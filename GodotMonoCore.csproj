@@ -4,5 +4,13 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <!-- Enable code style enforcement in build -->
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <!-- gdUnit4 Setup -->
+    <LangVersion>11.0</LangVersion>
+    <!--Force nullable warnings -->
+    <Nullable>enable</Nullable>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="gdUnit4.api" Version="4.2.*" />
+  </ItemGroup>
 </Project>
