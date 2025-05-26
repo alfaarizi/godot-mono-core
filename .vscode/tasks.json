@@ -10,14 +10,14 @@
                     "-ExecutionPolicy",
                     "Bypass",
                     "-File",
-                    "scripts/setup.ps1"
+                    ".scripts/setup.ps1"
                 ]
             },
             "linux": {
-                "command": "./scripts/setup.sh"
+                "command": "./.scripts/setup.sh"
             },
             "osx": {
-                "command": "./scripts/setup.sh"
+                "command": "./.scripts/setup.sh"
             },
             "problemMatcher": []
         },
