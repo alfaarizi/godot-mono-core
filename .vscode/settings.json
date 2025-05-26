@@ -1,6 +1,23 @@
 {
+    // .NET/C# Dev Kit settings
+    "dotnet.completion.showCompletionItemsFromUnimportedNamespaces": true,
+    "dotnet.codeLens.enableReferencesCodeLens": true,
+    "dotnet.projects.enableAutomaticRestore": true,
+    // Godot integration
     "godotTools.editorPath.godot4": "godot",
     "godotTools.lsp.serverPort": 6005,
+    // Editor behavior - universal
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit",
+        "source.organizeImports": "explicit",
+    },
+    "editor.renderWhitespace": "trailing",
+    "editor.renderControlCharacters": true,
+    // File handling
+    "files.trimTrailingWhitespace": true,
+    "files.trimFinalNewlines": true,
+    "files.insertFinalNewline": false,
     "files.exclude": {
         "**/.godot": true
     },

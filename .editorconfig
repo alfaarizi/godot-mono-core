@@ -232,3 +232,25 @@ dotnet_naming_style.begins_with_i.required_prefix = I
 dotnet_naming_style.begins_with_i.required_suffix =
 dotnet_naming_style.begins_with_i.word_separator =
 dotnet_naming_style.begins_with_i.capitalization = pascal_case
+
+#### Analyzer Settings ####
+
+# Enable style analysis as warnings in build
+dotnet_analyzer_diagnostic.category-Style.severity = error
+dotnet_analyzer_diagnostic.category-CodeQuality.severity = error
+
+# Optional: Enable other categories
+dotnet_analyzer_diagnostic.category-Design.severity = suggestion
+dotnet_analyzer_diagnostic.category-Maintainability.severity = suggestion
+dotnet_analyzer_diagnostic.category-Performance.severity = error
+
+# Godot-specific adjustments
+dotnet_diagnostic.CA1050.severity = none        # Don't require namespaces
+dotnet_diagnostic.IDE0058.severity = none       # Allow ignoring return values
+dotnet_diagnostic.IDE0005.severity = none       # Don't warn about unused usings
+dotnet_diagnostic.IDE0051.severity = suggestion # Unused members (Godot reflection)
+
+# Critical rules
+dotnet_diagnostic.IDE1006.severity = error  # Bad naming
+dotnet_diagnostic.IDE0052.severity = error  # Unused members
+dotnet_diagnostic.IDE0007.severity = error  # enforce var when obvious
