@@ -3,6 +3,8 @@
     "dotnet.completion.showCompletionItemsFromUnimportedNamespaces": true,
     "dotnet.codeLens.enableReferencesCodeLens": true,
     "dotnet.projects.enableAutomaticRestore": true,
+    // .NET Unit Testing
+    "dotnet.unitTests.runSettingsPath": "${workspaceFolder}/.runsettings",
     // Godot integration
     "godotTools.editorPath.godot4": "godot",
     "godotTools.lsp.serverPort": 6005,
@@ -15,10 +17,14 @@
     "editor.renderWhitespace": "trailing",
     "editor.renderControlCharacters": true,
     // File handling
+    "files.eol": "\n",
+    "files.insertFinalNewline": false,
     "files.trimTrailingWhitespace": true,
     "files.trimFinalNewlines": true,
-    "files.insertFinalNewline": false,
     "files.exclude": {
-        "**/.godot": true
+        "**/.godot": true,
+        "**/.scripts": true,
+        "**/addons": true,
+        "**/gdunit4_testadapter": true,
     },
 }

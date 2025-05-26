@@ -1,8 +1,8 @@
 if (-not (Test-Path .env)) { exit }
 Get-Content .env | Where-Object { $_ -match '^([^=#]+)=(.*)$' } | ForEach-Object {
     $key = $matches[1]; $value = $matches[2]
-    if ($key -eq "GDT_EXEC") {
-        $oldGdtExec = [Environment]::GetEnvironmentVariable("GDT_EXEC", "User")
+    if ($key -eq "GODOT_BIN") {
+        $oldGdtExec = [Environment]::GetEnvironmentVariable("GODOT_BIN", "User")
         if ($oldGdtExec) {
             $oldDir = Split-Path $oldGdtExec -Parent
             $path = [Environment]::GetEnvironmentVariable("PATH", "User")

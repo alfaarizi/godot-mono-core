@@ -2,12 +2,12 @@
 [ -f .env ] || exit 0
 PROFILE="${HOME}/$([[ "$SHELL" == *zsh* ]] && echo .zshrc || echo .bashrc)"
 while IFS='=' read -r key value; do
-    [ "$key" = "GDT_EXEC" ] && {
-        grep -q "^export GDT_EXEC=" "$PROFILE" && { 
-            old_path=$(dirname "$(grep "^export GDT_EXEC=" "$PROFILE" | cut -d'=' -f2)")
+    [ "$key" = "GODOT_BIN" ] && {
+        grep -q "^export GODOT_BIN=" "$PROFILE" && {
+            old_path=$(dirname "$(grep "^export GODOT_BIN=" "$PROFILE" | cut -d'=' -f2)")
             old_path_export="export PATH=\"$old_path:\$PATH\""
             grep -q "^$old_path_export" "$PROFILE" && sed -i.bak "\|^$old_path_export|d" "$PROFILE"
-        }        
+        }
         echo "export PATH=\"$(dirname "$value"):\$PATH\"" >> "$PROFILE"
         export PATH="$(dirname "$value"):$PATH"
     }

@@ -3,6 +3,8 @@ root = true
 [*]
 charset = utf-8
 trim_trailing_whitespace = true
+insert_final_newline = false
+end_of_line = lf
 
 # C# files
 [*.cs]
@@ -256,3 +258,11 @@ dotnet_diagnostic.IDE0051.severity = suggestion # Unused members (Godot reflecti
 dotnet_diagnostic.IDE1006.severity = error # Bad naming
 dotnet_diagnostic.IDE0052.severity = error # Unused members
 dotnet_diagnostic.IDE0007.severity = error # enforce var when obvious
+
+# Exclude addons from import ordering
+[addons/**/*.cs]
+dotnet_sort_system_directives_first = false
+dotnet_separate_import_directive_groups = false
+dotnet_analyzer_diagnostic.IMPORTS.severity = none
+dotnet_diagnostic.CS8669.severity = none
+generated_code = true
