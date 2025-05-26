@@ -1,0 +1,7 @@
+{
+    "godotTools.editorPath.godot4": "godot",
+    "godotTools.lsp.serverPort": 6005,
+    "files.exclude": {
+        "**/.godot": true
+    },
+}
