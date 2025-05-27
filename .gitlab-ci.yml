@@ -1,12 +1,7 @@
 image: barichello/godot-ci:mono-4.4.1
 
 # Stages: lint -> prepare -> test -> docs -> build -> deploy
-stages:
-  - lint
-  - prepare
-  - test
-  - build
-  - deploy
+stages: [lint, prepare, test, build, deploy]
 
 variables:
   EXPORT_NAME: InnerAnimaMono
@@ -15,17 +10,19 @@ variables:
 
 # Cache to speed up builds
 cache:
-  key: godot-4.4.1-${CI_PROJECT_NAME}-${CI_COMMIT_REF_SLUG}
+  key: ${CI_COMMIT_REF_SLUG}
   paths:
     - .godot/imported/
+    - .import/
 
 # Linter
 linter:
   stage: lint
+  cache: {}
   before_script:
     - dotnet restore
   script:
-    - dotnet build --configuration ExportRelease --verbosity normal
+    - dotnet build --configuration ExportDebug --verbosity normal
     - dotnet format GodotMonoCore.sln --verify-no-changes --verbosity diagnostic
   allow_failure: false
 
@@ -33,10 +30,10 @@ linter:
 assets:
   stage: prepare
   script:
-    - rm -rf .import
     - mkdir -p .godot .import
     - godot --headless --verbose --import --quit
   artifacts:
+    expire_in: 1 hour
     paths:
       - .import/
       - .godot/imported/
@@ -45,7 +42,7 @@ assets:
 # Unit Test
 gdunit4:
   stage: test
-  needs: ["assets"]
+  needs: [assets]
   before_script:
     - dotnet restore
     - dotnet tool install -g trx2junit
@@ -62,100 +59,95 @@ gdunit4:
   allow_failure: false
 
 # Build exports
-windows:
+.build:
   stage: build
-  needs: ["assets"]
+  needs: [gdunit4]
   script:
     - dotnet build --configuration ExportRelease
-    - mkdir -p build/windows
+  artifacts:
+    name: $EXPORT_NAME-$CI_JOB_NAME
+    expire_in: 1 week
+
+windows:
+  extends: .build
+  script:
+    - mkdir -v -p build/windows
     - godot --headless --verbose --export-release "Windows Desktop" ./build/windows/$EXPORT_NAME.exe
   artifacts:
-    name: $EXPORT_NAME-$CI_JOB_NAME
-    paths:
-      - build/windows
+    paths: [build/windows]
 
 linux:
-  stage: build
-  needs: ["assets"]
+  extends: .build
   script:
-    - dotnet build --configuration ExportRelease
-    - mkdir -p build/linux
+    - mkdir -v -p build/linux
     - godot --headless --verbose --export-release "Linux" ./build/linux/$EXPORT_NAME.x86_64
   artifacts:
-    name: $EXPORT_NAME-$CI_JOB_NAME
-    paths:
-      - build/linux
+    paths: [build/linux]
 
 # macos:
-#   stage: build
-#   needs: ["gdunit4"]
+#   extends: .build
 #   script:
-#     - mkdir -p build/macos
+#     - mkdir -v -p build/macos
 #     - godot --headless --verbose --export-release "macOS" ./build/macos/$EXPORT_NAME.dmg
 #   artifacts:
-#     name: $EXPORT_NAME-$CI_JOB_NAME
-#     paths:
-#       - build/macos
+#     paths: [build/macos]
 
 # web:
-#   stage: build
-#   needs: ["gdunit4"]
+#   extends: .build
 #   script:
-#     - mkdir -p build/web
+#     - mkdir -v -p build/web
 #     - godot --headless --verbose --export-release "Web" ./build/web/index.html
 #   artifacts:
-#     name: $EXPORT_NAME-$CI_JOB_NAME
-#     paths:
-#       - build/web
+#     paths: [build/web]
 
-# Deployment to development
+# Deployment to GitLab Pages
 # pages:
 #   stage: deploy
+#   needs: [web]
+#   dependencies: [web]
 #   script:
 #     - rm -f *.md
 #     - mkdir -p public
 #     - mv build/web/* ./public/
-#   dependencies:
-#     - web
 #   artifacts:
-#     paths:
-#       - public
+#     paths: [public]
 #   rules:
-#     - if: '$CI_COMMIT_BRANCH == "develop" && $CI_PROJECT_NAMESPACE == "inner-anima"'
+#     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+#       when: never
+#     - if: '$CI_PROJECT_NAMESPACE == "inner-anima" && $CI_COMMIT_BRANCH == "develop"'
+#       when: on_success
+#     - when: never
 
 # Deployment to production environment
-itchio:windows:
+.itchio:
   stage: deploy
-  script:
-    -  butler push ./build/windows ${ITCH_USER}/${ITCH_PROJECT}:windows
-  dependencies:
-    - windows
   rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_PROJECT_NAMESPACE == "inner-anima"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: never
+    - if: '$CI_PROJECT_NAMESPACE == "inner-anima" && $CI_COMMIT_BRANCH == "main"'
+      when: on_success
+    - when: never
+
+itchio:windows:
+  extends: .itchio
+  needs: [windows]
+  dependencies: [windows]
+  script: butler push ./build/windows ${ITCH_USER}/${ITCH_PROJECT}:windows
 
 itchio:linux:
-  stage: deploy
-  script:
-    -  butler push ./build/linux ${ITCH_USER}/${ITCH_PROJECT}:linux
-  dependencies:
-    - linux
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_PROJECT_NAMESPACE == "inner-anima"'
+  extends: .itchio
+  needs: [linux]
+  dependencies: [linux]
+  script: butler push ./build/linux ${ITCH_USER}/${ITCH_PROJECT}:linux
 
 # itchio:macos:
-#   stage: deploy
-#   script:
-#     -  butler push ./build/macos ${ITCH_USER}/${ITCH_PROJECT}:macos
-#   dependencies:
-#     - macos
-#   rules:
-#     - if: '$CI_COMMIT_BRANCH == "main" && $CI_PROJECT_NAMESPACE == "inner-anima"'
+#   extends: .itchio
+#   needs: [macos]
+#   dependencies: [macos]
+#   script: butler push ./build/macos ${ITCH_USER}/${ITCH_PROJECT}:macos
 
 # itchio:web:
-#   stage: deploy
-#   script:
-#     -  butler push ./build/web ${ITCH_USER}/${ITCH_PROJECT}:web
-#   dependencies:
-#     - web
-#   rules:
-#     - if: '$CI_COMMIT_BRANCH == "main" && $CI_PROJECT_NAMESPACE == "inner-anima"'
+#   extends: .itchio
+#   needs: [web]
+#   dependencies: [web]
+#   script: butler push ./build/web ${ITCH_USER}/${ITCH_PROJECT}:web
