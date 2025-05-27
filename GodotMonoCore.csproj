@@ -20,16 +20,16 @@
   </PropertyGroup>
 
   <!-- gdUnit4 requirements -->
-  <ItemGroup>
+  <ItemGroup Condition="'$(Configuration)' != 'ExportRelease'">
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
     <PackageReference Include="gdUnit4.api" Version="4.3.*" />
     <PackageReference Include="gdUnit4.test.adapter" Version="2.*" />
   </ItemGroup>
 
-  <!-- <ItemGroup> -->
+  <ItemGroup>
     <!-- Exclude addon files from compilation but keep them as content -->
-    <!-- <Compile Remove="addons/**/*.cs" />
-    <Content Include="addons/**/*.cs" /> -->
-  <!-- </ItemGroup> -->
+    <Compile Remove="addons/**/*.cs" />
+    <Content Include="addons/**/*.cs" />
+  </ItemGroup>
 
 </Project>
