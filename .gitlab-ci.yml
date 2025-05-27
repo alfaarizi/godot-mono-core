@@ -66,6 +66,7 @@ windows:
   stage: build
   needs: ["assets"]
   script:
+    - dotnet build --configuration ExportRelease
     - mkdir -p build/windows
     - godot --headless --verbose --export-release "Windows Desktop" ./build/windows/$EXPORT_NAME.exe
   artifacts:
@@ -77,6 +78,7 @@ linux:
   stage: build
   needs: ["assets"]
   script:
+    - dotnet build --configuration ExportRelease
     - mkdir -p build/linux
     - godot --headless --verbose --export-release "Linux" ./build/linux/$EXPORT_NAME.x86_64
   artifacts:
