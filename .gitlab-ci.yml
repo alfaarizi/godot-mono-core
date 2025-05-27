@@ -48,8 +48,6 @@ gdunit4:
     - dotnet tool install -g trx2junit
     - export PATH="$PATH:/root/.dotnet/tools"
     - export GODOT_BIN=/usr/local/bin/godot
-    - export DISPLAY=:99
-    - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
   script:
     - dotnet test --settings .runsettings-ci
     - trx2junit TestResults/*.trx --output TestResults/
