@@ -2,7 +2,7 @@
 <RunSettings>
     <RunConfiguration>
         <MaxCpuCount>1</MaxCpuCount>
-        <ResultsDirectory>./.test_results</ResultsDirectory>
+        <ResultsDirectory>./reports_dotnet</ResultsDirectory>
         <TargetFrameworks>net8.0</TargetFrameworks>
         <TestSessionTimeout>180000</TestSessionTimeout>
         <TreatNoTestsAsError>true</TreatNoTestsAsError>

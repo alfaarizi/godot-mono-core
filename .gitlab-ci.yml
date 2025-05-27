@@ -43,19 +43,11 @@ assets:
 gdunit4:
   stage: test
   needs: [assets]
-  before_script:
-    - dotnet restore
-    - dotnet tool install -g trx2junit
-    - export PATH="$PATH:/root/.dotnet/tools"
-    - export GODOT_BIN=/usr/local/bin/godot
   script:
-    - dotnet test --settings .runsettings-ci
-    - trx2junit TestResults/*.trx --output TestResults/
+    - godot --path . -s -d res://addons/gdUnit4/bin/GdUnitCmdTool.gd -a tests/
   artifacts:
     reports:
-      junit: TestResults/*.xml
-    paths:
-      - TestResults/
+      junit: reports/report_1/results.xml
   allow_failure: false
 
 # Build exports
