@@ -22,6 +22,9 @@
     "files.trimTrailingWhitespace": true,
     "files.trimFinalNewlines": true,
     "files.exclude": {
+        "project.godot": true,
+        "**/*.uid": true,
+        "**/*.import": true,
         "**/.godot": true,
         "**/addons": true,
         "**/gdunit4_testadapter": true,

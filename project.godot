@@ -27,6 +27,8 @@ enabled=PackedStringArray("res://addons/gdUnit4/plugin.cfg")
 
 folder_colors={
 "res://addons/": "gray",
+"res://docs/": "gray",
 "res://gdunit4_testadapter/": "gray",
-"res://tests/": "red"
+"res://src/": "blue",
+"res://tests/": "green"
 }

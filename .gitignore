@@ -17,8 +17,10 @@ mono_crash.*.json
 
 # Build artifacts (game builds, test results, uml)
 /build/
-.TestResults/
-docs/
+.test_results/
+docs/uml/**/*.puml
+docs/uml/**/*.png
+docs/uml/**/*.svg
 
 # System/tool-specific ignores
 .directory
