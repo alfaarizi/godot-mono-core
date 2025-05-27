@@ -62,7 +62,8 @@ gdunit4:
 .build:
   stage: build
   needs: [gdunit4]
-  script:
+  before_script:
+    - mv addons/gdUnit4 addons/gdUnit4.disabled
     - dotnet build --configuration ExportRelease
   artifacts:
     name: $EXPORT_NAME-$CI_JOB_NAME
