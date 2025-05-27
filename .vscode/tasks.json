@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Setup Environment",
+            "label": "setup-environment",
             "type": "shell",
             "windows": {
                 "command": "powershell",
@@ -77,5 +77,23 @@
                 "clear": false
             }
         },
+        {
+            "label": "build-uml",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-c",
+                "dotnet tool run puml-gen src/ docs/uml/ -dir -public -createAssociation -allInOne"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "silent",
+                "close": true
+            },
+            "problemMatcher": []
+        }
     ]
 }

@@ -1,5 +1,7 @@
 #!/bin/bash
 [ -f .env ] || exit 0
+# Auto-restore project tools if needed
+command -v puml-gen >/dev/null 2>&1 || dotnet tool restore >/dev/null 2>&1
 PROFILE="${HOME}/$([[ "$SHELL" == *zsh* ]] && echo .zshrc || echo .bashrc)"
 while IFS='=' read -r key value; do
     [ "$key" = "GODOT_BIN" ] && {

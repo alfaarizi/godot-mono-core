@@ -1,4 +1,8 @@
 if (-not (Test-Path .env)) { exit }
+# Auto-restore project tools if needed
+if (-not (Get-Command puml-gen -ErrorAction SilentlyContinue)) {
+    dotnet tool restore | Out-Null
+}
 Get-Content .env | Where-Object { $_ -match '^([^=#]+)=(.*)$' } | ForEach-Object {
     $key = $matches[1]; $value = $matches[2]
     if ($key -eq "GODOT_BIN") {

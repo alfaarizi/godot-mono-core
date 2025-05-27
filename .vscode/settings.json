@@ -23,7 +23,6 @@
     "files.trimFinalNewlines": true,
     "files.exclude": {
         "**/.godot": true,
-        "**/.scripts": true,
         "**/addons": true,
         "**/gdunit4_testadapter": true,
     },
