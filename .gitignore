@@ -18,6 +18,7 @@ mono_crash.*.json
 # Build artifacts (game builds, test results, uml)
 /build/
 .test_results/
+TestResults/
 docs/uml/**/*.puml
 docs/uml/**/*.png
 docs/uml/**/*.svg
