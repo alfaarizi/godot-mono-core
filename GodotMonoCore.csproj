@@ -27,8 +27,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!-- Exclude addon files from compilation but keep them as content -->
+    <!-- Always exclude addon files from compilation -->
     <Compile Remove="addons/**/*.cs" />
+    <!-- ALSO exclude test files from ExportRelease builds -->
+    <Compile Remove="tests/**/*.cs" Condition="'$(Configuration)' == 'ExportRelease'" />
     <Content Include="addons/**/*.cs" />
   </ItemGroup>
 
