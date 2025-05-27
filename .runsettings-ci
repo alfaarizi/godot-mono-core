@@ -2,30 +2,17 @@
 <RunSettings>
     <RunConfiguration>
         <MaxCpuCount>1</MaxCpuCount>
-        <ResultsDirectory>./.test_results</ResultsDirectory>
-        <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
+        <ResultsDirectory>./TestResults</ResultsDirectory>
+        <TargetFrameworks>net8.0</TargetFrameworks>
         <TestSessionTimeout>180000</TestSessionTimeout>
         <TreatNoTestsAsError>true</TreatNoTestsAsError>
-        <!-- <EnvironmentVariables>
-            <GODOT_BIN>$(GODOT_BIN)</GODOT_BIN>
-        </EnvironmentVariables> -->
     </RunConfiguration>
 
     <LoggerRunSettings>
         <Loggers>
-            <Logger friendlyName="console" enabled="True">
-                <Configuration>
-                    <Verbosity>detailed</Verbosity>
-                </Configuration>
-            </Logger>
-            <Logger friendlyName="html" enabled="True">
-                <Configuration>
-                    <LogFileName>./test-result.html</LogFileName>
-                </Configuration>
-            </Logger>
             <Logger friendlyName="trx" enabled="True">
                 <Configuration>
-                    <LogFileName>./test-result.trx</LogFileName>
+                    <LogFileName>test-result.trx</LogFileName>
                 </Configuration>
             </Logger>
         </Loggers>

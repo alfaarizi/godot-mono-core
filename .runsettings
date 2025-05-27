@@ -3,7 +3,7 @@
     <RunConfiguration>
         <MaxCpuCount>1</MaxCpuCount>
         <ResultsDirectory>./.test_results</ResultsDirectory>
-        <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
+        <TargetFrameworks>net8.0</TargetFrameworks>
         <TestSessionTimeout>180000</TestSessionTimeout>
         <TreatNoTestsAsError>true</TreatNoTestsAsError>
         <!-- <EnvironmentVariables>
@@ -20,12 +20,12 @@
             </Logger>
             <Logger friendlyName="html" enabled="True">
                 <Configuration>
-                    <LogFileName>./test-result.html</LogFileName>
+                    <LogFileName>test-result.html</LogFileName>
                 </Configuration>
             </Logger>
             <Logger friendlyName="trx" enabled="True">
                 <Configuration>
-                    <LogFileName>./test-result.trx</LogFileName>
+                    <LogFileName>test-result.trx</LogFileName>
                 </Configuration>
             </Logger>
         </Loggers>

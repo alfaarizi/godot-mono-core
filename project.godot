@@ -27,8 +27,13 @@ enabled=PackedStringArray("res://addons/gdUnit4/plugin.cfg")
 
 folder_colors={
 "res://addons/": "gray",
+"res://build/": "gray",
 "res://docs/": "gray",
 "res://gdunit4_testadapter/": "gray",
 "res://src/": "blue",
 "res://tests/": "green"
 }
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true
