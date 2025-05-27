@@ -64,7 +64,7 @@ gdunit4:
 # Build exports
 windows:
   stage: build
-  needs: ["gdunit4"]
+  needs: ["assets"]
   script:
     - mkdir -p build/windows
     - godot --headless --verbose --export-release "Windows Desktop" ./build/windows/$EXPORT_NAME.exe
@@ -75,7 +75,7 @@ windows:
 
 linux:
   stage: build
-  needs: ["gdunit4"]
+  needs: ["assets"]
   script:
     - mkdir -p build/linux
     - godot --headless --verbose --export-release "Linux" ./build/linux/$EXPORT_NAME.x86_64
