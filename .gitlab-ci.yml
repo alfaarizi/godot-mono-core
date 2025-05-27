@@ -48,11 +48,14 @@ gdunit4:
   needs: ["assets"]
   before_script:
     - dotnet restore
+    - dotnet tool install -g trx2junit
+    - export PATH="$PATH:/root/.dotnet/tools"
   script:
     - dotnet test --settings .runsettings-ci
+    - trx2junit TestResults/*.trx --output TestResults/
   artifacts:
     reports:
-      dotnet: TestResults/*.trx
+      junit: TestResults/*.xml
     paths:
       - TestResults/
   allow_failure: false
