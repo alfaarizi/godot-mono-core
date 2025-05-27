@@ -4,6 +4,7 @@
     "dotnet.codeLens.enableReferencesCodeLens": true,
     "dotnet.projects.enableAutomaticRestore": true,
     // .NET Unit Testing
+    "dotnet.server.waitForDebugger": false,
     "dotnet.unitTests.runSettingsPath": "${workspaceFolder}/.runsettings",
     // Godot integration
     "godotTools.editorPath.godot4": "godot",

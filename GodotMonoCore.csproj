@@ -26,4 +26,13 @@
     <PackageReference Include="gdUnit4.test.adapter" Version="2.*" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- Exclude test files from compilation but keep them as content -->
+    <Compile Remove="tests/**/*.cs" />
+    <Content Include="tests/**/*.cs" />
+    <!-- Exclude addon files from compilation but keep them as content -->
+    <Compile Remove="addons/**/*.cs" />
+    <Content Include="addons/**/*.cs" />
+  </ItemGroup>
+
 </Project>
