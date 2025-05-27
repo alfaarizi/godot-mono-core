@@ -14,9 +14,6 @@
     <!--Force nullable warnings -->
     <Nullable>enable</Nullable>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <!-- Exclude addons from all analysis -->
-    <RunAnalyzersDuringBuild Condition="$(MSBuildProjectDirectory.Contains('addons'))">false</RunAnalyzersDuringBuild>
-    <EnableNETAnalyzers Condition="$(MSBuildProjectDirectory.Contains('addons'))">false</EnableNETAnalyzers>
   </PropertyGroup>
 
   <!-- gdUnit4 requirements -->
@@ -27,11 +24,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!-- Always exclude addon files from compilation -->
-    <Compile Remove="addons/**/*.cs" />
-    <!-- ALSO exclude test files from ExportRelease builds -->
+    <!-- Exclude gdUnit4 files from compilation -->
+    <Compile Remove="addons/gdUnit4/**/*.cs" />
+    <Content Include="addons/gdUnit4/**/*.cs" />
+    <!-- ALSO exclude gdunit4_testadapter directory -->
+    <Compile Remove="gdunit4_testadapter/**/*.cs" />
+    <Content Include="gdunit4_testadapter/**/*.cs" />
+    <!-- Exclude test files from ExportRelease builds -->
     <Compile Remove="tests/**/*.cs" Condition="'$(Configuration)' == 'ExportRelease'" />
-    <Content Include="addons/**/*.cs" />
   </ItemGroup>
 
 </Project>
