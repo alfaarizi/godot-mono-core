@@ -50,6 +50,7 @@ gdunit4:
     - dotnet restore
     - dotnet tool install -g trx2junit
     - export PATH="$PATH:/root/.dotnet/tools"
+    - export GODOT_BIN=/usr/local/bin/godot
   script:
     - dotnet test --settings .runsettings-ci
     - trx2junit TestResults/*.trx --output TestResults/
@@ -63,7 +64,7 @@ gdunit4:
 # Build exports
 windows:
   stage: build
-  needs: ["assets"]
+  needs: ["gdunit4"]
   script:
     - mkdir -p build/windows
     - godot --headless --verbose --export-release "Windows Desktop" ./build/windows/$EXPORT_NAME.exe
@@ -74,7 +75,7 @@ windows:
 
 linux:
   stage: build
-  needs: ["assets"]
+  needs: ["gdunit4"]
   script:
     - mkdir -p build/linux
     - godot --headless --verbose --export-release "Linux" ./build/linux/$EXPORT_NAME.x86_64
@@ -85,7 +86,7 @@ linux:
 
 # macos:
 #   stage: build
-#   needs: ["assets"]
+#   needs: ["gdunit4"]
 #   script:
 #     - mkdir -p build/macos
 #     - godot --headless --verbose --export-release "macOS" ./build/macos/$EXPORT_NAME.dmg
@@ -96,7 +97,7 @@ linux:
 
 # web:
 #   stage: build
-#   needs: ["assets"]
+#   needs: ["gdunit4"]
 #   script:
 #     - mkdir -p build/web
 #     - godot --headless --verbose --export-release "Web" ./build/web/index.html
