@@ -46,16 +46,17 @@ gdunit4:
     - dotnet restore
     - dotnet build --configuration Debug
     - dotnet tool install -g trx2junit
+    - export PATH="$PATH:/root/.dotnet/tools"
+    - export GODOT_BIN=godot
     - apt-get update && apt-get install -y xvfb
   script:
-    - export GODOT_BIN=godot
     - xvfb-run --auto-servernum dotnet test --no-build --settings .runsettings-ci
-    - trx2junit TestResults/results.trx
+    - trx2junit TestResults/test-result.trx
   artifacts:
     when: always
     expire_in: 1 week
     reports:
-      junit: TestResults/results.xml
+      junit: TestResults/test-result.xml
     paths:
       - TestResults/
   allow_failure: false

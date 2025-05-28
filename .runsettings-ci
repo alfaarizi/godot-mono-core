@@ -12,7 +12,7 @@
         <Loggers>
             <Logger friendlyName="trx" enabled="True">
                 <Configuration>
-                    <LogFileName>results.trx</LogFileName>
+                    <LogFileName>test-result.trx</LogFileName>
                 </Configuration>
             </Logger>
         </Loggers>
