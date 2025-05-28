@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+    <RunConfiguration>
+        <MaxCpuCount>1</MaxCpuCount>
+        <ResultsDirectory>./TestResults</ResultsDirectory>
+        <TargetFrameworks>net8.0</TargetFrameworks>
+        <TestSessionTimeout>180000</TestSessionTimeout>
+        <TreatNoTestsAsError>true</TreatNoTestsAsError>
+    </RunConfiguration>
+
+    <LoggerRunSettings>
+        <Loggers>
+            <Logger friendlyName="trx" enabled="True">
+                <Configuration>
+                    <LogFileName>test-result.trx</LogFileName>
+                </Configuration>
+            </Logger>
+        </Loggers>
+    </LoggerRunSettings>
+
+    <GdUnit4>
+        <!-- Additional Godot runtime parameters-->
+        <!-- These parameters are crucial for configuring the Godot runtime to work in headless
+        environments, such as automated testing or CI/CD pipelines.-->
+        <Parameters>--audio-driver Dummy --display-driver x11 --rendering-driver opengl3 --screen 0</Parameters>
+        <DisplayName>FullyQualifiedName</DisplayName>
+    </GdUnit4>
+</RunSettings>

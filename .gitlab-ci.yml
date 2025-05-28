@@ -1,0 +1,160 @@
+image: barichello/godot-ci:mono-4.4.1
+
+# Stages: lint -> prepare -> test -> build -> deploy
+stages: [lint, prepare, test, build, deploy]
+
+variables:
+  EXPORT_NAME: InnerAnimaMono
+  ITCH_USER:  mkdrdscf
+  ITCH_PROJECT: inneranimamono
+
+# Cache to speed up builds
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - .godot/imported/
+    - .import/
+
+# Linter
+roslyn:
+  stage: lint
+  cache: {}
+  before_script:
+    - dotnet restore
+  script:
+    - dotnet build --configuration Debug
+    - dotnet format GodotMonoCore.sln --verify-no-changes --verbosity diagnostic
+  allow_failure: false
+
+# Open the editor to import assets in case the cache was empty or outdated
+assets:
+  stage: prepare
+  script:
+    - mkdir -p .godot .import
+    - godot --headless --import --quit
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - .import/
+      - .godot/imported/
+      - .godot/global_script_class_cache.cfg
+
+# Unit Test
+gdunit4:
+  stage: test
+  needs: [assets]
+  before_script:
+    - dotnet restore
+    - dotnet build --configuration Debug
+    - dotnet tool install -g trx2junit --verbosity quiet
+    - apt-get update >/dev/null && apt-get install -y xvfb >/dev/null
+    - export PATH="$PATH:/root/.dotnet/tools"
+    - export GODOT_BIN=godot
+  script:
+    - xvfb-run --auto-servernum dotnet test --no-build --settings .runsettings-ci
+    - trx2junit TestResults/test-result.trx
+  artifacts:
+    when: always
+    expire_in: 1 week
+    reports:
+      junit: TestResults/test-result.xml
+    paths:
+      - TestResults/
+  allow_failure: false
+
+# Build exports
+.build:
+  stage: build
+  needs: [gdunit4]
+  before_script:
+    - dotnet restore
+    - rm -rf addons/gdUnit4
+    - rm -rf gdunit4_testadapter
+    - dotnet build --configuration ExportRelease
+  artifacts:
+    name: $EXPORT_NAME-$CI_JOB_NAME
+    expire_in: 1 week
+
+windows:
+  extends: .build
+  script:
+    - mkdir -p build/windows
+    - godot --headless --export-release "Windows Desktop" ./build/windows/$EXPORT_NAME.exe
+  artifacts:
+    paths: [build/windows]
+
+linux:
+  extends: .build
+  script:
+    - mkdir -p build/linux
+    - godot --headless --export-release "Linux" ./build/linux/$EXPORT_NAME.x86_64
+  artifacts:
+    paths: [build/linux]
+
+# macos:
+#   extends: .build
+#   script:
+#     - mkdir -p build/macos
+#     - godot --headless --export-release "macOS" ./build/macos/$EXPORT_NAME.dmg
+#   artifacts:
+#     paths: [build/macos]
+
+# web:
+#   extends: .build
+#   script:
+#     - mkdir -p build/web
+#     - godot --headless --export-release "Web" ./build/web/index.html
+#   artifacts:
+#     paths: [build/web]
+
+# Deployment to GitLab Pages
+# pages:
+#   stage: deploy
+#   needs: [web]
+#   dependencies: [web]
+#   script:
+#     - rm -f *.md
+#     - mkdir -p public
+#     - mv build/web/* ./public/
+#   artifacts:
+#     paths: [public]
+#   rules:
+#     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+#       when: never
+#     - if: '$CI_PROJECT_NAMESPACE == "inner-anima" && $CI_COMMIT_BRANCH == "develop"'
+#       when: on_success
+#     - when: never
+
+# Deployment to production environment
+.itchio:
+  stage: deploy
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: never
+    - if: '$CI_PROJECT_NAMESPACE == "inner-anima" && $CI_COMMIT_BRANCH == "main"'
+      when: on_success
+    - when: never
+
+itchio:windows:
+  extends: .itchio
+  needs: [windows]
+  dependencies: [windows]
+  script: butler push ./build/windows ${ITCH_USER}/${ITCH_PROJECT}:windows
+
+itchio:linux:
+  extends: .itchio
+  needs: [linux]
+  dependencies: [linux]
+  script: butler push ./build/linux ${ITCH_USER}/${ITCH_PROJECT}:linux
+
+# itchio:macos:
+#   extends: .itchio
+#   needs: [macos]
+#   dependencies: [macos]
+#   script: butler push ./build/macos ${ITCH_USER}/${ITCH_PROJECT}:macos
+
+# itchio:web:
+#   extends: .itchio
+#   needs: [web]
+#   dependencies: [web]
+#   script: butler push ./build/web ${ITCH_USER}/${ITCH_PROJECT}:web
