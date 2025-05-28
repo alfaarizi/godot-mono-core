@@ -4,6 +4,7 @@
         "ms-dotnettools.csharp",
         "ms-dotnettools.vscodeintellicode-csharp",
         "editorconfig.editorconfig",
-        "geequlim.godot-tools"
+        "geequlim.godot-tools",
+        "mebrahtom.plantumlpreviewer"
     ]
 }

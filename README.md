@@ -4,11 +4,9 @@
 
 **Inner Anima** is a psychological adventure where a boy becomes trapped in his own mind after a therapy session goes wrong. To escape, he must navigate surreal environments, solve puzzles, and confront his fears, uncovering hidden truths along the way.
 
-
 ## Requirements
 
 The minimum requirement by this application is that you have OpenGL 3.3 / OpenGL ES 3.0 compatible hardware.
-
 
 ## Development Setup
 
@@ -16,11 +14,11 @@ The minimum requirement by this application is that you have OpenGL 3.3 / OpenGL
 
 Before setting up the development environment, ensure you have the following installed:
 
-| Tool | Version | Download Link |
-|------|---------|---------------|
-| **Visual Studio Code** | Latest | [Download](https://code.visualstudio.com/Download) |
-| **.NET SDK** | 8.0 LTS (Recommended) | [Download](https://dotnet.microsoft.com/en-us/download) |
-| **Godot Engine** | v4.4.1 (.NET) | [Download](https://godotengine.org/download/archive/4.4.1-stable/) |
+| Tool                   | Version               | Download Link                                                      |
+| ---------------------- | --------------------- | ------------------------------------------------------------------ |
+| **Visual Studio Code** | Latest                | [Download](https://code.visualstudio.com/Download)                 |
+| **.NET SDK**           | 8.0 LTS (Recommended) | [Download](https://dotnet.microsoft.com/en-us/download)            |
+| **Godot Engine**       | v4.4.1 (.NET)         | [Download](https://godotengine.org/download/archive/4.4.1-stable/) |
 
 ### Initial Configuration
 
@@ -29,12 +27,13 @@ Before setting up the development environment, ensure you have the following ins
    Create a `.env` file in the project root with your Godot installation path:
 
    ```bash
-   GDT_EXEC=/path/to/godot
+   GODOT_BIN=/path/to/godot
    ```
 
 2. **Locate Godot Executable**
 
    Common installation paths:
+
    - **macOS**: `/Applications/Godot_mono.app/Contents/MacOS/Godot`
    - **Linux**: `/usr/local/bin/godot`
    - **Windows**: `C:\Program Files\Godot\Godot_v4.4.1-stable_win64.exe`
@@ -42,11 +41,13 @@ Before setting up the development environment, ensure you have the following ins
 ### Project Setup
 
 1. **Configure Godot Editor**
+
    - Import the project in Godot
    - Navigate to **Editor** → **Editor Settings** (or **Godot** → **Editor Settings** on macOS)
    - Under **Dotnet** → **External Editor**, select **Visual Studio Code and VSCodium**
 
 2. **Setup Development Environment**
+
    - Open any `.cs` file in Godot to launch VS Code
    - Install recommended extensions when prompted
    - Ensure your `.env` file is properly configured
@@ -57,16 +58,14 @@ Before setting up the development environment, ensure you have the following ins
 
 **NOTE:** You may need to give write permission to the script if setup fails
 
-   ```bash
-   chmod +x scripts/setup.sh      # macOS/Linux
-   # scripts/setup.ps1            # Windows (run as administrator if needed)
-   ```
-
+```bash
+chmod +x scripts/setup.sh      # macOS/Linux
+# scripts/setup.ps1            # Windows (run as administrator if needed)
+```
 
 ## License
 
 This project is proprietary software. See [LICENSE.md](LICENSE.md) for details.
-
 
 ## Contributing
 

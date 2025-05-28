@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+    <RunConfiguration>
+        <MaxCpuCount>1</MaxCpuCount>
+        <ResultsDirectory>./reports</ResultsDirectory>
+        <TargetFrameworks>net8.0</TargetFrameworks>
+        <TestSessionTimeout>180000</TestSessionTimeout>
+        <TreatNoTestsAsError>true</TreatNoTestsAsError>
+    </RunConfiguration>
+
+    <LoggerRunSettings>
+        <Loggers>
+            <Logger friendlyName="console" enabled="True">
+                <Configuration>
+                    <Verbosity>detailed</Verbosity>
+                </Configuration>
+            </Logger>
+            <Logger friendlyName="trx" enabled="True">
+                <Configuration>
+                    <LogFileName>test-result.trx</LogFileName>
+                </Configuration>
+            </Logger>
+        </Loggers>
+    </LoggerRunSettings>
+
+    <GdUnit4>
+        <!-- Additional Godot runtime parameters-->
+        <Parameters></Parameters>
+        <DisplayName>FullyQualifiedName</DisplayName>
+    </GdUnit4>
+</RunSettings>

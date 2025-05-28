@@ -1,7 +1,33 @@
 <Project Sdk="Godot.NET.Sdk/4.4.1">
+
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
-    <NoWarn>CA1050</NoWarn>
+    <!-- Enable code style enforcement in build -->
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+
+    <!--Disable warning of invalid/incompatible GodotSharp version-->
+    <NoWarn>NU1605</NoWarn>
+
+    <!-- gdUnit4 Setup -->
+    <LangVersion>11.0</LangVersion>
+    <!--Force nullable warnings -->
+    <Nullable>enable</Nullable>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
+
+  <!-- gdUnit4 requirements -->
+  <ItemGroup Condition="'$(Configuration)' != 'ExportRelease'">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+    <PackageReference Include="gdUnit4.api" Version="4.3.*" />
+    <PackageReference Include="gdUnit4.test.adapter" Version="2.*" />
+  </ItemGroup>
+
+  <!-- Exclude test-related files from ExportRelease builds -->
+  <ItemGroup Condition="'$(Configuration)' == 'ExportRelease'">
+    <Compile Remove="addons/gdUnit4/**/*.cs" />
+    <Compile Remove="gdunit4_testadapter/**/*.cs" />
+    <Compile Remove="tests/**/*.cs" />
+  </ItemGroup>
+
 </Project>

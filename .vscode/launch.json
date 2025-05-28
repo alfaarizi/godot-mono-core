@@ -33,11 +33,11 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "godot",
+            "program": "dotnet",
             "args": [
-                // These command line flags are used by GoDotTest to run tests.
-                "--run-tests",
-                "--quit-on-finish"
+                "test",
+                "--settings",
+                ".runsettings"
             ],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
@@ -48,11 +48,13 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "godot",
+            "program": "dotnet",
             "args": [
-                // These command line flags are used by GoDotTest to run tests.
-                "--run-tests=${fileBasenameNoExtension}",
-                "--quit-on-finish"
+                "test",
+                "--settings",
+                ".runsettings",
+                "--filter",
+                "DisplayName~${fileBasenameNoExtension}"
             ],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
@@ -63,5 +65,7 @@
             "type": "coreclr",
             "request": "attach",
         }
+        // gdunit4 gdscript test
+        // godot --path . -s -d res://addons/gdUnit4/bin/GdUnitCmdTool.gd -a tests/
     ]
 }

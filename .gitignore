@@ -15,8 +15,13 @@ export_credentials.cfg
 data_*/
 mono_crash.*.json
 
-# Build artifacts
+# Build artifacts (game builds, test results, uml)
 /build/
+reports/
+TestResults/
+docs/uml/**/*.puml
+docs/uml/**/*.png
+docs/uml/**/*.svg
 
 # System/tool-specific ignores
 .directory

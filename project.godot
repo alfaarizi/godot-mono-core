@@ -11,10 +11,31 @@ config_version=5
 [application]
 
 config/name="GodotMonoCore"
-run/main_scene="uid://kjmqcs1p2sv2"
+run/main_scene="uid://drcuf3n73y2pu"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [dotnet]
 
 project/assembly_name="GodotMonoCore"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gdUnit4/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://addons/": "gray",
+"res://build/": "gray",
+"res://docs/": "gray",
+"res://gdunit4_testadapter/": "gray",
+"res://reports/": "gray",
+"res://reports_dotnet/": "gray",
+"res://src/": "blue",
+"res://tests/": "green"
+}
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true
