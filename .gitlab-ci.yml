@@ -1,7 +1,7 @@
 image: barichello/godot-ci:mono-4.4.1
 
-# Stages: lint -> prepare -> test -> docs -> build -> deploy
-stages: [test, build, deploy]
+# Stages: lint -> prepare -> test -> build -> deploy
+stages: [lint, prepare, test, build, deploy]
 
 variables:
   EXPORT_NAME: InnerAnimaMono
@@ -16,32 +16,33 @@ cache:
     - .import/
 
 # Linter
-# roslyn:
-#   stage: lint
-#   cache: {}
-#   before_script:
-#     - dotnet restore
-#   script:
-#     - dotnet build --configuration Debug --verbosity normal
-#     - dotnet format GodotMonoCore.sln --verify-no-changes --verbosity diagnostic
-#   allow_failure: false
+roslyn:
+  stage: lint
+  cache: {}
+  before_script:
+    - dotnet restore
+  script:
+    - dotnet build --configuration Debug --verbosity normal
+    - dotnet format GodotMonoCore.sln --verify-no-changes --verbosity diagnostic
+  allow_failure: false
 
 # Open the editor to import assets in case the cache was empty or outdated
-# assets:
-#   stage: prepare
-#   script:
-#     - mkdir -p .godot .import
-#     - godot --headless --verbose --import --quit
-#   artifacts:
-#     expire_in: 1 hour
-#     paths:
-#       - .import/
-#       - .godot/imported/
-#       - .godot/global_script_class_cache.cfg
+assets:
+  stage: prepare
+  script:
+    - mkdir -p .godot .import
+    - godot --headless --verbose --import --quit
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - .import/
+      - .godot/imported/
+      - .godot/global_script_class_cache.cfg
 
 # Unit Test
 gdunit4:
   stage: test
+  needs: [assets]
   before_script:
     - dotnet restore
     - dotnet build --configuration Debug
@@ -77,7 +78,7 @@ gdunit4:
 windows:
   extends: .build
   script:
-    - mkdir -v -p build/windows
+    - mkdir -p build/windows
     - godot --headless --verbose --export-release "Windows Desktop" ./build/windows/$EXPORT_NAME.exe
   artifacts:
     paths: [build/windows]
@@ -85,7 +86,7 @@ windows:
 linux:
   extends: .build
   script:
-    - mkdir -v -p build/linux
+    - mkdir -p build/linux
     - godot --headless --verbose --export-release "Linux" ./build/linux/$EXPORT_NAME.x86_64
   artifacts:
     paths: [build/linux]
@@ -93,7 +94,7 @@ linux:
 # macos:
 #   extends: .build
 #   script:
-#     - mkdir -v -p build/macos
+#     - mkdir -p build/macos
 #     - godot --headless --verbose --export-release "macOS" ./build/macos/$EXPORT_NAME.dmg
 #   artifacts:
 #     paths: [build/macos]
@@ -101,7 +102,7 @@ linux:
 # web:
 #   extends: .build
 #   script:
-#     - mkdir -v -p build/web
+#     - mkdir -p build/web
 #     - godot --headless --verbose --export-release "Web" ./build/web/index.html
 #   artifacts:
 #     paths: [build/web]
