@@ -22,7 +22,7 @@ roslyn:
   before_script:
     - dotnet restore
   script:
-    - dotnet build --configuration Debug --verbosity normal
+    - dotnet build --configuration Debug
     - dotnet format GodotMonoCore.sln --verify-no-changes --verbosity diagnostic
   allow_failure: false
 
@@ -31,7 +31,7 @@ assets:
   stage: prepare
   script:
     - mkdir -p .godot .import
-    - godot --headless --verbose --import --quit
+    - godot --headless --import --quit
   artifacts:
     expire_in: 1 hour
     paths:
@@ -46,10 +46,10 @@ gdunit4:
   before_script:
     - dotnet restore
     - dotnet build --configuration Debug
-    - dotnet tool install -g trx2junit
+    - dotnet tool install -g trx2junit --verbosity quiet
+    - apt-get update >/dev/null && apt-get install -y xvfb >/dev/null
     - export PATH="$PATH:/root/.dotnet/tools"
     - export GODOT_BIN=godot
-    - apt-get update && apt-get install -y xvfb
   script:
     - xvfb-run --auto-servernum dotnet test --no-build --settings .runsettings-ci
     - trx2junit TestResults/test-result.trx
@@ -79,7 +79,7 @@ windows:
   extends: .build
   script:
     - mkdir -p build/windows
-    - godot --headless --verbose --export-release "Windows Desktop" ./build/windows/$EXPORT_NAME.exe
+    - godot --headless --export-release "Windows Desktop" ./build/windows/$EXPORT_NAME.exe
   artifacts:
     paths: [build/windows]
 
@@ -87,7 +87,7 @@ linux:
   extends: .build
   script:
     - mkdir -p build/linux
-    - godot --headless --verbose --export-release "Linux" ./build/linux/$EXPORT_NAME.x86_64
+    - godot --headless --export-release "Linux" ./build/linux/$EXPORT_NAME.x86_64
   artifacts:
     paths: [build/linux]
 
@@ -95,7 +95,7 @@ linux:
 #   extends: .build
 #   script:
 #     - mkdir -p build/macos
-#     - godot --headless --verbose --export-release "macOS" ./build/macos/$EXPORT_NAME.dmg
+#     - godot --headless --export-release "macOS" ./build/macos/$EXPORT_NAME.dmg
 #   artifacts:
 #     paths: [build/macos]
 
@@ -103,7 +103,7 @@ linux:
 #   extends: .build
 #   script:
 #     - mkdir -p build/web
-#     - godot --headless --verbose --export-release "Web" ./build/web/index.html
+#     - godot --headless --export-release "Web" ./build/web/index.html
 #   artifacts:
 #     paths: [build/web]
 
