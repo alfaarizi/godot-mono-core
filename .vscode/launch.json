@@ -65,5 +65,7 @@
             "type": "coreclr",
             "request": "attach",
         }
+        // gdunit4
+        // godot --path . -s -d res://addons/gdUnit4/bin/GdUnitCmdTool.gd -a tests/
     ]
 }

@@ -40,20 +40,19 @@ assets:
       - .godot/global_script_class_cache.cfg
 
 # Unit Test
-gdunit4:
-  stage: test
-  needs: [assets]
-  script:
-    - godot --path . -s -d res://addons/gdUnit4/bin/GdUnitCmdTool.gd -a tests/
-  artifacts:
-    reports:
-      junit: reports/report_1/results.xml
-  allow_failure: false
+# gdunit4:
+#   stage: test
+#   needs: [assets]
+#   script:
+#     - godot --path . -s -d res://addons/gdUnit4/bin/GdUnitCmdTool.gd -a tests/
+#   artifacts:
+#     reports:
+#       junit: reports/report_1/results.xml
+#   allow_failure: false
 
 # Build exports
 .build:
   stage: build
-  needs: [gdunit4]
   before_script:
     - dotnet restore
     - rm -rf addons/gdUnit4

@@ -30,6 +30,8 @@ folder_colors={
 "res://build/": "gray",
 "res://docs/": "gray",
 "res://gdunit4_testadapter/": "gray",
+"res://reports/": "gray",
+"res://reports_dotnet/": "gray",
 "res://src/": "blue",
 "res://tests/": "green"
 }
