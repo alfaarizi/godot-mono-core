@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=5 format=3 uid="uid://doevqnbisq07u"]
+
+[ext_resource type="Texture2D" uid="uid://1ilafohwcdn3" path="res://assets/sprites/hart/hart.png" id="1_2et12"]
+[ext_resource type="Texture2D" uid="uid://dtbgmwolnpw6l" path="res://assets/sprites/hart/hart_movement.png" id="2_s1ik8"]
+[ext_resource type="Script" uid="uid://bcauf63r01jxq" path="res://src/data/base/CharacterData.cs" id="3_2et12"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2et12"]
+radius = 6.0
+height = 16.0
+
+[resource]
+script = ExtResource("3_2et12")
+Name = "Hart"
+Portrait = ExtResource("1_2et12")
+Sprite = ExtResource("2_s1ik8")
+CollisionShape = SubResource("CapsuleShape2D_2et12")
+metadata/_custom_type_script = "uid://bcauf63r01jxq"
