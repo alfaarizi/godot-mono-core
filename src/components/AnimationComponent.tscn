@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnx5ypkt3ymst"]
+
+[ext_resource type="Script" uid="uid://64hvbxlmpb50" path="res://src/components/AnimationComponent.cs" id="1_6uebe"]
+
+[node name="AnimationComponent" type="Node" node_paths=PackedStringArray("AnimationPlayer", "AnimationTree")]
+script = ExtResource("1_6uebe")
+AnimationPlayer = NodePath("AnimationPlayer")
+AnimationTree = NodePath("AnimationTree")
+metadata/_custom_type_script = "uid://bvr3yq8d15ypf"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+anim_player = NodePath("../AnimationPlayer")
