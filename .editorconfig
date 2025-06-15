@@ -266,3 +266,6 @@ dotnet_separate_import_directive_groups = false
 dotnet_analyzer_diagnostic.IMPORTS.severity = none
 dotnet_diagnostic.CS8669.severity = none
 generated_code = true
+
+[tests/*.cs]
+dotnet_diagnostic.CA1822.severity = none
