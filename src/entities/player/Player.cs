@@ -21,7 +21,6 @@ public partial class Player : Character
         _animationComponent = GetNodeOrNull<AnimationComponent>("AnimationComponent");
         if (_inputComponent != null)
             _inputComponent.DirectionalInput += OnDirectionalInput;
-        _animationComponent?.SetAnimationSpeed(0.5f);
     }
 
     public override void _Process(double delta)
