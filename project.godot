@@ -38,6 +38,7 @@ folder_colors={
 "res://build/": "gray",
 "res://docs/": "gray",
 "res://gdunit4_testadapter/": "gray",
+"res://presets/": "orange",
 "res://reports/": "gray",
 "res://reports_dotnet/": "gray",
 "res://src/": "blue",
@@ -50,6 +51,8 @@ folder_colors={
 "res://src/entities/base/": "gray",
 "res://src/extensions/": "yellow",
 "res://src/interfaces/": "blue",
+"res://src/rooms/": "red",
+"res://src/rooms/base/": "gray",
 "res://tests/": "green"
 }
 

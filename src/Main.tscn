@@ -1,7 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://bh6yhe6qsb6pf"]
+[gd_scene load_steps=3 format=3 uid="uid://bh6yhe6qsb6pf"]
 
-[ext_resource type="PackedScene" uid="uid://da3dgt837tvea" path="res://src/entities/player/Player.tscn" id="1_4gxt3"]
+[ext_resource type="Script" uid="uid://bievrd1e3ixao" path="res://src/Main.cs" id="1_hk4rc"]
+[ext_resource type="PackedScene" uid="uid://c7jq83l1yke0e" path="res://src/rooms/PrologueForest01.tscn" id="2_chrbn"]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node"]
+script = ExtResource("1_hk4rc")
 
-[node name="Player" parent="." instance=ExtResource("1_4gxt3")]
+[node name="World2D" type="Node2D" parent="."]
+scale = Vector2(1, 1)
+
+[node name="PrologueForest01" parent="World2D" instance=ExtResource("2_chrbn")]
