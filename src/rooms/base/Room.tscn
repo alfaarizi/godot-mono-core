@@ -7,11 +7,12 @@ script = ExtResource("1_l6bsb")
 
 [node name="TileMapLayers" type="Node2D" parent="."]
 scale = Vector2(3.5, 3.5)
+metadata/_edit_group_ = true
 
 [node name="Background" type="TileMapLayer" parent="TileMapLayers"]
 
 [node name="Elements" type="Node2D" parent="."]
 
-[node name="Doors" type="Node2D" parent="Elements"]
+[node name="Transfers" type="Node2D" parent="Elements"]
 
 [node name="Characters" type="Node2D" parent="Elements"]

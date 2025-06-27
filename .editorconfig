@@ -254,6 +254,9 @@ dotnet_diagnostic.IDE0005.severity = none # Don't warn about unused usings
 dotnet_diagnostic.IDE0008.severity = none # Don't warn about using var
 dotnet_diagnostic.IDE0051.severity = suggestion # Unused members (Godot reflection)
 
+# Style Preferences
+dotnet_diagnostic.IDE0022.severity = none
+
 # Critical rules
 dotnet_diagnostic.IDE1006.severity = error # Bad naming
 dotnet_diagnostic.IDE0052.severity = error # Unused members
