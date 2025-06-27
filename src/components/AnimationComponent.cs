@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class AnimationComponent : Component
 {
@@ -88,9 +87,7 @@ public partial class AnimationComponent : Component
     }
 
     public bool IsAnimationPlaying(StringName animationName)
-    {
-        return AnimationPlayer?.IsPlaying() == true && AnimationPlayer.CurrentAnimation == animationName;
-    }
+        => AnimationPlayer?.IsPlaying() == true && AnimationPlayer.CurrentAnimation == animationName;
     #endregion
 
     #region Shared Methods
@@ -102,17 +99,13 @@ public partial class AnimationComponent : Component
     }
 
     public bool IsAnimationPlaying()
-    {
-        return AnimationPlayer?.IsPlaying() == true;
-    }
+        => AnimationPlayer?.IsPlaying() == true;
     #endregion
 
     public override void _Ready()
     {
         base._Ready();
         if (Engine.IsEditorHint()) return;
-        AnimationPlayer ??= GetParent<AnimationPlayer>();
-        AnimationTree ??= GetParent<AnimationTree>();
         _isUsingTree = AnimationTree?.Active == true;
         if (AnimationPlayer != null)
         {

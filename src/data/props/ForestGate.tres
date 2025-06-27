@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="PropData" load_steps=4 format=3 uid="uid://d3mqe5k4vfaq1"]
+
+[ext_resource type="Texture2D" uid="uid://jy5hscatjcy6" path="res://assets/props/forest_gate.png" id="1_8001f"]
+[ext_resource type="Script" uid="uid://b1p3e8jgmnx7h" path="res://src/data/base/PropData.cs" id="1_rjlau"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j8jc2"]
+size = Vector2(64, 32)
+
+[resource]
+script = ExtResource("1_rjlau")
+Name = "Forest Gate"
+Sprite = ExtResource("1_8001f")
+CollisionShape = SubResource("RectangleShape2D_j8jc2")
+metadata/_custom_type_script = "uid://b1p3e8jgmnx7h"

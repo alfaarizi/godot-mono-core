@@ -1,12 +1,11 @@
 using Godot;
-using System;
 
 [Tool]
 public partial class Player : Character
 {
-    private InputComponent? _inputComponent;
-    private MovementComponent? _movementComponent;
-    private AnimationComponent? _animationComponent;
+    public InputComponent? InputComponent { get; private set; }
+    public MovementComponent? MovementComponent { get; private set; }
+    public AnimationComponent? AnimationComponent { get; private set; }
 
     public override void _Ready()
     {
@@ -16,35 +15,36 @@ public partial class Player : Character
             SetProcess(false);
             return;
         }
-        _inputComponent = GetNodeOrNull<InputComponent>("InputComponent");
-        _movementComponent = GetNodeOrNull<MovementComponent>("MovementComponent");
-        _animationComponent = GetNodeOrNull<AnimationComponent>("AnimationComponent");
-        if (_inputComponent != null)
-            _inputComponent.DirectionalInput += OnDirectionalInput;
+
+        InputComponent = GetNodeOrNull<InputComponent>("%InputComponent");
+        if (InputComponent != null)
+        {
+            InputComponent.DirectionalInput += OnDirectionalInput;
+        }
+        MovementComponent = GetNodeOrNull<MovementComponent>("%MovementComponent");
+        AnimationComponent = GetNodeOrNull<AnimationComponent>("%AnimationComponent");
     }
 
     public override void _Process(double delta)
     {
-        if (_animationComponent != null && _movementComponent != null)
+        if (AnimationComponent != null && MovementComponent != null)
         {
-            bool isMoving = _movementComponent.IsMoving();
-            Vector2 direction = _movementComponent.GetDirection();
-            _animationComponent.SetTreeParameter("conditions/is_moving", isMoving);
-            _animationComponent.SetTreeParameter("conditions/!is_moving", !isMoving);
-            _animationComponent.SetTreeParameter("Move/blend_position", direction);
-            _animationComponent.SetTreeParameter("Idle/blend_position", direction);
+            bool isMoving = MovementComponent.IsMoving();
+            Vector2 lastDirection = MovementComponent.GetLastDirection();
+            AnimationComponent.SetTreeParameter("conditions/is_moving", isMoving);
+            AnimationComponent.SetTreeParameter("conditions/!is_moving", !isMoving);
+            AnimationComponent.SetTreeParameter("Move/blend_position", lastDirection);
+            AnimationComponent.SetTreeParameter("Idle/blend_position", lastDirection);
         }
     }
 
     public override void _ExitTree()
     {
-        if (_inputComponent != null)
-            _inputComponent.DirectionalInput -= OnDirectionalInput;
+        if (InputComponent != null)
+            InputComponent.DirectionalInput -= OnDirectionalInput;
         base._ExitTree();
     }
 
     private void OnDirectionalInput(Vector2 inputVector)
-    {
-        _movementComponent?.SetDirection(inputVector);
-    }
+        => MovementComponent?.SetDirection(inputVector);
 }

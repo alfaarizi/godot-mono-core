@@ -20,6 +20,7 @@ public partial class MovementComponent : Component
     private MovementMode _currentMovementMode = MovementMode.None;
     private Vector2 _velocity;
     private Vector2 _direction;
+    private Vector2 _lastDirection = Vector2.Down;
     private Vector2 _targetPosition;
     private float _stoppingDistance = 1.0f;
     private bool _isMovingToTarget;
@@ -29,6 +30,8 @@ public partial class MovementComponent : Component
     {
         _isMovingToTarget = false;
         _direction = direction.Normalized();
+        if (_direction != Vector2.Zero)
+            _lastDirection = _direction;
         _currentMovementMode = direction.LengthSquared() > 0 ? MovementMode.Input : MovementMode.None;
     }
     #endregion
@@ -43,9 +46,7 @@ public partial class MovementComponent : Component
     }
 
     public bool IsMovingToTarget()
-    {
-        return _isMovingToTarget;
-    }
+        => _isMovingToTarget;
     #endregion
 
     #region Tweened Movement
@@ -66,29 +67,22 @@ public partial class MovementComponent : Component
 
     #region Shared Methods
     public void AddForce(Vector2 force)
-    {
-        _velocity += force;
-    }
+        => _velocity += force;
 
     public MovementMode GetCurrentMovementMode()
-    {
-        return _currentMovementMode;
-    }
+        => _currentMovementMode;
 
     public Vector2 GetDirection()
-    {
-        return _direction;
-    }
+        => _direction;
+
+    public Vector2 GetLastDirection()
+        => _lastDirection;
 
     public Vector2 GetVelocity()
-    {
-        return _velocity;
-    }
+        => _velocity;
 
     public bool IsMoving()
-    {
-        return _velocity.LengthSquared() > 0.1f || _isMovingToTarget;
-    }
+        => _velocity.LengthSquared() > 0.1f || _isMovingToTarget;
     #endregion
 
     public override void _Ready()
@@ -108,6 +102,8 @@ public partial class MovementComponent : Component
         if (_isMovingToTarget)
         {
             _direction = CalculateDirection();
+            if (_direction != Vector2.Zero)
+                _lastDirection = _direction;
         }
         _velocity = CalculateVelocity(delta);
         MoveBody();

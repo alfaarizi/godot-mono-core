@@ -7,6 +7,5 @@
 script = ExtResource("1_hk4rc")
 
 [node name="World2D" type="Node2D" parent="."]
-scale = Vector2(1, 1)
 
 [node name="PrologueForest01" parent="World2D" instance=ExtResource("2_chrbn")]

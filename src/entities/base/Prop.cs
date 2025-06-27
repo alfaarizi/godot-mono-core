@@ -1,16 +1,16 @@
 using Godot;
 
 [Tool]
-public partial class Character : CharacterBody2D,
+public partial class Prop : StaticBody2D,
     IEntity,
-    IDataProvider<CharacterData>
+    IDataProvider<PropData>
 {
     [Export] public Sprite2D? Sprite { get; set; }
     [Export] public CollisionShape2D? CollisionShape { get; set; }
-    [Export] public CharacterData? Data { get => _data; set => SetData(value); }
-    private CharacterData? _data;
+    [Export] public PropData? Data { get => _data; set => SetData(value); }
+    private PropData? _data;
 
-    public void SetData(CharacterData? data)
+    public void SetData(PropData? data)
     {
         _data = data;
         if (Sprite != null)
@@ -28,12 +28,5 @@ public partial class Character : CharacterBody2D,
             SetPhysicsProcess(false);
             return;
         }
-        Global.AddCharacter(Name, this);
-    }
-
-    public override void _ExitTree()
-    {
-        Global.RemoveCharacter(Name);
-        base._ExitTree();
     }
 }

@@ -26,19 +26,13 @@ public partial class InputComponent : Component
 
     #region Input Methods
     public Vector2 GetInputVector()
-    {
-        return _currentInputVector;
-    }
+        => _currentInputVector;
 
     public float GetHoldDuration(StringName action)
-    {
-        return _holdDurations.GetValueOrDefault(action);
-    }
+        => _holdDurations.GetValueOrDefault(action);
 
     public bool IsHolding(StringName action)
-    {
-        return _holdDurations.ContainsKey(action);
-    }
+        => _holdDurations.ContainsKey(action);
     #endregion
 
     public override void _Ready()
