@@ -16,3 +16,5 @@ metadata/_edit_group_ = true
 [node name="Transfers" type="Node2D" parent="Elements"]
 
 [node name="Characters" type="Node2D" parent="Elements"]
+
+[node name="Props" type="Node2D" parent="Elements"]
