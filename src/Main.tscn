@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bh6yhe6qsb6pf"]
 
 [ext_resource type="Script" uid="uid://bievrd1e3ixao" path="res://src/Main.cs" id="1_hk4rc"]
-[ext_resource type="PackedScene" uid="uid://c7jq83l1yke0e" path="res://src/rooms/PrologueForest01.tscn" id="2_chrbn"]
+[ext_resource type="PackedScene" uid="uid://c7jq83l1yke0e" path="res://src/rooms/Prologue/PrologueForest01.tscn" id="2_chrbn"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_hk4rc")

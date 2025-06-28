@@ -38,6 +38,7 @@ enabled=PackedStringArray("res://addons/gdUnit4/plugin.cfg")
 [file_customization]
 
 folder_colors={
+"res://Unused_Contents/": "pink",
 "res://addons/": "gray",
 "res://assets/": "teal",
 "res://build/": "gray",
