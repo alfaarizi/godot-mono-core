@@ -7,12 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://dtfb4gdflqv1c" path="res://src/components/PromptComponent.tscn" id="5_mxkt5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p106i"]
-size = Vector2(65, 32)
+size = Vector2(64, 32)
 
 [node name="Transfer" instance=ExtResource("1_ynlg8")]
 script = ExtResource("2_cli3g")
 RoomPath = ""
 DestinationName = ""
+RequiresInteraction = false
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(0, -8)

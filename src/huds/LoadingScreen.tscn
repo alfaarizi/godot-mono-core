@@ -194,7 +194,7 @@ _data = {
 
 [node name="LoadingScreen" type="CanvasLayer"]
 script = ExtResource("1_b5w75")
-FadeSpeed = 2
+FadeSpeed = 3
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15

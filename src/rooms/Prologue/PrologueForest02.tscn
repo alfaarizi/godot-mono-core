@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=4 uid="uid://btpnpd7i4hpdv"]
+[gd_scene load_steps=5 format=4 uid="uid://btpnpd7i4hpdv"]
 
 [ext_resource type="PackedScene" uid="uid://dnsgoxb5hgp8o" path="res://src/rooms/base/Room.tscn" id="1_my6dj"]
 [ext_resource type="TileSet" uid="uid://brgodq1lsk1kp" path="res://presets/PrologueForest02/PrologueForest02.tres" id="2_auvfq"]
 [ext_resource type="PackedScene" uid="uid://da3dgt837tvea" path="res://src/entities/player/Player.tscn" id="3_2tx4y"]
+[ext_resource type="PackedScene" uid="uid://b73ng4lo6h50r" path="res://src/common/Transfer.tscn" id="3_ih43h"]
 
 [node name="PrologueForest02" instance=ExtResource("1_my6dj")]
 
@@ -46,5 +47,12 @@ tile_map_data = PackedByteArray("AAAAAAAAAwAAAAAAAAAAAAEAAwAAAAEAAAAAAAIAAwAAAAI
 tile_set = ExtResource("2_auvfq")
 metadata/_edit_lock_ = true
 
+[node name="Transfer_01_South" parent="Elements/Transfers" index="0" instance=ExtResource("3_ih43h")]
+position = Vector2(1560, 1896)
+rotation = 3.14159
+scale = Vector2(4.12282, 3.43723)
+RoomPath = "uid://c7jq83l1yke0e"
+DestinationName = "Transfer_01_North"
+
 [node name="Player" parent="Elements/Characters" index="0" instance=ExtResource("3_2tx4y")]
-position = Vector2(1523, 1830)
+position = Vector2(1587, 1671)
