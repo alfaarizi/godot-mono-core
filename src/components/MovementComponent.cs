@@ -11,6 +11,7 @@ public enum MovementMode
 
 public partial class MovementComponent : Component
 {
+    [Signal] public delegate void LastDirectionChangedEventHandler(Vector2 direction);
     [Signal] public delegate void MovementCompletedEventHandler();
     [Export] public PhysicsBody2D? Body { get; set; }
     [Export] public float MaxSpeed { get; set; } = 100.0f;
@@ -30,8 +31,11 @@ public partial class MovementComponent : Component
     {
         _isMovingToTarget = false;
         _direction = direction.Normalized();
-        if (_direction != Vector2.Zero)
+        if (_direction != Vector2.Zero && _direction != _lastDirection)
+        {
             _lastDirection = _direction;
+            _ = EmitSignal(SignalName.LastDirectionChanged, _lastDirection);
+        }
         _currentMovementMode = direction.LengthSquared() > 0 ? MovementMode.Input : MovementMode.None;
     }
     #endregion
@@ -72,14 +76,20 @@ public partial class MovementComponent : Component
     public MovementMode GetCurrentMovementMode()
         => _currentMovementMode;
 
+    public Vector2 GetVelocity()
+        => _velocity;
+
     public Vector2 GetDirection()
         => _direction;
 
     public Vector2 GetLastDirection()
         => _lastDirection;
 
-    public Vector2 GetVelocity()
-        => _velocity;
+    public void SetLastDirection(Vector2 lastDirection)
+    {
+        _lastDirection = lastDirection;
+        _ = EmitSignal(SignalName.LastDirectionChanged, _lastDirection);
+    }
 
     public bool IsMoving()
         => _velocity.LengthSquared() > 0.1f || _isMovingToTarget;
@@ -101,25 +111,26 @@ public partial class MovementComponent : Component
         if (!IsEnabled || Body == null) return;
         if (_isMovingToTarget)
         {
-            _direction = CalculateDirection();
-            if (_direction != Vector2.Zero)
-                _lastDirection = _direction;
+            Vector2 directionToTarget = _targetPosition - Body.GlobalPosition;
+            if (directionToTarget.Length() <= _stoppingDistance)
+            {
+                _isMovingToTarget = false;
+                _currentMovementMode = MovementMode.None;
+                _ = EmitSignal(SignalName.MovementCompleted);
+                _direction = Vector2.Zero;
+            }
+            else
+            {
+                _direction = directionToTarget.Normalized();
+                if (_direction != Vector2.Zero && _direction != _lastDirection)
+                {
+                    _lastDirection = _direction;
+                    _ = EmitSignal(SignalName.LastDirectionChanged, _lastDirection);
+                }
+            }
         }
         _velocity = CalculateVelocity(delta);
         MoveBody();
-    }
-
-    private Vector2 CalculateDirection()
-    {
-        Vector2 directionToTarget = _targetPosition - (Body?.GlobalPosition ?? Vector2.Zero);
-        if (directionToTarget.Length() <= _stoppingDistance)
-        {
-            _isMovingToTarget = false;
-            _currentMovementMode = MovementMode.None;
-            _ = EmitSignal(SignalName.MovementCompleted);
-            return Vector2.Zero;
-        }
-        return directionToTarget.Normalized();
     }
 
     private Vector2 CalculateVelocity(double delta)

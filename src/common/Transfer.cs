@@ -5,6 +5,7 @@ public partial class Transfer : Prop
 {
     [Export(PropertyHint.File, "*.tscn")] public string RoomPath { get; set; } = "";
     [Export] public string DestinationName { get; set; } = "";
+    [Export] public bool RequiresInteraction { get; set; }
 
     private Area2D? _detectionArea;
     private Marker2D? _marker;
@@ -12,6 +13,8 @@ public partial class Transfer : Prop
     private PromptComponent? _promptComponent;
     private SceneManager? _sceneManager;
     private Player? _playerEntered;
+    private Vector2 _entryDirection;
+    private bool _isTransported;
 
     public override void _Ready()
     {
@@ -30,6 +33,14 @@ public partial class Transfer : Prop
         {
             _detectionArea.BodyEntered += OnPlayerEntered;
             _detectionArea.BodyExited += OnPlayerExited;
+        }
+
+        if (_marker != null)
+        {
+            Vector2 diff = GlobalPosition - _marker.GlobalPosition;
+            _entryDirection = Mathf.Abs(diff.X) > Mathf.Abs(diff.Y)
+                ? new Vector2(Mathf.Sign(diff.X), 0)
+                : new Vector2(0, Mathf.Sign(diff.Y));
         }
 
         if (_inputComponent != null)
@@ -54,25 +65,54 @@ public partial class Transfer : Prop
 
     private void OnPlayerEntered(Node body)
     {
-        if (body is Player player)
+        if (body is not Player player) return;
+
+        _isTransported = false;
+        _playerEntered = player;
+
+        if (RequiresInteraction)
         {
-            _playerEntered = player;
             _promptComponent?.Show("Press Z to Enter");
+            return;
+        }
+
+        if (player.MovementComponent != null)
+            player.MovementComponent.LastDirectionChanged += OnPlayerLastDirectionChanged;
+
+        // Check Initial Direction
+        if (player.MovementComponent?.GetLastDirection().Dot(_entryDirection) > 0.0f)
+        {
+            _isTransported = true;
+            Transport(player);
+        }
+    }
+
+    private void OnPlayerLastDirectionChanged(Vector2 direction)
+    {
+        if (_playerEntered != null && !_isTransported && direction.Dot(_entryDirection) > 0.0f)
+        {
+            _isTransported = true;
+            Transport(_playerEntered);
         }
     }
 
     private void OnPlayerExited(Node body)
     {
-        if (body == _playerEntered)
-        {
-            _playerEntered = null;
+        if (body != _playerEntered) return;
+
+        if (_playerEntered?.MovementComponent != null)
+            _playerEntered.MovementComponent.LastDirectionChanged -= OnPlayerLastDirectionChanged;
+
+        _isTransported = false;
+        _playerEntered = null;
+
+        if (RequiresInteraction)
             _promptComponent?.Hide();
-        }
     }
 
     private void OnActionPressed(StringName action)
     {
-        if (_playerEntered == null || action != "ui_interact") return;
+        if (_playerEntered == null || !RequiresInteraction || action != "ui_interact") return;
         Transport(_playerEntered);
     }
 
@@ -96,7 +136,11 @@ public partial class Transfer : Prop
             _ = await ToSignal(_sceneManager, SceneManager.SignalName.SceneLoadCompleted);
 
             if (Global.GetCharacter("Player") is Player newPlayer && Global.GetDestination(DestinationName) is Transfer newTransfer)
+            {
                 newPlayer.GlobalPosition = newTransfer._marker?.GlobalPosition ?? newTransfer.GlobalPosition;
+                if (_entryDirection != Vector2.Zero)
+                    newPlayer.MovementComponent?.SetLastDirection(_entryDirection);
+            }
         }
         else if (!string.IsNullOrEmpty(DestinationName) && Global.GetDestination(DestinationName) is Transfer currentTransfer)
         {
