@@ -19,6 +19,12 @@ config/icon="res://icon.svg"
 
 Global="*res://src/autoloads/Global.cs"
 SceneManager="*res://src/autoloads/SceneManager.cs"
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+
+[dialogue_manager]
+
+runtime/advanced/uses_dotnet=true
+runtime/balloon_path="res://src/dialogue/Balloon.tscn"
 
 [display]
 
@@ -34,7 +40,7 @@ project/assembly_name="GodotMonoCore"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/gdUnit4/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/gdUnit4/plugin.cfg")
 
 [file_customization]
 
