@@ -269,6 +269,7 @@ DownAction = &"ui_down"
 unique_name_in_owner = true
 Body = NodePath("..")
 MaxSpeed = 600.0
+Acceleration = 15.0
 
 [node name="AnimationComponent" parent="." index="4" instance=ExtResource("5_lvau8")]
 unique_name_in_owner = true
@@ -283,7 +284,7 @@ tree_root = SubResource("AnimationNodeStateMachine_brwq7")
 parameters/conditions/!is_moving = false
 parameters/conditions/is_moving = false
 parameters/Idle/blend_position = Vector2(0, 0.1)
-parameters/Move/blend_position = Vector2(0, 0.1)
+parameters/Move/blend_position = Vector2(-0.043554, 0.0846155)
 
 [node name="Camera2D" type="Camera2D" parent="." index="5"]
 

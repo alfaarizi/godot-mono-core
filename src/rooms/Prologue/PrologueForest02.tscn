@@ -25,13 +25,13 @@ tile_set = ExtResource("2_auvfq")
 [node name="StaticBody2D" type="StaticBody2D" parent="TileMapLayers/TreeBottom" index="0"]
 
 [node name="TreeZone1" type="CollisionPolygon2D" parent="TileMapLayers/TreeBottom/StaticBody2D" index="0"]
-polygon = PackedVector2Array(0, 0, 0, 122.571, 0, 157.143, 4.57143, 157.143, 4.57143, 116, 53.4286, 116.571, 53.7143, 92, 107.429, 92.5714, 110.571, 56.5714, 127.429, 44.2857, 185.143, 44.5714, 190.571, 54.5714, 254.571, 54.2857, 254.286, 0.285714)
+polygon = PackedVector2Array(0, 0, 0, 122.571, 0, 157.143, 4.57143, 157.143, 4.57143, 116, 53.4286, 116.571, 53.7143, 92, 107.429, 92.5714, 110.571, 56.5714, 127.429, 44.2857, 185.143, 44.5714, 190.571, 54.5714, 253.714, 54.8571, 244.571, 41.1429, 244.571, 13.7143, 256, 2.28571, 329.143, 2.28571, 329.143, 0)
 
 [node name="TreeZone2" type="CollisionPolygon2D" parent="TileMapLayers/TreeBottom/StaticBody2D" index="1"]
-polygon = PackedVector2Array(0, 156.857, 0, 544, 483.429, 544, 483.429, 541.429, 408, 541.429, 408.857, 474, 371.714, 473.714, 329.714, 444, 329.714, 405.714, 337.143, 405.429, 337.429, 397.143, 332.857, 394.857, 326.286, 388, 326.286, 358.286, 366.571, 359.143, 372.571, 348, 412.286, 348, 417.429, 341.429, 407.429, 332.857, 407.429, 319.429, 453.143, 320, 453.429, 308.857, 447.143, 306.286, 446.857, 251.429, 84.8571, 251.429, 78.2857, 207.143, 66.8571, 183.714, 56.5714, 166.286, 4.57143, 166.286, 4.57143, 156.857)
+polygon = PackedVector2Array(0, 156.857, 0, 544, 483.429, 544, 483.429, 541.429, 408, 541.429, 408.857, 474, 371.714, 473.714, 329.714, 444, 329.714, 405.714, 337.143, 405.429, 337.429, 397.143, 332.857, 394.857, 326.286, 388, 326.286, 358.286, 366.571, 359.143, 372.571, 348, 412.286, 348, 417.429, 341.429, 407.429, 332.857, 407.429, 319.429, 453.143, 320, 453.429, 308.857, 447.143, 306.286, 446.857, 251.429, 84.8571, 251.429, 78.2857, 207.143, 66.8571, 183.714, 57.1429, 171.429, 4.57143, 171.429, 4.57143, 156.857)
 
 [node name="TreeZone3" type="CollisionPolygon2D" parent="TileMapLayers/TreeBottom/StaticBody2D" index="2"]
-polygon = PackedVector2Array(334, 1.14286, 334.286, 66.8571, 294, 66.8571, 294, 98.5714, 168.571, 98.5714, 168.857, 183.429, 218.286, 184.857, 219.429, 173.143, 274.286, 172.571, 279.143, 192, 340.571, 194.286, 340, 169.429, 376.286, 172.286, 382.857, 194, 442.286, 194, 442, 154.857, 480.857, 155.143, 481.714, 100, 512, 101.429, 510.857, 58, 671.714, 57.7143, 672.286, 124.286, 714.571, 185.714, 739.143, 191.143, 734.571, 227.143, 731.143, 292, 747.143, 346, 867.143, 345.429, 873.429, 76.2857, 916.571, 53.7143, 1013.71, 60.5714, 1015.71, 110.857, 1088, 110.857, 1088, 0)
+polygon = PackedVector2Array(329.143, 0, 329.143, 66.2857, 292.571, 66.2857, 292.571, 98.2857, 168.571, 98.5714, 168.857, 183.429, 218.286, 184.857, 219.429, 173.143, 274.286, 172.571, 279.143, 192, 340.571, 194.286, 340, 169.429, 376.286, 172.286, 382.857, 194, 442.286, 194, 442, 154.857, 480.857, 155.143, 481.714, 100, 512, 101.429, 510.857, 58, 671.714, 57.7143, 672.286, 124.286, 714.571, 185.714, 739.143, 191.143, 734.571, 227.143, 731.143, 292, 747.143, 346, 867.143, 345.429, 873.429, 76.2857, 916.571, 53.7143, 1013.71, 60.5714, 1015.71, 110.857, 1088, 110.857, 1088, 0)
 
 [node name="TreeZone4" type="CollisionPolygon2D" parent="TileMapLayers/TreeBottom/StaticBody2D" index="3"]
 polygon = PackedVector2Array(483.429, 543.714, 482.857, 475.143, 601.429, 475.143, 601.429, 433.143, 573.429, 433.143, 579.143, 371.714, 580.571, 346.286, 554.571, 338, 500, 332.857, 501.429, 252, 650.571, 251.429, 650.571, 322.286, 659.143, 455.714, 748.341, 455.714, 747.714, 433.143, 754.286, 417.714, 862, 418, 862, 449.714, 962.286, 449.714, 962.286, 440.857, 1084.29, 440.857, 1084.29, 285.429, 1062.29, 285.429, 1062.29, 407.714, 976.571, 407.714, 976.857, 208.286, 1086.86, 208.286, 1087.14, 110.857, 1088, 110.857, 1088, 544)
@@ -47,12 +47,56 @@ tile_map_data = PackedByteArray("AAAAAAAAAwAAAAAAAAAAAAEAAwAAAAEAAAAAAAIAAwAAAAI
 tile_set = ExtResource("2_auvfq")
 metadata/_edit_lock_ = true
 
-[node name="Transfer_01_South" parent="Elements/Transfers" index="0" instance=ExtResource("3_ih43h")]
-position = Vector2(1560, 1896)
+[node name="Transfers" parent="Elements" index="0"]
+position = Vector2(1, 0)
+
+[node name="ToPrologueForest01" parent="Elements/Transfers" index="0" instance=ExtResource("3_ih43h")]
+position = Vector2(1559, 1904)
 rotation = 3.14159
-scale = Vector2(4.12282, 3.43723)
+scale = Vector2(4.12282, 1.15725)
 RoomPath = "uid://c7jq83l1yke0e"
-DestinationName = "Transfer_01_North"
+DestinationName = "ToPrologueForest02"
+
+[node name="Marker2D" parent="Elements/Transfers/ToPrologueForest01" index="3"]
+position = Vector2(-0.72768, 47.5265)
+
+[node name="ToPrologueForest03" parent="Elements/Transfers" index="1" instance=ExtResource("3_ih43h")]
+position = Vector2(1.99999, 490)
+rotation = 4.71239
+scale = Vector2(2.9, 0.9)
+RoomPath = "uid://ctturifr7tg34"
+DestinationName = "ToPrologueForest02"
+
+[node name="Marker2D" parent="Elements/Transfers/ToPrologueForest03" index="3"]
+position = Vector2(-0.68962, 62.2222)
+
+[node name="ToPrologueForest04" parent="Elements/Transfers" index="2" instance=ExtResource("3_ih43h")]
+position = Vector2(3804, 557)
+rotation = 1.5708
+scale = Vector2(5.06, 0.82)
+RoomPath = "uid://c3ybehawmiq16"
+DestinationName = "ToPrologueForest02"
+
+[node name="Marker2D" parent="Elements/Transfers/ToPrologueForest04" index="3"]
+position = Vector2(0.395245, 80.4877)
+
+[node name="ToPrologueForest11" parent="Elements/Transfers" index="3" instance=ExtResource("3_ih43h")]
+position = Vector2(1014, 3)
+scale = Vector2(4.17999, 0.78)
+RoomPath = "uid://c8gvo6ofxw1wx"
+DestinationName = "ToPrologueForest02"
+
+[node name="Marker2D" parent="Elements/Transfers/ToPrologueForest11" index="3"]
+position = Vector2(0, 132.051)
 
 [node name="Player" parent="Elements/Characters" index="0" instance=ExtResource("3_2tx4y")]
 position = Vector2(1587, 1671)
+
+[editable path="Elements/Transfers/ToPrologueForest01"]
+[editable path="Elements/Transfers/ToPrologueForest01/DetectionArea"]
+[editable path="Elements/Transfers/ToPrologueForest03"]
+[editable path="Elements/Transfers/ToPrologueForest03/DetectionArea"]
+[editable path="Elements/Transfers/ToPrologueForest04"]
+[editable path="Elements/Transfers/ToPrologueForest04/DetectionArea"]
+[editable path="Elements/Transfers/ToPrologueForest11"]
+[editable path="Elements/Transfers/ToPrologueForest11/DetectionArea"]
