@@ -124,7 +124,7 @@ public partial class Transfer : Prop
             currentPlayer.InputComponent?.SetEnabled(false);
             currentPlayer.MovementComponent?.SetEnabled(false);
 
-            Room? currentRoom = Global.GetCurrentRoom();
+            Room? currentRoom = Global.CurrentRoom;
             if (currentRoom == null || _sceneManager == null)
             {
                 currentPlayer.InputComponent?.SetEnabled(true);

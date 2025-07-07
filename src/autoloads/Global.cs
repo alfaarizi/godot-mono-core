@@ -25,10 +25,10 @@ public partial class Global : Node
     #endregion
 
     #region Current Room
-    private static Room? _currentRoom;
-    public static Room? GetCurrentRoom()
-        => _currentRoom;
-    internal static void SetCurrentRoom(Room? room)
-        => _currentRoom = room;
+    public static Room? CurrentRoom { get; internal set; }
+    #endregion
+
+    #region Current Camera
+    public static CameraComponent? CurrentCamera { get; set; }
     #endregion
 }

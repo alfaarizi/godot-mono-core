@@ -6,6 +6,7 @@ public partial class Player : Character
     public InputComponent? InputComponent { get; private set; }
     public MovementComponent? MovementComponent { get; private set; }
     public AnimationComponent? AnimationComponent { get; private set; }
+    public CameraComponent? CameraComponent { get; private set; }
 
     public override void _Ready()
     {
@@ -21,8 +22,13 @@ public partial class Player : Character
         {
             InputComponent.DirectionalInput += OnDirectionalInput;
         }
+
         MovementComponent = GetNodeOrNull<MovementComponent>("%MovementComponent");
+
         AnimationComponent = GetNodeOrNull<AnimationComponent>("%AnimationComponent");
+
+        CameraComponent = GetNodeOrNull<CameraComponent>("%CameraComponent");
+        CameraComponent?.MakeCurrent();
     }
 
     public override void _Process(double delta)
