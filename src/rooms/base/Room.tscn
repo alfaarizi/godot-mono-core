@@ -2,14 +2,16 @@
 
 [ext_resource type="Script" uid="uid://d0qhie0t33anj" path="res://src/rooms/base/Room.cs" id="1_l6bsb"]
 
-[node name="Room" type="Node2D"]
+[node name="Room" type="Node2D" node_paths=PackedStringArray("TileMapRect")]
 script = ExtResource("1_l6bsb")
+TileMapRect = NodePath("TileMapLayers/Background")
 
 [node name="TileMapLayers" type="Node2D" parent="."]
 scale = Vector2(3.5, 3.5)
 metadata/_edit_group_ = true
 
 [node name="Background" type="TileMapLayer" parent="TileMapLayers"]
+unique_name_in_owner = true
 
 [node name="Elements" type="Node2D" parent="."]
 
