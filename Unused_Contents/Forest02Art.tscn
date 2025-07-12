@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=4 uid="uid://chp1fa2ta1a36"]
 
-[ext_resource type="TileSet" uid="uid://brgodq1lsk1kp" path="res://presets/PrologueForest02/PrologueForest02.tres" id="1_6h53e"]
+[ext_resource type="TileSet" uid="uid://brgodq1lsk1kp" path="res://presets/PrologueForest/PrologueForest02/PrologueForest02.tres" id="1_6h53e"]
 
 [node name="Art" type="Node2D"]
 
