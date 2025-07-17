@@ -14,9 +14,12 @@ metadata/_edit_group_ = true
 unique_name_in_owner = true
 
 [node name="Elements" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="Transfers" type="Node2D" parent="Elements"]
 
 [node name="Characters" type="Node2D" parent="Elements"]
+y_sort_enabled = true
 
 [node name="Props" type="Node2D" parent="Elements"]
+y_sort_enabled = true

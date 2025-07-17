@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1cyx62731dv3"
-path="res://.godot/imported/bushmaze_long.png-b58de23ab2c757ab2c379bb95a2ad511.ctex"
+uid="uid://bsdoi6vgbhgtr"
+path="res://.godot/imported/forest6_bush0.png-d64a322a38fa03bb3dd8306937e4c7f7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/props/bushmaze_long.png"
-dest_files=["res://.godot/imported/bushmaze_long.png-b58de23ab2c757ab2c379bb95a2ad511.ctex"]
+source_file="res://assets/props/PrologueForest/forest6_bush0.png"
+dest_files=["res://.godot/imported/forest6_bush0.png-d64a322a38fa03bb3dd8306937e4c7f7.ctex"]
 
 [params]
 
