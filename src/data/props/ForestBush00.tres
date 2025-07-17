@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PropData" load_steps=4 format=3 uid="uid://bshq7d5e2w4sh"]
+
+[ext_resource type="Texture2D" uid="uid://bsdoi6vgbhgtr" path="res://assets/props/PrologueForest/forest6_bush0.png" id="1_o0jvr"]
+[ext_resource type="Script" uid="uid://b1p3e8jgmnx7h" path="res://src/data/base/PropData.cs" id="2_lj0ek"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o0jvr"]
+
+[resource]
+script = ExtResource("2_lj0ek")
+Name = "ForestBush00"
+Sprite = ExtResource("1_o0jvr")
+CollisionShape = SubResource("RectangleShape2D_o0jvr")
+metadata/_custom_type_script = "uid://b1p3e8jgmnx7h"

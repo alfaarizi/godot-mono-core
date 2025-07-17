@@ -1,12 +1,15 @@
-[gd_scene load_steps=32 format=3 uid="uid://da3dgt837tvea"]
+[gd_scene load_steps=34 format=3 uid="uid://da3dgt837tvea"]
 
 [ext_resource type="PackedScene" uid="uid://gr5ue7odva4l" path="res://src/entities/base/Character.tscn" id="1_3py4g"]
 [ext_resource type="Script" uid="uid://cmqgvm31pj3xi" path="res://src/entities/player/Player.cs" id="2_vna0p"]
 [ext_resource type="Resource" uid="uid://doevqnbisq07u" path="res://src/data/characters/Hart.tres" id="3_j0f6w"]
+[ext_resource type="Texture2D" uid="uid://dtbgmwolnpw6l" path="res://assets/sprites/hart/hart_movement.png" id="4_3g2ip"]
 [ext_resource type="PackedScene" uid="uid://dnx5ypkt3ymst" path="res://src/components/AnimationComponent.tscn" id="5_lvau8"]
 [ext_resource type="PackedScene" uid="uid://dwu0av21crh2f" path="res://src/components/MovementComponent.tscn" id="6_gc66i"]
 [ext_resource type="PackedScene" uid="uid://d38i6iuc1di8v" path="res://src/components/InputComponent.tscn" id="7_j0f6w"]
 [ext_resource type="PackedScene" uid="uid://tubun22eupv2" path="res://src/components/CameraComponent.tscn" id="8_3g2ip"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2et12"]
 
 [sub_resource type="Animation" id="Animation_3g2ip"]
 length = 0.001
@@ -247,6 +250,14 @@ graph_offset = Vector2(-40.998, -1.2)
 motion_mode = 1
 script = ExtResource("2_vna0p")
 Data = ExtResource("3_j0f6w")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("4_3g2ip")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(1.70762e-12, -6.57143)
+scale = Vector2(0.551084, 0.500621)
+shape = SubResource("RectangleShape2D_2et12")
 
 [node name="InputComponent" parent="." index="2" instance=ExtResource("7_j0f6w")]
 unique_name_in_owner = true
