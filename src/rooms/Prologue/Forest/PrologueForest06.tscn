@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://b0o43244mbbfs" path="res://assets/props/PrologueForest/forest6_bush2.png" id="10_prhsa"]
 [ext_resource type="Resource" uid="uid://wxnfaqvrhxjr" path="res://src/data/props/ForestBush05.tres" id="11_vyafm"]
 [ext_resource type="Texture2D" uid="uid://dvxp6oqrf8jks" path="res://assets/props/PrologueForest/forest6_bush4.png" id="15_nraq4"]
-[ext_resource type="Texture2D" uid="uid://rrk4o1d543cn" path="res://assets/props/PrologueForest/forest6_bush5.png" id="16_ljidl"]
+[ext_resource type="Texture2D" uid="uid://b3yry52ptuu3x" path="res://assets/props/PrologueForest/forest6_bush5.png" id="16_ljidl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o0jvr"]
 
@@ -92,7 +92,7 @@ DestinationName = "ToPrologueForest06"
 position = Vector2(0.857143, 120.371)
 
 [node name="Player" parent="Elements/Characters" index="0" instance=ExtResource("3_14eyr")]
-position = Vector2(608, 1760)
+position = Vector2(608, 1749)
 
 [node name="Prop00" parent="Elements/Props" index="0" instance=ExtResource("5_rp02f")]
 position = Vector2(1920, 1306)
@@ -178,12 +178,12 @@ position = Vector2(2395, 1077)
 Data = ExtResource("11_vyafm")
 
 [node name="Sprite2D" parent="Elements/Props/Prop05" index="0"]
-position = Vector2(0, -68)
+position = Vector2(-16, -68)
 texture = ExtResource("16_ljidl")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Elements/Props/Prop05" index="2"]
 position = Vector2(0, -68)
-polygon = PackedVector2Array(31.7143, 56.8571, 31.4286, -62.2857, 61.7143, -62.5714, 62.2858, 56.8571, 95.4286, 57.1429, 95.7143, 77.7143, -95.9999, 78, -96.2857, 32, -65.4285, 32, -65.4285, 57.1429)
+polygon = PackedVector2Array(31.7143, 56.8571, 31.4286, -62.2857, 61.7143, -62.5714, 62.2858, 56.8571, 62.2858, 77.7143, -95.9999, 78, -96.2857, 32, -65.4285, 32, -65.4285, 57.1429)
 
 [node name="Prop06" parent="Elements/Props" index="7" instance=ExtResource("5_rp02f")]
 position = Vector2(1137, 951)

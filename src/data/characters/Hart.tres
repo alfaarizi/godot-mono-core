@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://bcauf63r01jxq" path="res://src/data/base/CharacterData.cs" id="3_2et12"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2et12"]
+size = Vector2(11, 10)
 
 [resource]
 script = ExtResource("3_2et12")
