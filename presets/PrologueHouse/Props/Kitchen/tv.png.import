@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3yry52ptuu3x"
-path="res://.godot/imported/forest6_bush5.png-1f3ec709f5ea6fd5fd4ad21ee27f37b0.ctex"
+uid="uid://ue3y7fofyfhe"
+path="res://.godot/imported/tv.png-f4c904d5def5c8e6a19bebad9635c766.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/props/PrologueForest/forest6_bush5.png"
-dest_files=["res://.godot/imported/forest6_bush5.png-1f3ec709f5ea6fd5fd4ad21ee27f37b0.ctex"]
+source_file="res://presets/PrologueHouse/Props/Kitchen/tv.png"
+dest_files=["res://.godot/imported/tv.png-f4c904d5def5c8e6a19bebad9635c766.ctex"]
 
 [params]
 

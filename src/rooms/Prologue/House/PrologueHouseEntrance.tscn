@@ -76,6 +76,16 @@ RequiresInteraction = true
 [node name="Marker2D" parent="Elements/Transfers/ToPrologueForest10" index="3"]
 position = Vector2(-1.63731e-05, 55.4798)
 
+[node name="ToLivingRoom" parent="Elements/Transfers" index="3" instance=ExtResource("3_v2u6f")]
+position = Vector2(1790, 821)
+rotation = 1.5708
+scale = Vector2(2.78, 1.53999)
+RoomPath = "uid://d1hwftfk3mnmd"
+DestinationName = "ToEntrance"
+
+[node name="Marker2D" parent="Elements/Transfers/ToLivingRoom" index="3"]
+position = Vector2(11.5108, 72.0785)
+
 [node name="Player" parent="Elements/Characters" index="0" instance=ExtResource("4_7xk0l")]
 position = Vector2(888, 1222)
 
@@ -85,3 +95,5 @@ position = Vector2(888, 1222)
 [editable path="Elements/Transfers/ToKitchen/DetectionArea"]
 [editable path="Elements/Transfers/ToPrologueForest10"]
 [editable path="Elements/Transfers/ToPrologueForest10/DetectionArea"]
+[editable path="Elements/Transfers/ToLivingRoom"]
+[editable path="Elements/Transfers/ToLivingRoom/DetectionArea"]
