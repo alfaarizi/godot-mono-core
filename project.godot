@@ -8,19 +8,6 @@
 
 config_version=5
 
-[addons]
-
-resources_spreadsheet_view/array_color_tint=100.0
-resources_spreadsheet_view/color_rows=true
-resources_spreadsheet_view/array_min_width=128.0
-resources_spreadsheet_view/resource_preview_size=32.0
-resources_spreadsheet_view/clip_headers=false
-resources_spreadsheet_view/dupe_arrays=true
-resources_spreadsheet_view/context_menu_on_leftclick=false
-resources_spreadsheet_view/fold_docks=true
-resources_spreadsheet_view/resource_cell_label_mode=1
-resources_spreadsheet_view/freeze_first_column=true
-
 [application]
 
 config/name="GodotMonoCore"
@@ -52,7 +39,7 @@ project/assembly_name="GodotMonoCore"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/gdUnit4/plugin.cfg", "res://addons/resources_spreadsheet_view/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/gdUnit4/plugin.cfg")
 
 [file_customization]
 
