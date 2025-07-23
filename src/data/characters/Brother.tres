@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=4 format=3 uid="uid://2kul8gwn8fqy"]
+
+[ext_resource type="Texture2D" uid="uid://suag6jvcdbb5" path="res://assets/sprites/brother/brother_movement.png" id="1_1aray"]
+[ext_resource type="Script" uid="uid://bcauf63r01jxq" path="res://src/data/base/CharacterData.cs" id="2_cryqd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bqcyj"]
+size = Vector2(12, 10)
+
+[resource]
+script = ExtResource("2_cryqd")
+Name = "Bro"
+Sprite = ExtResource("1_1aray")
+CollisionShape = SubResource("RectangleShape2D_bqcyj")
+metadata/_custom_type_script = "uid://bcauf63r01jxq"

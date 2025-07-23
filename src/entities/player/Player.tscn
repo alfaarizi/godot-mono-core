@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://tubun22eupv2" path="res://src/components/CameraComponent.tscn" id="8_3g2ip"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2et12"]
+size = Vector2(11, 10)
 
 [sub_resource type="Animation" id="Animation_3g2ip"]
 length = 0.001
@@ -252,11 +253,11 @@ script = ExtResource("2_vna0p")
 Data = ExtResource("3_j0f6w")
 
 [node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, -23)
 texture = ExtResource("4_3g2ip")
 
 [node name="CollisionShape2D" parent="." index="1"]
-position = Vector2(1.70762e-12, -6.57143)
-scale = Vector2(0.551084, 0.500621)
+position = Vector2(0, -5.5)
 shape = SubResource("RectangleShape2D_2et12")
 
 [node name="InputComponent" parent="." index="2" instance=ExtResource("7_j0f6w")]
