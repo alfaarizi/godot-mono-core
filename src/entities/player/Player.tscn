@@ -248,6 +248,8 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(-40.998, -1.2)
 
 [node name="Player" instance=ExtResource("1_3py4g")]
+position = Vector2(1, 0)
+collision_layer = 2
 motion_mode = 1
 script = ExtResource("2_vna0p")
 Data = ExtResource("3_j0f6w")

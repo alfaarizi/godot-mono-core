@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dnsgoxb5hgp8o"]
+[gd_scene load_steps=5 format=3 uid="uid://dnsgoxb5hgp8o"]
 
 [ext_resource type="Script" uid="uid://d0qhie0t33anj" path="res://src/rooms/base/Room.cs" id="1_l6bsb"]
+[ext_resource type="PackedScene" uid="uid://oo71pjbqscq7" path="res://src/common/LOSManager.tscn" id="2_241hj"]
+[ext_resource type="PackedScene" uid="uid://cjxy831xfipp2" path="res://src/common/LOSDebugger.tscn" id="3_p0i1h"]
+[ext_resource type="FontFile" uid="uid://crkv0naeyvgmb" path="res://assets/fonts/Born2bSportyV2.ttf" id="4_3xvu2"]
 
 [node name="Room" type="Node2D" node_paths=PackedStringArray("TileMapRect")]
 script = ExtResource("1_l6bsb")
@@ -23,3 +26,52 @@ y_sort_enabled = true
 
 [node name="Props" type="Node2D" parent="Elements"]
 y_sort_enabled = true
+
+[node name="Managers" type="Node2D" parent="."]
+
+[node name="LOSManager" parent="Managers" node_paths=PackedStringArray("TileMapLayer") instance=ExtResource("2_241hj")]
+TileMapLayer = NodePath("../../TileMapLayers/Background")
+
+[node name="Debuggers" type="Node2D" parent="."]
+
+[node name="LOSDebugger" parent="Debuggers" node_paths=PackedStringArray("LOSManager") instance=ExtResource("3_p0i1h")]
+unique_name_in_owner = true
+LOSManager = NodePath("../../Managers/LOSManager")
+
+[node name="StateDebugger" type="CanvasLayer" parent="Debuggers"]
+
+[node name="Label" type="Label" parent="Debuggers/StateDebugger"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_3xvu2")
+theme_override_font_sizes/font_size = 36
+text = "Debug Tools"
+
+[node name="FPSLabel" type="Label" parent="Debuggers/StateDebugger"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_3xvu2")
+theme_override_font_sizes/font_size = 36
+text = "FPS:"
+horizontal_alignment = 2
+
+[node name="LOSButton" type="Button" parent="Debuggers/StateDebugger"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 44.0
+offset_right = -1760.0
+offset_bottom = -992.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_3xvu2")
+theme_override_font_sizes/font_size = 36
+text = "LOS: Off"

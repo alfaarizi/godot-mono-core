@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://1cdnr2kjy6l8"]
 
 [node name="DetectionArea" type="Area2D"]
+collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
