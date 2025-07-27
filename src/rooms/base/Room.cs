@@ -1,9 +1,10 @@
 using Godot;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 public partial class Room : Node2D
 {
     [Export] public TileMapLayer? TileMapRect { get; set; }
-
+    private LOSManager? LOSManager;
 #if DEBUG
     private Label? FPSLabel;
     private Button? LOSButton;
@@ -15,6 +16,9 @@ public partial class Room : Node2D
         base._Ready();
         Global.CurrentRoom = this;
         Global.CurrentCamera?.SetBoundsFromTileMap(TileMapRect);
+
+        LOSManager = GetNodeOrNull<LOSManager>("%LOSManager");
+
 #if DEBUG
         FPSLabel = GetNodeOrNull<Label>("%FPSLabel");
         LOSButton = GetNodeOrNull<Button>("%LOSButton");
@@ -41,6 +45,9 @@ public partial class Room : Node2D
         FPSLabel.Text = $"FPS: {Engine.GetFramesPerSecond()}";
     }
 #endif
+
+    public LOSManager? GetLOSManager()
+        => LOSManager;
 
     public override void _ExitTree()
     {

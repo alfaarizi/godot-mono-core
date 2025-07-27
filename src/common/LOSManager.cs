@@ -7,9 +7,9 @@ public partial class LOSManager : Node2D
     [Export] public bool IsEnabled { get; set; } = true;
     [Export] public TileMapLayer? TileMapLayer { get; set; }
     [Export] public Node2D? Target { get; set; }
-    [Export] public int TileRadius { get; set; } = 24;
+    [Export] public int TileRadius { get; set; } = 32;
     [Export] public float TileUpdateDistance { get; set; } = 96.0f;
-    [Export] public int TileProcessedPerFrame { get; set; } = 128;
+    [Export] public int TileProcessedPerFrame { get; set; } = 60;
 
     private readonly Dictionary<Vector2I, LOSTile> _tiles = new();
     private readonly Queue<Vector2I> _tilesUpdateQueue = new();
@@ -29,6 +29,59 @@ public partial class LOSManager : Node2D
         public Vector2I GridPos { get; set; }
         public Vector2 WorldPos { get; set; }
         public bool HasLOS { get; set; }
+    }
+
+    public Vector2I ToGridPos(Vector2 worldPosition)
+        => TileMapLayer?.LocalToMap(TileMapLayer.ToLocal(worldPosition)) ?? Vector2I.Zero;
+
+    public Vector2 ToWorldPos(Vector2I gridPosition)
+        => TileMapLayer?.ToGlobal(TileMapLayer.MapToLocal(gridPosition)) ?? Vector2.Zero;
+
+    public bool HasLOSAt(Vector2 globalPosition)
+        => _tiles.TryGetValue(ToGridPos(globalPosition), out var tile) && tile.HasLOS;
+
+    public IReadOnlyDictionary<Vector2I, LOSTile> GetTiles()
+        => _tiles;
+
+    public void GetLOSTiles(List<LOSTile> output)
+    {
+        output.Clear();
+        foreach (var tile in _tiles.Values)
+            if (tile.HasLOS) output.Add(tile);
+    }
+
+    public (bool, Vector2) GetNearestLOSToTarget(Vector2 from)
+    {
+        if (Target == null) return (false, Vector2.Zero);
+
+        var nearestWorldPos = Vector2.Zero;
+        var nearestDistSq = float.MaxValue;
+
+        foreach (var tile in _tiles.Values)
+        {
+            if (!tile.HasLOS) continue;
+            var distSq = tile.WorldPos.DistanceSquaredTo(Target.GlobalPosition);
+            if (distSq < nearestDistSq && HasLOS(from, tile.WorldPos))
+            {
+                nearestWorldPos = tile.WorldPos;
+                nearestDistSq = distSq;
+            }
+        }
+
+        return nearestDistSq < float.MaxValue ? (true, nearestWorldPos) : (false, Vector2.Zero);
+    }
+
+    public bool IsTargetVisible(Vector2 globalPosition)
+    {
+        if (Target == null || Global.CurrentCamera?.Camera == null) return false;
+        if (!Global.CurrentCamera.IsInViewport(Global.CurrentCamera.Camera.ToLocal(globalPosition)))
+            return false;
+
+        if (HasLOSAt(globalPosition)) return true;
+
+        foreach (var tile in _tiles.Values)
+            if (tile.HasLOS && HasLOS(globalPosition, tile.WorldPos)) return true;
+        return false;
     }
 
     public override void _Ready()
@@ -63,67 +116,12 @@ public partial class LOSManager : Node2D
         ProcessQueue();
     }
 
-    public IReadOnlyDictionary<Vector2I, LOSTile> GetTiles()
-        => _tiles;
-
-    public void GetLOSTiles(List<LOSTile> output)
-    {
-        output.Clear();
-        foreach (var tile in _tiles.Values)
-        {
-            if (tile.HasLOS)
-                output.Add(tile);
-        }
-    }
-
-    public void GetLOSTilesNear(Vector2 pos, float range, List<LOSTile> output)
-    {
-        output.Clear();
-        var rangeSq = range * range;
-        foreach (var tile in _tiles.Values)
-        {
-            if (tile.HasLOS && tile.WorldPos.DistanceSquaredTo(pos) <= rangeSq)
-                output.Add(tile);
-        }
-    }
-
-    public Vector2I GetNearestLOSTile(Vector2 from)
-    {
-        var nearestGrid = Vector2I.Zero;
-        var nearestDistSq = float.MaxValue;
-
-        foreach (var tile in _tiles.Values)
-        {
-            if (!tile.HasLOS) continue;
-            var distSq = tile.WorldPos.DistanceSquaredTo(from);
-            if (distSq < nearestDistSq)
-            {
-                nearestDistSq = distSq;
-                nearestGrid = tile.GridPos;
-            }
-        }
-        return nearestGrid;
-    }
-
-    public bool HasLOS(Vector2 from, Vector2 to)
-    {
-        if (_space == null) return false;
-        _rayQuery.From = from;
-        _rayQuery.To = to;
-        return _space.IntersectRay(_rayQuery).Count == 0;
-    }
-
-    public bool HasLOSAt(Vector2I gridPos)
-        => _tiles.TryGetValue(gridPos, out var tile) && tile.HasLOS;
-
-    public float GetTileSize()
-        => _tileSize;
-
     private void UpdateQueue(Vector2 targetPos)
     {
         if (TileMapLayer == null) return;
 
-        var centerGrid = TileMapLayer.LocalToMap(TileMapLayer.ToLocal(targetPos));
+        var centerPos = TileMapLayer.LocalToMap(TileMapLayer.ToLocal(targetPos));
+        var centerGrid = new Vector2I(centerPos.X & ~1, centerPos.Y & ~1);
 
         _tilesRemoveList.Clear();
         foreach (var kvp in _tiles)
@@ -139,11 +137,11 @@ public partial class LOSManager : Node2D
         _tilesUpdateQueue.Clear();
         var centerX = centerGrid.X;
         var centerY = centerGrid.Y;
-        for (int x = -TileRadius; x <= TileRadius; x++)
+        for (int x = -TileRadius; x <= TileRadius; x += 2)
         {
             var gridX = centerX + x;
             var xSq = x * x;
-            for (int y = -TileRadius; y <= TileRadius; y++)
+            for (int y = -TileRadius; y <= TileRadius; y += 2)
             {
                 var gridY = centerY + y;
                 var distSq = xSq + (y * y);
@@ -180,5 +178,12 @@ public partial class LOSManager : Node2D
             };
             processed++;
         }
+    }
+
+    private bool HasLOS(Vector2 from, Vector2 to)
+    {
+        if (_space == null) return false;
+        _rayQuery.From = from; _rayQuery.To = to;
+        return _space.IntersectRay(_rayQuery).Count == 0;
     }
 }

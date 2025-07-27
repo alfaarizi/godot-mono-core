@@ -66,6 +66,13 @@ public partial class CameraComponent : Component
         );
     }
 
+    public bool IsInViewport(Vector2 position)
+    {
+        if (Camera == null) return false;
+        var halfScreen = GetViewport().GetVisibleRect().Size / Camera.Zoom * 0.5f;
+        return Mathf.Abs(position.X) <= halfScreen.X && Mathf.Abs(position.Y) <= halfScreen.Y;
+    }
+
     public override void _Ready()
     {
         base._Ready();

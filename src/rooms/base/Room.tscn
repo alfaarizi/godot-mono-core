@@ -30,6 +30,7 @@ y_sort_enabled = true
 [node name="Managers" type="Node2D" parent="."]
 
 [node name="LOSManager" parent="Managers" node_paths=PackedStringArray("TileMapLayer") instance=ExtResource("2_241hj")]
+unique_name_in_owner = true
 TileMapLayer = NodePath("../../TileMapLayers/Background")
 
 [node name="Debuggers" type="Node2D" parent="."]
