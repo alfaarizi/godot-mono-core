@@ -78,6 +78,18 @@ public partial class MovementComponent : Component
     public bool IsMoving()
         => _velocity.LengthSquared() > 0.1f || _isMovingToTarget;
 
+    public bool IsColliding()
+    {
+        return Body switch
+        {
+            CharacterBody2D characterBody =>
+                characterBody.IsOnWall() || characterBody.GetSlideCollisionCount() > 0,
+            RigidBody2D rigidBody =>
+                rigidBody.GetCollidingBodies().Count > 0, // requires more setup
+            _ => false
+        };
+    }
+
     public void AddForce(Vector2 force)
         => _velocity += force;
 

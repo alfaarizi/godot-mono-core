@@ -1,8 +1,13 @@
 using Godot;
+using System.Runtime.Serialization;
 
 [Tool]
 public partial class Brother : Character
 {
+    [Export] public float MinTargetDistance { get; set; } = 32.0f;
+    [Export] public float MinPathProgressDistance { get; set; } = 8.0f;
+    [Export] public int PathValidationFrames { get; set; } = 90;
+
     public MovementComponent? MovementComponent { get; private set; }
     public AnimationComponent? AnimationComponent { get; private set; }
     public PathfindingComponent? PathfindingComponent { get; private set; }
@@ -10,6 +15,8 @@ public partial class Brother : Character
     private LOSManager? _losManager;
     private Vector2 _initialPosition;
     private Vector2 _lastTarget;
+    private Vector2 _lastPathValidationPosition;
+    private ulong _lastPathValidationFrame;
 
     public override void _Ready()
     {
@@ -29,22 +36,32 @@ public partial class Brother : Character
     {
         if (Engine.IsEditorHint() || MovementComponent == null || PathfindingComponent == null) return;
 
-        Vector2 target = GetTargetPosition();
+        var targetPos = GetTargetPosition();
+        var targetPosChanged = targetPos.DistanceSquaredTo(_lastTarget) > MinTargetDistance * MinTargetDistance;
 
-        if (target != _lastTarget && !PathfindingComponent.IsPathfinding())
+        if (targetPosChanged && (!PathfindingComponent.IsPathfinding() || PathfindingComponent.IsPathHalfComplete()))
         {
-            PathfindingComponent.SetPath(target);
-            _lastTarget = target;
+            PathfindingComponent.SetPath(targetPos);
+            _lastTarget = targetPos;
+        }
+
+        var currentFrame = Engine.GetProcessFrames();
+        if (PathfindingComponent.IsPathfinding() && currentFrame - _lastPathValidationFrame >= (ulong)PathValidationFrames)
+        {
+            if (MovementComponent.IsColliding() && GlobalPosition.DistanceSquaredTo(_lastPathValidationPosition) < MinPathProgressDistance * MinPathProgressDistance)
+                PathfindingComponent.SetPath(_lastTarget);
+            _lastPathValidationPosition = GlobalPosition;
+            _lastPathValidationFrame = currentFrame;
         }
 
         if (AnimationComponent != null)
         {
-            bool moving = MovementComponent.IsMoving();
-            Vector2 direction = MovementComponent.GetLastDirection();
-            AnimationComponent.SetTreeParameter("conditions/is_moving", moving);
-            AnimationComponent.SetTreeParameter("conditions/!is_moving", !moving);
-            AnimationComponent.SetTreeParameter("Move/blend_position", direction);
-            AnimationComponent.SetTreeParameter("Idle/blend_position", direction);
+            bool isMoving = MovementComponent.IsMoving();
+            Vector2 lastDirection = MovementComponent.GetLastDirection();
+            AnimationComponent.SetTreeParameter("conditions/is_moving", isMoving);
+            AnimationComponent.SetTreeParameter("conditions/!is_moving", !isMoving);
+            AnimationComponent.SetTreeParameter("Move/blend_position", lastDirection);
+            AnimationComponent.SetTreeParameter("Idle/blend_position", lastDirection);
         }
 
         QueueRedraw();

@@ -10,6 +10,7 @@ public partial class LOSManager : Node2D
     [Export] public int TileRadius { get; set; } = 32;
     [Export] public float TileUpdateDistance { get; set; } = 96.0f;
     [Export] public int TileProcessedPerFrame { get; set; } = 60;
+    [Export] public int NearestLOSUpdateFrames { get; set; } = 6;
 
     private readonly Dictionary<Vector2I, LOSTile> _tiles = new();
     private readonly Queue<Vector2I> _tilesUpdateQueue = new();
@@ -18,6 +19,8 @@ public partial class LOSManager : Node2D
 
     private PhysicsDirectSpaceState2D? _space;
     private Vector2 _lastTargetPos = Vector2.Inf;
+    private Vector2 _lastNearestLOS;
+    private ulong _lastNearestLOSFrame;
 
     private float _tileSize;
     private int _tileRadiusSq;
@@ -54,21 +57,25 @@ public partial class LOSManager : Node2D
     {
         if (Target == null) return (false, Vector2.Zero);
 
-        var nearestWorldPos = Vector2.Zero;
-        var nearestDistSq = float.MaxValue;
-
-        foreach (var tile in _tiles.Values)
+        var currentFrame = Engine.GetProcessFrames();
+        if (currentFrame - _lastNearestLOSFrame >= (ulong)NearestLOSUpdateFrames)
         {
-            if (!tile.HasLOS || (excludePoints != null && excludePoints.Contains(tile.GridPos))) continue;
-            var distSq = tile.WorldPos.DistanceSquaredTo(Target.GlobalPosition);
-            if (distSq < nearestDistSq && HasLOS(from, tile.WorldPos))
-            {
-                nearestWorldPos = tile.WorldPos;
-                nearestDistSq = distSq;
-            }
-        }
+            var nearestDistSq = float.MaxValue;
+            _lastNearestLOS = Vector2.Zero;
 
-        return nearestDistSq < float.MaxValue ? (true, nearestWorldPos) : (false, Vector2.Zero);
+            foreach (var tile in _tiles.Values)
+            {
+                if (!tile.HasLOS || (excludePoints != null && excludePoints.Contains(tile.GridPos))) continue;
+                var distSq = tile.WorldPos.DistanceSquaredTo(Target.GlobalPosition);
+                if (distSq < nearestDistSq && HasLOS(from, tile.WorldPos))
+                {
+                    _lastNearestLOS = tile.WorldPos;
+                    nearestDistSq = distSq;
+                }
+            }
+            _lastNearestLOSFrame = currentFrame;
+        }
+        return _lastNearestLOS != Vector2.Zero ? (true, _lastNearestLOS) : (false, Vector2.Zero);
     }
 
     public bool IsTargetVisible(Vector2 globalPosition)

@@ -32,6 +32,9 @@ public partial class PathfindingComponent : Component
     public bool IsPathfinding()
         => _waypoints.Length > 0 && _currentWaypointIndex < _waypoints.Length;
 
+    public bool IsPathHalfComplete()
+        => _currentWaypointIndex >= (_waypoints.Length / 2);
+
     public void SetPath(Vector2 endPosition)
     {
         if (!IsEnabled || _target == null || _grid == null) return;
