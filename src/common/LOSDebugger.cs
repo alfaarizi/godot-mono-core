@@ -67,11 +67,7 @@ public partial class LOSDebugger : Node2D
         var targetPos = ToLocal(LOSManager.Target!.GlobalPosition);
 
         foreach (var tile in tiles.Values)
-        {
-            var pos = ToLocal(tile.WorldPos);
-            DrawCircle(pos, _circleSize, tile.HasLOS ? Colors.Gold : Colors.Purple);
-        }
-
+            DrawCircle(ToLocal(tile.WorldPos), _circleSize, tile.HasLOS ? Colors.Gold : Colors.Purple);
         DrawArc(targetPos, _radius, 0, Mathf.Tau, 32, Colors.Cyan, 1f);
     }
 }

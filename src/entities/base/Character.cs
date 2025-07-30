@@ -25,15 +25,18 @@ public partial class Character : CharacterBody2D,
         SetData(_data);
         if (Engine.IsEditorHint())
         {
+            MaxSlides = 4;
             SetPhysicsProcess(false);
             return;
         }
-        Global.AddCharacter(Name, this);
+        MaxSlides = 6;
+        EventBus.EmitCharacterAdded(Name, this);
     }
 
     public override void _ExitTree()
     {
-        Global.RemoveCharacter(Name);
+        if (!Engine.IsEditorHint())
+            EventBus.EmitCharacterRemoved(Name);
         base._ExitTree();
     }
 }

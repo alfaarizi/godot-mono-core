@@ -1,13 +1,9 @@
-[gd_scene load_steps=7 format=4 uid="uid://ce6gpduluhlyk"]
+[gd_scene load_steps=5 format=4 uid="uid://ce6gpduluhlyk"]
 
 [ext_resource type="PackedScene" uid="uid://dnsgoxb5hgp8o" path="res://src/rooms/base/Room.tscn" id="1_i7v4r"]
 [ext_resource type="TileSet" uid="uid://bpw0mvwwesfx6" path="res://presets/PrologueForest/PrologueForest08/PrologueForest08.tres" id="2_7w6s4"]
 [ext_resource type="PackedScene" uid="uid://b73ng4lo6h50r" path="res://src/common/Transfer.tscn" id="3_7w6s4"]
 [ext_resource type="PackedScene" uid="uid://da3dgt837tvea" path="res://src/entities/player/Player.tscn" id="4_kxxa4"]
-[ext_resource type="PackedScene" uid="uid://dbrrokolrm0sb" path="res://src/entities/brother/Brother.tscn" id="5_5agf7"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5agf7"]
-size = Vector2(20, 229.143)
 
 [node name="PrologueForest08" instance=ExtResource("1_i7v4r")]
 
@@ -76,18 +72,6 @@ position = Vector2(-5.99078, 134.286)
 
 [node name="Player" parent="Elements/Characters" index="0" instance=ExtResource("4_kxxa4")]
 position = Vector2(426, 933)
-
-[node name="Brother" parent="Elements/Characters" index="1" instance=ExtResource("5_5agf7")]
-position = Vector2(1120, 667)
-collision_layer = 2
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Elements/Props" index="0"]
-position = Vector2(865, 547)
-scale = Vector2(3.5, 3.5)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Elements/Props/StaticBody2D" index="0"]
-position = Vector2(6.28571, 14.2857)
-shape = SubResource("RectangleShape2D_5agf7")
 
 [node name="Label" parent="Debuggers/StateDebugger" index="0"]
 metadata/_edit_lock_ = true

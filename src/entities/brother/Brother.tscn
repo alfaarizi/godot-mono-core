@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dbrrokolrm0sb"]
+[gd_scene load_steps=33 format=3 uid="uid://dbrrokolrm0sb"]
 
 [ext_resource type="PackedScene" uid="uid://gr5ue7odva4l" path="res://src/entities/base/Character.tscn" id="1_w82ql"]
 [ext_resource type="Texture2D" uid="uid://suag6jvcdbb5" path="res://assets/sprites/brother/brother_movement.png" id="2_bqcyj"]
@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://2kul8gwn8fqy" path="res://src/data/characters/Brother.tres" id="3_jqosp"]
 [ext_resource type="PackedScene" uid="uid://dwu0av21crh2f" path="res://src/components/MovementComponent.tscn" id="5_ndxlm"]
 [ext_resource type="PackedScene" uid="uid://dnx5ypkt3ymst" path="res://src/components/AnimationComponent.tscn" id="6_uxv0d"]
+[ext_resource type="PackedScene" uid="uid://b2txv1448dtmq" path="res://src/components/navigation/PathfindingComponent.tscn" id="7_780g7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bqcyj"]
 size = Vector2(12, 10)
@@ -246,6 +247,8 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(53.397, 8.565)
 
 [node name="Brother" instance=ExtResource("1_w82ql")]
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("2_jqosp")
 Data = ExtResource("3_jqosp")
 
@@ -260,9 +263,9 @@ shape = SubResource("RectangleShape2D_bqcyj")
 [node name="MovementComponent" parent="." index="2" node_paths=PackedStringArray("Body") instance=ExtResource("5_ndxlm")]
 unique_name_in_owner = true
 Body = NodePath("..")
-MaxSpeed = 200.0
+MaxSpeed = 300.0
 Acceleration = 15.0
-Deceleration = 100.0
+Deceleration = 200.0
 
 [node name="AnimationComponent" parent="." index="3" instance=ExtResource("6_uxv0d")]
 unique_name_in_owner = true
@@ -278,5 +281,9 @@ parameters/conditions/!is_moving = false
 parameters/conditions/is_moving = false
 parameters/Idle/blend_position = Vector2(0.036855, 0.260763)
 parameters/Move/blend_position = Vector2(-0.043554, 0.0846155)
+
+[node name="PathfindingComponent" parent="." index="4" node_paths=PackedStringArray("MovementComponent") instance=ExtResource("7_780g7")]
+unique_name_in_owner = true
+MovementComponent = NodePath("../MovementComponent")
 
 [editable path="AnimationComponent"]

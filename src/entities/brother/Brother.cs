@@ -5,80 +5,96 @@ public partial class Brother : Character
 {
     public MovementComponent? MovementComponent { get; private set; }
     public AnimationComponent? AnimationComponent { get; private set; }
-    private Room? _room;
+    public PathfindingComponent? PathfindingComponent { get; private set; }
 
     private LOSManager? _losManager;
     private Vector2 _initialPosition;
-    private Vector2 _targetPosition = Vector2.Zero;
+    private Vector2 _lastTarget;
 
     public override void _Ready()
     {
         base._Ready();
-        if (Engine.IsEditorHint())
-        {
-            SetProcess(false);
-            return;
-        }
+        if (Engine.IsEditorHint()) { SetProcess(false); return; }
 
-        _ = CallDeferred(nameof(SetRoomAndPosition));
-
-        MovementComponent = GetNodeOrNull<MovementComponent>("%MovementComponent");
-
-        AnimationComponent = GetNodeOrNull<AnimationComponent>("%AnimationComponent");
-
+        _ = CallDeferred(nameof(SetInitialPosition));
+        MovementComponent ??= GetNodeOrNull<MovementComponent>("%MovementComponent");
+        AnimationComponent ??= GetNodeOrNull<AnimationComponent>("%AnimationComponent");
+        PathfindingComponent ??= GetNodeOrNull<PathfindingComponent>("%PathfindingComponent");
         _losManager = GetNodeOrNull<LOSManager>("%LOSManager");
-
     }
 
-    private void SetRoomAndPosition()
+    private void SetInitialPosition() => _initialPosition = GlobalPosition;
+
+    public override void _Process(double delta)
     {
-        _room = Global.CurrentRoom;
-        _initialPosition = GlobalPosition;
+        if (Engine.IsEditorHint() || MovementComponent == null || PathfindingComponent == null) return;
+
+        Vector2 target = GetTargetPosition();
+
+        if (target != _lastTarget && !PathfindingComponent.IsPathfinding())
+        {
+            PathfindingComponent.SetPath(target);
+            _lastTarget = target;
+        }
+
+        if (AnimationComponent != null)
+        {
+            bool moving = MovementComponent.IsMoving();
+            Vector2 direction = MovementComponent.GetLastDirection();
+            AnimationComponent.SetTreeParameter("conditions/is_moving", moving);
+            AnimationComponent.SetTreeParameter("conditions/!is_moving", !moving);
+            AnimationComponent.SetTreeParameter("Move/blend_position", direction);
+            AnimationComponent.SetTreeParameter("Idle/blend_position", direction);
+        }
+
+        QueueRedraw();
     }
 
     public override void _Draw()
     {
         if (Engine.IsEditorHint()) return;
 
-        // Draw line from Brother to target position
-        if (_targetPosition != Vector2.Zero)
+        if (_lastTarget != Vector2.Zero)
         {
-            Vector2 localTarget = ToLocal(_targetPosition);
-            DrawLine(Vector2.Zero, localTarget, Colors.Red, 3.0f);
-            DrawCircle(localTarget, 10.0f, Colors.Yellow);
+            Vector2 local = ToLocal(_lastTarget);
+            DrawLine(Vector2.Zero, local, Colors.Red, 3.0f);
+            DrawCircle(local, 10.0f, Colors.Yellow);
         }
 
-        Vector2 localInitial = ToLocal(_initialPosition);
-        DrawLine(Vector2.Zero, localInitial, Colors.Blue, 2.0f);
-        DrawCircle(localInitial, 8.0f, Colors.Cyan);
-    }
+        Vector2 initial = ToLocal(_initialPosition);
+        DrawLine(Vector2.Zero, initial, Colors.Blue, 2.0f);
+        DrawCircle(initial, 8.0f, Colors.Cyan);
 
-    public override void _Process(double delta)
-    {
-        if (MovementComponent == null || AnimationComponent == null || _losManager == null || _losManager.Target == null) return;
+        var p = PathfindingComponent;
+        if (p == null) return;
 
-        if (_losManager.IsTargetVisible(GlobalPosition))
+        var solidPoints = p.GetSolidPoints();
+        var waypoints = p.GetWaypoints();
+
+        if (solidPoints != null)
         {
-            var (hasLOS, targetPosition) = _losManager.GetNearestLOSToTarget(GlobalPosition);
-            if (hasLOS)
+            foreach (var gridPos in solidPoints)
+                DrawCircle(ToLocal(p.ToWorldPos(gridPos)), 5.0f, Colors.Blue);
+        }
+
+        if (waypoints.Length > 1)
+        {
+            for (int i = 0; i < waypoints.Length - 1; i++)
             {
-                _targetPosition = targetPosition;
-                MovementComponent.MoveToPosition(targetPosition);
+                var startPathPos = ToLocal(p.ToWorldPos(new Vector2I((int)waypoints[i].X, (int)waypoints[i].Y)));
+                var nextPathPos = ToLocal(p.ToWorldPos(new Vector2I((int)waypoints[i + 1].X, (int)waypoints[i + 1].Y)));
+                DrawLine(startPathPos, nextPathPos, Colors.White, 3.0f);
             }
         }
-        else
+    }
+
+    private Vector2 GetTargetPosition()
+    {
+        if (_losManager?.IsTargetVisible(GlobalPosition) == true)
         {
-            _targetPosition = _initialPosition;
-            MovementComponent.MoveToPosition(_initialPosition);
+            var (hasLOS, pos) = _losManager.GetNearestLOSToTarget(GlobalPosition, PathfindingComponent?.GetSolidPoints());
+            if (hasLOS) return pos;
         }
-
-        bool isMoving = MovementComponent.IsMoving();
-        Vector2 lastDirection = MovementComponent.GetLastDirection();
-        AnimationComponent.SetTreeParameter("conditions/is_moving", isMoving);
-        AnimationComponent.SetTreeParameter("conditions/!is_moving", !isMoving);
-        AnimationComponent.SetTreeParameter("Move/blend_position", lastDirection);
-        AnimationComponent.SetTreeParameter("Idle/blend_position", lastDirection);
-
-        QueueRedraw();
+        return _initialPosition;
     }
 }

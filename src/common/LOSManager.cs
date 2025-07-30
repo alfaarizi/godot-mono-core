@@ -50,7 +50,7 @@ public partial class LOSManager : Node2D
             if (tile.HasLOS) output.Add(tile);
     }
 
-    public (bool, Vector2) GetNearestLOSToTarget(Vector2 from)
+    public (bool, Vector2) GetNearestLOSToTarget(Vector2 from, HashSet<Vector2I>? excludePoints = null)
     {
         if (Target == null) return (false, Vector2.Zero);
 
@@ -59,7 +59,7 @@ public partial class LOSManager : Node2D
 
         foreach (var tile in _tiles.Values)
         {
-            if (!tile.HasLOS) continue;
+            if (!tile.HasLOS || (excludePoints != null && excludePoints.Contains(tile.GridPos))) continue;
             var distSq = tile.WorldPos.DistanceSquaredTo(Target.GlobalPosition);
             if (distSq < nearestDistSq && HasLOS(from, tile.WorldPos))
             {
@@ -73,8 +73,9 @@ public partial class LOSManager : Node2D
 
     public bool IsTargetVisible(Vector2 globalPosition)
     {
-        if (Target == null || Global.CurrentCamera?.Camera == null) return false;
-        if (!Global.CurrentCamera.IsInViewport(Global.CurrentCamera.Camera.ToLocal(globalPosition)))
+        var currentCamera = Global.GetCurrentCamera();
+        if (Target == null || currentCamera?.Camera == null) return false;
+        if (!currentCamera.IsInViewport(currentCamera.Camera.ToLocal(globalPosition)))
             return false;
 
         if (HasLOSAt(globalPosition)) return true;
