@@ -25,11 +25,9 @@ public partial class Character : CharacterBody2D,
         SetData(_data);
         if (Engine.IsEditorHint())
         {
-            MaxSlides = 4;
             SetPhysicsProcess(false);
             return;
         }
-        MaxSlides = 6;
         EventBus.EmitCharacterAdded(Name, this);
     }
 

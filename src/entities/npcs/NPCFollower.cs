@@ -1,8 +1,7 @@
 using Godot;
-using System.Runtime.Serialization;
 
 [Tool]
-public partial class Brother : Character
+public partial class NPCFollower : Character
 {
     [Export] public float MinMovementDistance { get; set; } = 32.0f;
     [Export] public float MinPathProgressDistance { get; set; } = 8.0f;
@@ -78,46 +77,46 @@ public partial class Brother : Character
             AnimationComponent.SetTreeParameter("Idle/blend_position", lastDirection);
         }
 
-        QueueRedraw();
+        // QueueRedraw();
     }
 
-    public override void _Draw()
-    {
-        if (Engine.IsEditorHint()) return;
+    // public override void _Draw()
+    // {
+    //     if (Engine.IsEditorHint()) return;
 
-        if (_lastPos != Vector2.Zero)
-        {
-            Vector2 local = ToLocal(_lastPos);
-            DrawLine(Vector2.Zero, local, Colors.Red, 3.0f);
-            DrawCircle(local, 10.0f, Colors.Yellow);
-        }
+    //     if (_lastPos != Vector2.Zero)
+    //     {
+    //         Vector2 local = ToLocal(_lastPos);
+    //         DrawLine(Vector2.Zero, local, Colors.Red, 3.0f);
+    //         DrawCircle(local, 10.0f, Colors.Yellow);
+    //     }
 
-        Vector2 initial = ToLocal(_initialPos);
-        DrawLine(Vector2.Zero, initial, Colors.Blue, 2.0f);
-        DrawCircle(initial, 8.0f, Colors.Cyan);
+    //     Vector2 initial = ToLocal(_initialPos);
+    //     DrawLine(Vector2.Zero, initial, Colors.Blue, 2.0f);
+    //     DrawCircle(initial, 8.0f, Colors.Cyan);
 
-        var p = PathfindingComponent;
-        if (p == null) return;
+    //     var p = PathfindingComponent;
+    //     if (p == null) return;
 
-        var solidPoints = p.GetSolidPoints();
-        var waypoints = p.GetWaypoints();
+    //     var solidPoints = p.GetSolidPoints();
+    //     var waypoints = p.GetWaypoints();
 
-        if (solidPoints != null)
-        {
-            foreach (var gridPos in solidPoints)
-                DrawCircle(ToLocal(p.ToWorldPos(gridPos)), 5.0f, Colors.Blue);
-        }
+    //     if (solidPoints != null)
+    //     {
+    //         foreach (var gridPos in solidPoints)
+    //             DrawCircle(ToLocal(p.ToWorldPos(gridPos)), 5.0f, Colors.Blue);
+    //     }
 
-        if (waypoints.Length > 1)
-        {
-            for (int i = 0; i < waypoints.Length - 1; i++)
-            {
-                var startPathPos = ToLocal(p.ToWorldPos(new Vector2I((int)waypoints[i].X, (int)waypoints[i].Y)));
-                var nextPathPos = ToLocal(p.ToWorldPos(new Vector2I((int)waypoints[i + 1].X, (int)waypoints[i + 1].Y)));
-                DrawLine(startPathPos, nextPathPos, Colors.White, 3.0f);
-            }
-        }
-    }
+    //     if (waypoints.Length > 1)
+    //     {
+    //         for (int i = 0; i < waypoints.Length - 1; i++)
+    //         {
+    //             var startPathPos = ToLocal(p.ToWorldPos(new Vector2I((int)waypoints[i].X, (int)waypoints[i].Y)));
+    //             var nextPathPos = ToLocal(p.ToWorldPos(new Vector2I((int)waypoints[i + 1].X, (int)waypoints[i + 1].Y)));
+    //             DrawLine(startPathPos, nextPathPos, Colors.White, 3.0f);
+    //         }
+    //     }
+    // }
 
     private Vector2 GetNextPosition()
     {

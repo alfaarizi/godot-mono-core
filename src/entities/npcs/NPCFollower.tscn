@@ -1,18 +1,17 @@
-[gd_scene load_steps=31 format=3 uid="uid://dbrrokolrm0sb"]
+[gd_scene load_steps=30 format=3 uid="uid://dbrrokolrm0sb"]
 
-[ext_resource type="PackedScene" uid="uid://gr5ue7odva4l" path="res://src/entities/base/Character.tscn" id="1_w82ql"]
-[ext_resource type="Script" uid="uid://s7jl0ql566i4" path="res://src/entities/brother/Brother.cs" id="2_jqosp"]
-[ext_resource type="Resource" uid="uid://2kul8gwn8fqy" path="res://src/data/characters/Brother.tres" id="3_jqosp"]
-[ext_resource type="PackedScene" uid="uid://dwu0av21crh2f" path="res://src/components/MovementComponent.tscn" id="5_ndxlm"]
-[ext_resource type="PackedScene" uid="uid://dnx5ypkt3ymst" path="res://src/components/AnimationComponent.tscn" id="6_uxv0d"]
-[ext_resource type="PackedScene" uid="uid://b2txv1448dtmq" path="res://src/components/navigation/PathfindingComponent.tscn" id="7_780g7"]
+[ext_resource type="PackedScene" uid="uid://gr5ue7odva4l" path="res://src/entities/base/Character.tscn" id="1_radn5"]
+[ext_resource type="Script" uid="uid://s7jl0ql566i4" path="res://src/entities/npcs/NPCFollower.cs" id="2_gmabs"]
+[ext_resource type="PackedScene" uid="uid://dwu0av21crh2f" path="res://src/components/MovementComponent.tscn" id="4_s5lok"]
+[ext_resource type="PackedScene" uid="uid://dnx5ypkt3ymst" path="res://src/components/AnimationComponent.tscn" id="5_222w1"]
+[ext_resource type="PackedScene" uid="uid://b2txv1448dtmq" path="res://src/components/navigation/PathfindingComponent.tscn" id="6_dq3ik"]
 
 [sub_resource type="Animation" id="Animation_gyx7h"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("%Sprite2D:frame")
+tracks/0/path = NodePath("../Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -29,7 +28,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("%Sprite2D:frame")
+tracks/0/path = NodePath("../Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -46,7 +45,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("%Sprite2D:frame")
+tracks/0/path = NodePath("../Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -63,7 +62,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("%Sprite2D:frame")
+tracks/0/path = NodePath("../Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -80,7 +79,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("%Sprite2D:frame")
+tracks/0/path = NodePath("../Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -97,7 +96,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("%Sprite2D:frame")
+tracks/0/path = NodePath("../Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -114,7 +113,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("%Sprite2D:frame")
+tracks/0/path = NodePath("../Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -131,7 +130,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("%Sprite2D:frame")
+tracks/0/path = NodePath("../Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -148,7 +147,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("%Sprite2D:frame")
+tracks/0/path = NodePath("../Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -242,13 +241,12 @@ states/Start/position = Vector2(194.5, 155.268)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_j0f6w"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_3g2ip"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_4niw5")]
 graph_offset = Vector2(53.397, 8.565)
 
-[node name="Brother" instance=ExtResource("1_w82ql")]
+[node name="NPCFollower" instance=ExtResource("1_radn5")]
 collision_layer = 2
-script = ExtResource("2_jqosp")
+script = ExtResource("2_gmabs")
 MinMovementDistance = 32.0
 MinPathProgressDistance = 8.0
-PathValidationFrames = 8
-Data = ExtResource("3_jqosp")
+PathValidationFrames = 90
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(0, -23)
@@ -256,14 +254,14 @@ position = Vector2(0, -23)
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2(0, -6)
 
-[node name="MovementComponent" parent="." index="2" node_paths=PackedStringArray("Body") instance=ExtResource("5_ndxlm")]
+[node name="MovementComponent" parent="." index="2" node_paths=PackedStringArray("Body") instance=ExtResource("4_s5lok")]
 unique_name_in_owner = true
 Body = NodePath("..")
 MaxSpeed = 300.0
 Acceleration = 15.0
 Deceleration = 200.0
 
-[node name="AnimationComponent" parent="." index="3" instance=ExtResource("6_uxv0d")]
+[node name="AnimationComponent" parent="." index="3" instance=ExtResource("5_222w1")]
 unique_name_in_owner = true
 
 [node name="AnimationPlayer" parent="AnimationComponent" index="0"]
@@ -278,7 +276,7 @@ parameters/conditions/is_moving = false
 parameters/Idle/blend_position = Vector2(0.036855, 0.260763)
 parameters/Move/blend_position = Vector2(-0.043554, 0.0846155)
 
-[node name="PathfindingComponent" parent="." index="4" node_paths=PackedStringArray("MovementComponent") instance=ExtResource("7_780g7")]
+[node name="PathfindingComponent" parent="." index="4" node_paths=PackedStringArray("MovementComponent") instance=ExtResource("6_dq3ik")]
 unique_name_in_owner = true
 MovementComponent = NodePath("../MovementComponent")
 
