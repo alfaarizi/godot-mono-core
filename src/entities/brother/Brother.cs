@@ -57,10 +57,7 @@ public partial class Brother : Character
         if (PathfindingComponent.IsPathfinding() && currentFrame - _lastPathValidationFrame >= (ulong)PathValidationFrames)
         {
             if (MovementComponent.IsColliding() && GlobalPosition.DistanceSquaredTo(_lastPathValidationPos) < MinPathProgressDistance * MinPathProgressDistance)
-            {
-                GD.Print("UNSTUCK ME");
                 PathfindingComponent.SetPath(_lastPos);
-            }
             _lastPathValidationPos = GlobalPosition;
             _lastPathValidationFrame = currentFrame;
         }
