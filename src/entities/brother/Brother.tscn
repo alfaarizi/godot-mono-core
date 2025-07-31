@@ -249,7 +249,7 @@ graph_offset = Vector2(53.397, 8.565)
 [node name="Brother" instance=ExtResource("1_w82ql")]
 collision_layer = 2
 script = ExtResource("2_jqosp")
-MinTargetDistance = 32.0
+MinMovementDistance = 32.0
 MinPathProgressDistance = 8.0
 PathValidationFrames = 8
 Data = ExtResource("3_jqosp")

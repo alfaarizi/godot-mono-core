@@ -46,14 +46,7 @@ public partial class LOSManager : Node2D
     public IReadOnlyDictionary<Vector2I, LOSTile> GetTiles()
         => _tiles;
 
-    public void GetLOSTiles(List<LOSTile> output)
-    {
-        output.Clear();
-        foreach (var tile in _tiles.Values)
-            if (tile.HasLOS) output.Add(tile);
-    }
-
-    public (bool, Vector2) GetNearestLOSToTarget(Vector2 from, HashSet<Vector2I>? excludePoints = null)
+    public (bool, Vector2) GetNearestLOSToTarget(HashSet<Vector2I>? excludePoints = null)
     {
         if (Target == null) return (false, Vector2.Zero);
 
@@ -65,9 +58,10 @@ public partial class LOSManager : Node2D
 
             foreach (var tile in _tiles.Values)
             {
-                if (!tile.HasLOS || (excludePoints != null && excludePoints.Contains(tile.GridPos))) continue;
+                if (!tile.HasLOS || (excludePoints != null && excludePoints.Contains(tile.GridPos)))
+                    continue;
                 var distSq = tile.WorldPos.DistanceSquaredTo(Target.GlobalPosition);
-                if (distSq < nearestDistSq && HasLOS(from, tile.WorldPos))
+                if (distSq < nearestDistSq)
                 {
                     _lastNearestLOS = tile.WorldPos;
                     nearestDistSq = distSq;
@@ -75,18 +69,12 @@ public partial class LOSManager : Node2D
             }
             _lastNearestLOSFrame = currentFrame;
         }
-        return _lastNearestLOS != Vector2.Zero ? (true, _lastNearestLOS) : (false, Vector2.Zero);
+        return (_lastNearestLOS != Vector2.Zero, _lastNearestLOS);
     }
 
     public bool IsTargetVisible(Vector2 globalPosition)
     {
-        var currentCamera = Global.GetCurrentCamera();
-        if (Target == null || currentCamera?.Camera == null) return false;
-        if (!currentCamera.IsInViewport(currentCamera.Camera.ToLocal(globalPosition)))
-            return false;
-
         if (HasLOSAt(globalPosition)) return true;
-
         foreach (var tile in _tiles.Values)
             if (tile.HasLOS && HasLOS(globalPosition, tile.WorldPos)) return true;
         return false;

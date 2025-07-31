@@ -70,7 +70,8 @@ public partial class CameraComponent : Component
     {
         if (Camera == null) return false;
         var halfScreen = GetViewport().GetVisibleRect().Size / Camera.Zoom * 0.5f;
-        return Mathf.Abs(position.X) <= halfScreen.X && Mathf.Abs(position.Y) <= halfScreen.Y;
+        var delta = (position - Camera.GlobalPosition).Abs();
+        return delta.X <= halfScreen.X && delta.Y <= halfScreen.Y;
     }
 
     public override void _Ready()
