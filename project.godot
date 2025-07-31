@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameSettings="*res://src/autoloads/GameSettings.cs"
+EventBus="*res://src/autoloads/EventBus.cs"
 Global="*res://src/autoloads/Global.cs"
 SceneManager="*res://src/autoloads/SceneManager.cs"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
@@ -81,6 +82,10 @@ ui_interact={
 [internationalization]
 
 locale/translations_pot_files=PackedStringArray("res://src/dialogue/testDialogue.dialogue")
+
+[layer_names]
+
+2d_physics/layer_2="Player"
 
 [limbo_ai]
 

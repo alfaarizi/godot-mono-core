@@ -27,7 +27,7 @@ public partial class Transfer : Prop
         _promptComponent = GetNodeOrNull<PromptComponent>("%PromptComponent");
         _sceneManager = GetNode<SceneManager>("/root/SceneManager");
 
-        Global.AddDestination(Name, this);
+        EventBus.EmitDestinationAdded(Name, this);
 
         if (_detectionArea != null)
         {
@@ -49,7 +49,8 @@ public partial class Transfer : Prop
 
     public override void _ExitTree()
     {
-        Global.RemoveDestination(Name);
+        if (!Engine.IsEditorHint())
+            EventBus.EmitDestinationRemoved(Name);
 
         if (_detectionArea != null)
         {
@@ -124,7 +125,7 @@ public partial class Transfer : Prop
             currentPlayer.InputComponent?.SetEnabled(false);
             currentPlayer.MovementComponent?.SetEnabled(false);
 
-            Room? currentRoom = Global.CurrentRoom;
+            Room? currentRoom = Global.GetCurrentRoom();
             if (currentRoom == null || _sceneManager == null)
             {
                 currentPlayer.InputComponent?.SetEnabled(true);

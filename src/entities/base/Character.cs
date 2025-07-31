@@ -28,12 +28,13 @@ public partial class Character : CharacterBody2D,
             SetPhysicsProcess(false);
             return;
         }
-        Global.AddCharacter(Name, this);
+        EventBus.EmitCharacterAdded(Name, this);
     }
 
     public override void _ExitTree()
     {
-        Global.RemoveCharacter(Name);
+        if (!Engine.IsEditorHint())
+            EventBus.EmitCharacterRemoved(Name);
         base._ExitTree();
     }
 }

@@ -4,6 +4,8 @@
 
 [node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("Sprite", "CollisionShape")]
 scale = Vector2(3.5, 3.5)
+motion_mode = 1
+safe_margin = 0.1
 script = ExtResource("1_wex0i")
 Sprite = NodePath("Sprite2D")
 CollisionShape = NodePath("CollisionShape2D")

@@ -43,6 +43,7 @@ public partial class MovementComponent : Component
     #region Script Movement
     public void MoveToPosition(Vector2 targetPosition, float stoppingDistance = 1.0f)
     {
+        if (IsAtTarget(targetPosition, stoppingDistance)) return;
         _isMovingToTarget = true;
         _targetPosition = targetPosition;
         _stoppingDistance = stoppingDistance;
@@ -54,8 +55,9 @@ public partial class MovementComponent : Component
     #endregion
 
     #region Tweened Movement
-    public void TweenToPosition(Vector2 targetPosition, float duration)
+    public void TweenToPosition(Vector2 targetPosition, float duration, float stoppingDistance = 1.0f)
     {
+        if (IsAtTarget(targetPosition, stoppingDistance)) return;
         _isMovingToTarget = false;
         _direction = Vector2.Zero;
         _currentMovementMode = MovementMode.Tweened;
@@ -70,6 +72,24 @@ public partial class MovementComponent : Component
     #endregion
 
     #region Shared Methods
+    public bool IsAtTarget(Vector2 targetPosition, float stoppingDistance)
+        => Body?.GlobalPosition.DistanceTo(targetPosition) <= stoppingDistance;
+
+    public bool IsMoving()
+        => _velocity.LengthSquared() > 0.1f || _isMovingToTarget;
+
+    public bool IsColliding()
+    {
+        return Body switch
+        {
+            CharacterBody2D characterBody =>
+                characterBody.IsOnWall() || characterBody.GetSlideCollisionCount() > 0,
+            RigidBody2D rigidBody =>
+                rigidBody.GetCollidingBodies().Count > 0, // requires more setup
+            _ => false
+        };
+    }
+
     public void AddForce(Vector2 force)
         => _velocity += force;
 
@@ -90,9 +110,6 @@ public partial class MovementComponent : Component
         _lastDirection = lastDirection;
         _ = EmitSignal(SignalName.LastDirectionChanged, _lastDirection);
     }
-
-    public bool IsMoving()
-        => _velocity.LengthSquared() > 0.1f || _isMovingToTarget;
     #endregion
 
     public override void _Ready()
