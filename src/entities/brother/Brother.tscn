@@ -1,15 +1,11 @@
-[gd_scene load_steps=33 format=3 uid="uid://dbrrokolrm0sb"]
+[gd_scene load_steps=31 format=3 uid="uid://dbrrokolrm0sb"]
 
 [ext_resource type="PackedScene" uid="uid://gr5ue7odva4l" path="res://src/entities/base/Character.tscn" id="1_w82ql"]
-[ext_resource type="Texture2D" uid="uid://suag6jvcdbb5" path="res://assets/sprites/brother/brother_movement.png" id="2_bqcyj"]
 [ext_resource type="Script" uid="uid://s7jl0ql566i4" path="res://src/entities/brother/Brother.cs" id="2_jqosp"]
 [ext_resource type="Resource" uid="uid://2kul8gwn8fqy" path="res://src/data/characters/Brother.tres" id="3_jqosp"]
 [ext_resource type="PackedScene" uid="uid://dwu0av21crh2f" path="res://src/components/MovementComponent.tscn" id="5_ndxlm"]
 [ext_resource type="PackedScene" uid="uid://dnx5ypkt3ymst" path="res://src/components/AnimationComponent.tscn" id="6_uxv0d"]
 [ext_resource type="PackedScene" uid="uid://b2txv1448dtmq" path="res://src/components/navigation/PathfindingComponent.tscn" id="7_780g7"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bqcyj"]
-size = Vector2(12, 10)
 
 [sub_resource type="Animation" id="Animation_gyx7h"]
 length = 0.001
@@ -256,11 +252,9 @@ Data = ExtResource("3_jqosp")
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(0, -23)
-texture = ExtResource("2_bqcyj")
 
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2(0, -6)
-shape = SubResource("RectangleShape2D_bqcyj")
 
 [node name="MovementComponent" parent="." index="2" node_paths=PackedStringArray("Body") instance=ExtResource("5_ndxlm")]
 unique_name_in_owner = true

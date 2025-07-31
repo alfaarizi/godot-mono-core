@@ -76,7 +76,6 @@ position = Vector2(426, 933)
 
 [node name="Brother" parent="Elements/Characters" index="1" instance=ExtResource("5_5agf7")]
 position = Vector2(1045, 885)
-MinMovementDistance = 32.0
 
 [node name="Label" parent="Debuggers/StateDebugger" index="0"]
 metadata/_edit_lock_ = true

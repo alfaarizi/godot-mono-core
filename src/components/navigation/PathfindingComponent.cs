@@ -9,7 +9,7 @@ public partial class PathfindingComponent : Component
     [Export] public MovementComponent? MovementComponent { get; set; }
     [Export] public TileMapLayer? TileMapLayer { get; set; }
     [Export] public bool EnableDiagonalMovement { get; set; } = true;
-    [Export] public float WaypointDistance { get; set; } = 20.0f;
+    [Export] public float WaypointDistance { get; set; } = 32.0f;
 
     private Node2D? _target;
     private AStarGrid2D _grid = new();
@@ -49,10 +49,13 @@ public partial class PathfindingComponent : Component
 
     public void ForceStop()
     {
-        _waypoints = Array.Empty<Vector2>();
-        _currentWaypointIndex = 0;
-        MovementComponent?.SetDirection(Vector2.Zero);
-        _ = EmitSignal(SignalName.PathCompleted);
+        if (!_waypoints.IsEmpty())
+        {
+            _waypoints = Array.Empty<Vector2>();
+            _currentWaypointIndex = 0;
+            MovementComponent?.SetDirection(Vector2.Zero);
+            _ = EmitSignal(SignalName.PathCompleted);
+        }
     }
 
     public override void _Ready()
@@ -83,8 +86,12 @@ public partial class PathfindingComponent : Component
 
         if (_target.GlobalPosition.DistanceSquaredTo(waypoint) <= WaypointDistance * WaypointDistance)
             _currentWaypointIndex++;
-        else
+
+        if (_currentWaypointIndex < _waypoints.Length)
+        {
+            waypoint = ToWorldPos(new Vector2I((int)_waypoints[_currentWaypointIndex].X, (int)_waypoints[_currentWaypointIndex].Y));
             MovementComponent.SetDirection((waypoint - _target.GlobalPosition).Normalized());
+        }
     }
 
     private async void SetupGrid()
