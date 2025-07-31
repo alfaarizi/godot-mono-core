@@ -57,7 +57,13 @@ public partial class Brother : Character
         if (PathfindingComponent.IsPathfinding() && currentFrame - _lastPathValidationFrame >= (ulong)PathValidationFrames)
         {
             if (MovementComponent.IsColliding() && GlobalPosition.DistanceSquaredTo(_lastPathValidationPos) < MinPathProgressDistance * MinPathProgressDistance)
-                PathfindingComponent.SetPath(_lastPos);
+            {
+                if (_losManager != null)
+                {
+                    var (_, tempPos) = _losManager.GetNearestLOSToTarget();
+                    PathfindingComponent.SetPath(tempPos);
+                }
+            }
             _lastPathValidationPos = GlobalPosition;
             _lastPathValidationFrame = currentFrame;
         }
