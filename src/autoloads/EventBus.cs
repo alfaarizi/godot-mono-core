@@ -17,8 +17,6 @@ public partial class EventBus : Node
     // Camera events
     [Signal] public delegate void CameraChangedEventHandler(CameraComponent newCamera);
 
-    [Signal] public delegate void SomethingEventHandler(GodotObject newCamera);
-
     // Room events
     [Signal] public delegate void RoomChangedEventHandler(Room newRoom);
 
