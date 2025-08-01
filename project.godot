@@ -51,6 +51,7 @@ folder_colors={
 "res://build/": "gray",
 "res://docs/": "gray",
 "res://gdunit4_testadapter/": "gray",
+"res://i18n/": "red",
 "res://presets/": "orange",
 "res://reports/": "gray",
 "res://reports_dotnet/": "gray",
@@ -81,6 +82,7 @@ ui_interact={
 
 [internationalization]
 
+locale/translations=PackedStringArray("res://i18n/translations.en.translation", "res://i18n/translations.ja.translation")
 locale/translations_pot_files=PackedStringArray("res://src/dialogue/testDialogue.dialogue")
 
 [layer_names]

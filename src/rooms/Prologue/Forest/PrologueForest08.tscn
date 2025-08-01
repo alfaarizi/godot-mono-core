@@ -79,9 +79,6 @@ position = Vector2(426, 933)
 position = Vector2(1201, 769)
 Data = ExtResource("6_icv1v")
 
-[node name="Label" parent="Debuggers/StateDebugger" index="0"]
-metadata/_edit_lock_ = true
-
 [node name="FPSLabel" parent="Debuggers/StateDebugger" index="1"]
 metadata/_edit_lock_ = true
 

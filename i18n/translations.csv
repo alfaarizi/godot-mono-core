@@ -1,0 +1,8 @@
+﻿key,en,ja
+locale,Locale,ロケール
+en,English,英語
+ja,Japanese,日本語
+debugTools,Debug tools,デバッグツール
+on,On,オン
+off,Off,オフ
+currentRoom,Current Room: {room}, 現在の部屋：{room}
