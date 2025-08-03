@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://1cdnr2kjy6l8"]
-
-[node name="DetectionArea" type="Area2D"]
-collision_mask = 2
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-debug_color = Color(0.580392, 0.45098, 0.823529, 0.419608)

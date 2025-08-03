@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bo54kwxb3is75"]
+
+[ext_resource type="PackedScene" uid="uid://1cdnr2kjy6l8" path="res://src/common/Actionable.tscn" id="1_yqt3a"]
+[ext_resource type="Script" uid="uid://fhlc600k1j0" path="res://src/common/DialogueActionable.cs" id="2_j3l4g"]
+
+[node name="DialogueActionable" instance=ExtResource("1_yqt3a")]
+script = ExtResource("2_j3l4g")
+DialogueResource = null
+DialogueStart = "start"

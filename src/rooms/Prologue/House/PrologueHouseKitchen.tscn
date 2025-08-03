@@ -48,6 +48,7 @@ rotation = 1.5708
 scale = Vector2(2.74, 1.74)
 RoomPath = "uid://gef0jbf403yc"
 DestinationName = "ToKitchen"
+RequiresInteraction = false
 
 [node name="Marker2D" parent="Elements/Transfers/ToEntrance" index="3"]
 position = Vector2(10.8466, 70.6898)
@@ -55,7 +56,6 @@ position = Vector2(10.8466, 70.6898)
 [node name="Transfer" parent="Elements/Transfers" index="1" instance=ExtResource("3_6kj5h")]
 position = Vector2(728, 256)
 scale = Vector2(1.58, 1.14)
-RequiresInteraction = true
 
 [node name="Characters" parent="Elements" index="1"]
 metadata/_edit_lock_ = true
@@ -137,4 +137,4 @@ scale = Vector2(3.5, 3.5)
 texture = ExtResource("14_4qfju")
 
 [editable path="Elements/Transfers/ToEntrance"]
-[editable path="Elements/Transfers/ToEntrance/DetectionArea"]
+[editable path="Elements/Transfers/ToEntrance/Actionable"]

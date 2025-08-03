@@ -72,6 +72,10 @@ folder_colors={
 "res://tests/": "green"
 }
 
+[global_group]
+
+action_actor="Entities that can interact with actionable objects"
+
 [input]
 
 ui_interact={

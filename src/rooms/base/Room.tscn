@@ -24,6 +24,8 @@ y_sort_enabled = true
 [node name="Characters" type="Node2D" parent="Elements"]
 y_sort_enabled = true
 
+[node name="Actionables" type="Node2D" parent="Elements"]
+
 [node name="Props" type="Node2D" parent="Elements"]
 y_sort_enabled = true
 

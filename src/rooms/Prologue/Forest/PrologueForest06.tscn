@@ -78,6 +78,7 @@ rotation = 3.14159
 scale = Vector2(5.74, 0.54)
 RoomPath = "uid://dapu3u0idjvcp"
 DestinationName = "ToPrologueForest06"
+RequiresInteraction = false
 
 [node name="Marker2D" parent="Elements/Transfers/ToPrologueForest05" index="3"]
 position = Vector2(-0.174216, 66.6667)
@@ -87,6 +88,7 @@ position = Vector2(3076, 3.00001)
 scale = Vector2(3.5, 0.539999)
 RoomPath = "uid://s3rvpuuv2ohq"
 DestinationName = "ToPrologueForest06"
+RequiresInteraction = false
 
 [node name="Marker2D" parent="Elements/Transfers/ToPrologueForest07" index="3"]
 position = Vector2(0.857143, 120.371)
@@ -214,9 +216,9 @@ scale = Vector2(1, 0.771428)
 shape = SubResource("RectangleShape2D_67dtr")
 
 [editable path="Elements/Transfers/ToPrologueForest05"]
-[editable path="Elements/Transfers/ToPrologueForest05/DetectionArea"]
+[editable path="Elements/Transfers/ToPrologueForest05/Actionable"]
 [editable path="Elements/Transfers/ToPrologueForest07"]
-[editable path="Elements/Transfers/ToPrologueForest07/DetectionArea"]
+[editable path="Elements/Transfers/ToPrologueForest07/Actionable"]
 [editable path="Elements/Props/Prop00"]
 [editable path="Elements/Props/Prop01"]
 [editable path="Elements/Props/Prop02"]

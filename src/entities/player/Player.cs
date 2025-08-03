@@ -28,6 +28,7 @@ public partial class Player : Character
         AnimationComponent = GetNodeOrNull<AnimationComponent>("%AnimationComponent");
 
         CameraComponent = GetNodeOrNull<CameraComponent>("%CameraComponent");
+
         CameraComponent?.MakeCurrent();
     }
 
