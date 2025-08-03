@@ -8,12 +8,10 @@ namespace DialogueManagerRuntime
         [Export] public string NextAction = "ui_accept";
         [Export] public string SkipAction = "ui_cancel";
 
-
         Control balloon;
         RichTextLabel characterLabel;
         RichTextLabel dialogueLabel;
         VBoxContainer responsesMenu;
-        AudioStreamPlayer audioStreamPlayer;
 
         Resource resource;
         Array<Variant> temporaryGameStates = new Array<Variant>();
@@ -46,7 +44,6 @@ namespace DialogueManagerRuntime
             characterLabel = GetNode<RichTextLabel>("%CharacterLabel");
             dialogueLabel = GetNode<RichTextLabel>("%DialogueLabel");
             responsesMenu = GetNode<VBoxContainer>("%ResponsesMenu");
-            audioStreamPlayer = GetNode<AudioStreamPlayer>("%AudioStreamPlayer");
 
             balloon.Hide();
 
@@ -101,13 +98,6 @@ namespace DialogueManagerRuntime
             AddChild(MutationCooldown);
 
             DialogueManager.Mutated += OnMutated;
-
-            dialogueLabel.Connect("spoke", Callable.From((string letter, int letterIndex, float speed) =>
-            {
-                if (letter == "." || letter == " ") return;
-                audioStreamPlayer.PitchScale = (float)GD.RandRange(0.9d, 1.1d);
-                audioStreamPlayer.Play();
-            }));
         }
 
 
