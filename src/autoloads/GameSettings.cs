@@ -6,14 +6,14 @@ public partial class GameSettings : Node
 
     public override void _Ready()
     {
-        if (!Engine.IsEditorHint())
-        {
-            RenderingServer.SetDefaultClearColor(Colors.Black);
+        if (Engine.IsEditorHint()) return;
 
-            var window = GetWindow();
-            window.ContentScaleMode = Window.ContentScaleModeEnum.Viewport;
-            window.ContentScaleAspect = Window.ContentScaleAspectEnum.Keep;
-            window.ContentScaleSize = MaxResolution;
-        }
+        TranslationServer.SetLocale("en_US");
+        RenderingServer.SetDefaultClearColor(Colors.Black);
+
+        var window = GetWindow();
+        window.ContentScaleMode = Window.ContentScaleModeEnum.Viewport;
+        window.ContentScaleAspect = Window.ContentScaleAspectEnum.Keep;
+        window.ContentScaleSize = MaxResolution;
     }
 }

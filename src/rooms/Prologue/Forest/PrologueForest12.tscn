@@ -41,6 +41,7 @@ rotation = -1.5708
 scale = Vector2(3.3, 0.380001)
 RoomPath = "uid://s4a8q72wcgc7"
 DestinationName = "ToPrologueForest12"
+RequiresInteraction = false
 
 [node name="Marker2D" parent="Elements/Transfers/ToPrologueForest09" index="3"]
 position = Vector2(-2.72727, 128.947)
@@ -48,4 +49,4 @@ position = Vector2(-2.72727, 128.947)
 [node name="Player" parent="Elements/Characters" index="0" instance=ExtResource("4_18ndx")]
 
 [editable path="Elements/Transfers/ToPrologueForest09"]
-[editable path="Elements/Transfers/ToPrologueForest09/DetectionArea"]
+[editable path="Elements/Transfers/ToPrologueForest09/Actionable"]

@@ -24,6 +24,8 @@ y_sort_enabled = true
 [node name="Characters" type="Node2D" parent="Elements"]
 y_sort_enabled = true
 
+[node name="Actionables" type="Node2D" parent="Elements"]
+
 [node name="Props" type="Node2D" parent="Elements"]
 y_sort_enabled = true
 
@@ -34,14 +36,17 @@ unique_name_in_owner = true
 TileMapLayer = NodePath("../../TileMapLayers/Background")
 
 [node name="Debuggers" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
 
 [node name="LOSDebugger" parent="Debuggers" node_paths=PackedStringArray("LOSManager") instance=ExtResource("3_p0i1h")]
 unique_name_in_owner = true
 LOSManager = NodePath("../../Managers/LOSManager")
+metadata/_edit_lock_ = true
 
 [node name="StateDebugger" type="CanvasLayer" parent="Debuggers"]
 
-[node name="Label" type="Label" parent="Debuggers/StateDebugger"]
+[node name="RoomLabel" type="Label" parent="Debuggers/StateDebugger"]
+unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -49,7 +54,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("4_3xvu2")
 theme_override_font_sizes/font_size = 36
-text = "Debug Tools"
+text = "currentRoom:"
+vertical_alignment = 2
+metadata/_edit_lock_ = true
 
 [node name="FPSLabel" type="Label" parent="Debuggers/StateDebugger"]
 unique_name_in_owner = true
@@ -62,17 +69,38 @@ theme_override_fonts/font = ExtResource("4_3xvu2")
 theme_override_font_sizes/font_size = 36
 text = "FPS:"
 horizontal_alignment = 2
+metadata/_edit_lock_ = true
 
-[node name="LOSButton" type="Button" parent="Debuggers/StateDebugger"]
-unique_name_in_owner = true
-anchors_preset = 15
-anchor_right = 1.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Debuggers/StateDebugger"]
+anchors_preset = 9
 anchor_bottom = 1.0
-offset_top = 44.0
-offset_right = -1760.0
-offset_bottom = -992.0
-grow_horizontal = 2
+offset_right = 285.0
 grow_vertical = 2
+theme_override_constants/separation = 10
+metadata/_edit_lock_ = true
+
+[node name="DebugLabel" type="Label" parent="Debuggers/StateDebugger/VBoxContainer"]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("4_3xvu2")
 theme_override_font_sizes/font_size = 36
-text = "LOS: Off"
+text = "debugTools"
+horizontal_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="LocaleButton" type="Button" parent="Debuggers/StateDebugger/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_3xvu2")
+theme_override_font_sizes/font_size = 36
+text = "Locale:"
+alignment = 0
+metadata/_edit_lock_ = true
+
+[node name="LOSButton" type="Button" parent="Debuggers/StateDebugger/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_3xvu2")
+theme_override_font_sizes/font_size = 36
+text = "LOS:"
+alignment = 0
+metadata/_edit_lock_ = true

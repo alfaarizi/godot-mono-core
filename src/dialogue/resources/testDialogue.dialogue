@@ -1,0 +1,12 @@
+~ start
+Brother: [[Hi|Hello|Howdy]], this is some dialogue. [#right]
+Hart: Hey, I see...
+Brother: Here are some choices.
+- First one
+	Brother: You picked the first one. [#right]
+- Second one
+	Brother: You picked the second one. [#right]
+- Start again => start
+- End the conversation => END
+Brother: For more information see the online documentation. [#right]
+=> END

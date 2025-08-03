@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://cek2r2gb7cb4q"]
+
+[ext_resource type="Script" uid="uid://ccqpbk1of8ql7" path="res://src/common/BasePortrait.cs" id="1_0mc1f"]
+
+[node name="BasePortrait" type="Node2D"]
+script = ExtResource("1_0mc1f")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+
+[node name="Body" type="Sprite2D" parent="Marker2D"]
+
+[node name="Face" type="Sprite2D" parent="Marker2D/Body"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true

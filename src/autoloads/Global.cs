@@ -1,10 +1,12 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 
 public partial class Global : Node
 {
     private static readonly Dictionary<string, Node2D> _destinations = new();
     private static readonly Dictionary<string, Character> _characters = new();
+    private static readonly Dictionary<string, Actionable> _actionables = new();
     private static CameraComponent? _currentCamera;
     private static Room? _currentRoom;
     private static readonly Dictionary<string, NavigationData> _navigationData = new();
@@ -14,6 +16,12 @@ public partial class Global : Node
 
     public static Character? GetCharacter(string name)
         => _characters.GetValueOrDefault(name);
+
+    public static Actionable? GetActionable(string name)
+        => _actionables.GetValueOrDefault(name);
+
+    public static IEnumerable<Actionable> GetActionables()
+        => _actionables.Values;
 
     public static CameraComponent? GetCurrentCamera()
         => _currentCamera;
@@ -30,6 +38,8 @@ public partial class Global : Node
         EventBus.Instance.DestinationRemoved += OnDestinationRemoved;
         EventBus.Instance.CharacterAdded += OnCharacterAdded;
         EventBus.Instance.CharacterRemoved += OnCharacterRemoved;
+        EventBus.Instance.ActionableAdded += OnActionableAdded;
+        EventBus.Instance.ActionableRemoved += OnActionableRemoved;
         EventBus.Instance.CameraChanged += OnCameraChanged;
         EventBus.Instance.RoomChanged += OnRoomChanged;
         EventBus.NavigationDataAdded += OnNavigationDataAdded;
@@ -42,6 +52,8 @@ public partial class Global : Node
         EventBus.Instance.DestinationRemoved -= OnDestinationRemoved;
         EventBus.Instance.CharacterAdded -= OnCharacterAdded;
         EventBus.Instance.CharacterRemoved -= OnCharacterRemoved;
+        EventBus.Instance.ActionableAdded -= OnActionableAdded;
+        EventBus.Instance.ActionableRemoved -= OnActionableRemoved;
         EventBus.Instance.CameraChanged -= OnCameraChanged;
         EventBus.Instance.RoomChanged -= OnRoomChanged;
         EventBus.NavigationDataAdded -= OnNavigationDataAdded;
@@ -59,6 +71,12 @@ public partial class Global : Node
 
     private static void OnCharacterRemoved(string name)
         => _characters.Remove(name);
+
+    private static void OnActionableAdded(string name, Actionable actionable)
+        => _actionables[name] = actionable;
+
+    private static void OnActionableRemoved(string name)
+        => _actionables.Remove(name);
 
     private static void OnCameraChanged(CameraComponent newCamera)
         => _currentCamera = newCamera;

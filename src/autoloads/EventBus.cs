@@ -14,6 +14,10 @@ public partial class EventBus : Node
     [Signal] public delegate void CharacterAddedEventHandler(string name, Character character);
     [Signal] public delegate void CharacterRemovedEventHandler(string name);
 
+    // Actionable events
+    [Signal] public delegate void ActionableAddedEventHandler(string name, Actionable actionable);
+    [Signal] public delegate void ActionableRemovedEventHandler(string name);
+
     // Camera events
     [Signal] public delegate void CameraChangedEventHandler(CameraComponent newCamera);
 
@@ -34,6 +38,12 @@ public partial class EventBus : Node
 
     public static void EmitCharacterRemoved(string name)
         => Instance.EmitSignal(SignalName.CharacterRemoved, name);
+
+    public static void EmitActionableAdded(string name, Actionable actionable)
+        => Instance.EmitSignal(SignalName.ActionableAdded, name, actionable);
+
+    public static void EmitActionableRemoved(string name)
+        => Instance.EmitSignal(SignalName.ActionableRemoved, name);
 
     public static void EmitCameraChanged(CameraComponent newCamera)
         => Instance.EmitSignal(SignalName.CameraChanged, newCamera);

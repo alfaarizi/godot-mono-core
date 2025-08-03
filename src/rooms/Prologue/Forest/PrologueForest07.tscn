@@ -46,6 +46,7 @@ rotation = 3.14159
 scale = Vector2(3.18, 0.37998)
 RoomPath = "uid://dsy1k1jb1shwx"
 DestinationName = "ToPrologueForest07"
+RequiresInteraction = false
 
 [node name="Marker2D" parent="Elements/Transfers/ToPrologueForest06" index="3"]
 position = Vector2(-0.62893, 76.3197)
@@ -56,6 +57,7 @@ rotation = -1.5708
 scale = Vector2(4.26, 0.660001)
 RoomPath = "uid://ce6gpduluhlyk"
 DestinationName = "ToPrologueForest07"
+RequiresInteraction = false
 
 [node name="Marker2D" parent="Elements/Transfers/ToPrologueForest08" index="3"]
 position = Vector2(-4.1495e-07, 77.2726)
@@ -65,6 +67,7 @@ position = Vector2(3060, 4)
 scale = Vector2(2.82, 0.5)
 RoomPath = "uid://s4a8q72wcgc7"
 DestinationName = "ToPrologueForest07"
+RequiresInteraction = false
 
 [node name="Marker2D" parent="Elements/Transfers/ToPrologueForest09" index="3"]
 position = Vector2(0, 58.0001)
@@ -73,8 +76,8 @@ position = Vector2(0, 58.0001)
 position = Vector2(3233, 1424)
 
 [editable path="Elements/Transfers/ToPrologueForest06"]
-[editable path="Elements/Transfers/ToPrologueForest06/DetectionArea"]
+[editable path="Elements/Transfers/ToPrologueForest06/Actionable"]
 [editable path="Elements/Transfers/ToPrologueForest08"]
-[editable path="Elements/Transfers/ToPrologueForest08/DetectionArea"]
+[editable path="Elements/Transfers/ToPrologueForest08/Actionable"]
 [editable path="Elements/Transfers/ToPrologueForest09"]
-[editable path="Elements/Transfers/ToPrologueForest09/DetectionArea"]
+[editable path="Elements/Transfers/ToPrologueForest09/Actionable"]

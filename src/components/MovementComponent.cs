@@ -121,6 +121,13 @@ public partial class MovementComponent : Component
             return;
         }
         Body ??= GetParent<PhysicsBody2D>();
+        EnabledChanged += OnEnabledChanged;
+    }
+
+    public override void _ExitTree()
+    {
+        if (Engine.IsEditorHint()) return;
+        EnabledChanged -= OnEnabledChanged;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -175,6 +182,17 @@ public partial class MovementComponent : Component
                 break;
             default:
                 break;
+        }
+    }
+
+    private void OnEnabledChanged(bool isEnabled)
+    {
+        if (!isEnabled)
+        {
+            _direction = Vector2.Zero;
+            _velocity = Vector2.Zero;
+            _isMovingToTarget = false;
+            _currentMovementMode = MovementMode.None;
         }
     }
 }

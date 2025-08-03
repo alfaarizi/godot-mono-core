@@ -36,6 +36,7 @@ rotation = -1.5708
 scale = Vector2(3.5, 1.3)
 RoomPath = "uid://gef0jbf403yc"
 DestinationName = "ToLivingRoom"
+RequiresInteraction = false
 
 [node name="Marker2D" parent="Elements/Transfers/ToEntrance" index="3"]
 position = Vector2(-11.1428, 70.7692)
@@ -44,4 +45,4 @@ position = Vector2(-11.1428, 70.7692)
 position = Vector2(149, 1248)
 
 [editable path="Elements/Transfers/ToEntrance"]
-[editable path="Elements/Transfers/ToEntrance/DetectionArea"]
+[editable path="Elements/Transfers/ToEntrance/Actionable"]
