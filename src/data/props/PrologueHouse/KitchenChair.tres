@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PropData" load_steps=4 format=3 uid="uid://ncurelqme0f3"]
+
+[ext_resource type="Texture2D" uid="uid://cvuej6vv44ni7" path="res://presets/PrologueHouse/Props/Kitchen/chair.png" id="1_thnrq"]
+[ext_resource type="Script" uid="uid://b1p3e8jgmnx7h" path="res://src/data/base/PropData.cs" id="2_pyav8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_thnrq"]
+
+[resource]
+script = ExtResource("2_pyav8")
+Name = "PHouseKitchenChair"
+Sprite = ExtResource("1_thnrq")
+CollisionShape = SubResource("RectangleShape2D_thnrq")
+metadata/_custom_type_script = "uid://b1p3e8jgmnx7h"

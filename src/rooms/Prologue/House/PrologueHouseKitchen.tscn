@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://brqcxxcd45hlq"]
+[gd_scene load_steps=27 format=4 uid="uid://brqcxxcd45hlq"]
 
 [ext_resource type="PackedScene" uid="uid://dnsgoxb5hgp8o" path="res://src/rooms/base/Room.tscn" id="1_uhjil"]
 [ext_resource type="TileSet" uid="uid://4wy66er8xqpd" path="res://presets/PrologueHouse/PrologueHouse.tres" id="2_6kj5h"]
@@ -11,11 +11,57 @@
 [ext_resource type="Texture2D" uid="uid://ue3y7fofyfhe" path="res://presets/PrologueHouse/Props/Kitchen/tv.png" id="8_6sm5m"]
 [ext_resource type="Texture2D" uid="uid://brwnu2ijlfnpd" path="res://presets/PrologueHouse/Props/Kitchen/table_main.png" id="8_w8a38"]
 [ext_resource type="Texture2D" uid="uid://cvuej6vv44ni7" path="res://presets/PrologueHouse/Props/Kitchen/chair.png" id="10_40y8b"]
+[ext_resource type="PackedScene" uid="uid://307rvguddqy8" path="res://src/entities/base/Prop.tscn" id="10_r0b43"]
 [ext_resource type="Texture2D" uid="uid://c72b2tx55tn7t" path="res://presets/PrologueHouse/Props/Kitchen/fridge.png" id="11_plt6y"]
 [ext_resource type="Texture2D" uid="uid://bnfonsg1jguyc" path="res://presets/PrologueHouse/Props/Kitchen/shelf.png" id="12_be7gj"]
+[ext_resource type="Script" uid="uid://b1p3e8jgmnx7h" path="res://src/data/base/PropData.cs" id="12_mefai"]
+[ext_resource type="Resource" uid="uid://ncurelqme0f3" path="res://src/data/props/PrologueHouse/KitchenChair.tres" id="13_mefai"]
 [ext_resource type="Texture2D" uid="uid://q5pq4ygtruho" path="res://presets/PrologueHouse/Props/Kitchen/trash_can.png" id="14_4qfju"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0c7li"]
+size = Vector2(64, 48.8571)
+
+[sub_resource type="Resource" id="Resource_0c7li"]
+script = ExtResource("12_mefai")
+Name = ""
+Sprite = ExtResource("8_w8a38")
+CollisionShape = SubResource("RectangleShape2D_0c7li")
+metadata/_custom_type_script = "uid://b1p3e8jgmnx7h"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r0b43"]
+size = Vector2(109.714, 20)
+
+[sub_resource type="Resource" id="Resource_cwbho"]
+script = ExtResource("12_mefai")
+Name = "PHouseTV"
+Sprite = ExtResource("8_6sm5m")
+CollisionShape = SubResource("RectangleShape2D_r0b43")
+metadata/_custom_type_script = "uid://b1p3e8jgmnx7h"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_thnrq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mefai"]
+size = Vector2(32.2857, 36)
+
+[sub_resource type="Resource" id="Resource_r0b43"]
+script = ExtResource("12_mefai")
+Name = "PHouseFridge"
+Sprite = ExtResource("11_plt6y")
+CollisionShape = SubResource("RectangleShape2D_mefai")
+metadata/_custom_type_script = "uid://b1p3e8jgmnx7h"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cwbho"]
+size = Vector2(20, 36.5714)
+
+[sub_resource type="Resource" id="Resource_mefai"]
+script = ExtResource("12_mefai")
+Name = "PHouseShelf"
+Sprite = ExtResource("12_be7gj")
+CollisionShape = SubResource("RectangleShape2D_cwbho")
+metadata/_custom_type_script = "uid://b1p3e8jgmnx7h"
+
 [node name="PrologueHouseKitchen" instance=ExtResource("1_uhjil")]
+position = Vector2(0, -1)
 
 [node name="TileMapLayers" parent="." index="0"]
 metadata/_edit_lock_ = true
@@ -35,6 +81,21 @@ tile_set = ExtResource("2_6kj5h")
 tile_map_data = PackedByteArray("AAAPAAkACAAHAAEAABAPAAoACAAHAAIAABAPAAsACAAHAAMAABAPAAwACAAHAAQAABAPAA0ACAAHAAUAABAQAAkACAAGAAEAABAQAAoACAAGAAIAABAQAAsACAAGAAMAABAQAAwACAAGAAQAABAQAA0ACAAGAAUAABAAAAAACAAAAAEAAAAAAAEACAAAAAIAAAAAAAIACAAAAAMAAAAAAAMACAAAAAQAAAAAAAQACAAAAAUAAAAAAAUACAAAAAYAAAABAAAACAABAAEAAAABAAEACAABAAIAAAABAAIACAABAAMAAAABAAMACAABAAQAAAABAAQACAABAAUAAAABAAUACAABAAYAAAACAAAACAACAAEAAAACAAEACAACAAIAAAACAAIACAACAAMAAAACAAMACAACAAQAAAACAAQACAACAAUAAAADAAAACAADAAEAAAADAAEACAADAAIAAAADAAIACAADAAMAAAADAAMACAADAAQAAAADAAQACAADAAUAAAAEAAAACAAEAAEAAAAEAAEACAAEAAIAAAAEAAIACAAEAAMAAAAEAAMACAAEAAQAAAAEAAQACAAEAAUAAAAFAAAACAAFAAEAAAAFAAEACAAFAAIAAAAFAAIACAAFAAMAAAAFAAMACAAFAAQAAAAFAAQACAAFAAUAAAAGAAAACAAEAAEAAAAGAAEACAAEAAIAAAAGAAIACAAEAAMAAAAGAAMACAAEAAQAAAAGAAQACAAEAAUAAAAHAAAACAAFAAEAAAAHAAEACAAFAAIAAAAHAAIACAAFAAMAAAAHAAMACAAFAAQAAAAHAAQACAAFAAUAAAAIAAAACAAEAAEAAAAIAAEACAAEAAIAAAAIAAIACAAEAAMAAAAIAAMACAAEAAQAAAAIAAQACAAEAAUAAAAJAAAACAAFAAEAAAAJAAEACAAFAAIAAAAJAAIACAAFAAMAAAAJAAMACAAFAAQAAAAJAAQACAAFAAUAAAAKAAAACAAEAAEAAAAKAAEACAAEAAIAAAAKAAIACAAEAAMAAAAKAAMACAAEAAQAAAAKAAQACAAEAAUAAAALAAAACAAFAAEAAAALAAEACAAFAAIAAAALAAIACAAFAAMAAAALAAMACAAFAAQAAAALAAQACAAFAAUAAAAMAAAACAAEAAEAAAAMAAEACAAEAAIAAAAMAAIACAAEAAMAAAAMAAMACAAEAAQAAAAMAAQACAAEAAUAAAANAAAACAAFAAEAAAANAAEACAAFAAIAAAANAAIACAAFAAMAAAANAAMACAAFAAQAAAANAAQACAAFAAUAAAAPAAAACAAAAAEAABAOAAAACAABAAEAABAPAAEACAAAAAIAABAOAAEACAABAAIAABAPAAIACAAAAAMAABAOAAIACAABAAMAABAPAAMACAAAAAQAABAOAAMACAABAAQAABAPAAQACAAAAAUAABAOAAQACAABAAUAABAPAAUACAAAAAYAABAOAAUACAABAAYAABAAAAYACAAAAAcAAAAAAAcACAAAAAgAAAAAAAgACAAAAAcAAAAAAAkACAAAAAgAAAAAAAoACAAAAAcAAAAAAAsACAAAAAgAAAAAAAwACAAAAAcAAAAAAA0ACAAAAAgAAAAAAA4ACAAAAAcAAAAAAA8ACAAAAAgAAAAAABAACAAAAAkAAAAAABEACAAAAAoAAAABABAACAABAAkAAAABABEACAABAAoAAAACABEACAACAAoAAAADABEACAADAAoAAAAEABEACAAEAAoAAAAFABEACAAFAAoAAAAGABEACAACAAoAAAAHABEACAADAAoAAAAIABEACAAEAAoAAAAJABEACAAFAAoAAAAKABEACAACAAoAAAALABEACAADAAoAAAAMABEACAAEAAoAAAANABEACAAFAAoAAAAOABEACAACAAoAAAAPABEACAADAAoAAAAQABEACAAEAAoAAAARABEACAAFAAoAAAASABEACAACAAoAAAAPAAYACAAAAAcAABAPAAcACAAAAAgAABARAAkACAADAAEAAAARAAoACAADAAIAAAARAAsACAADAAMAAAARAAwACAADAAQAAAARAA0ACAADAAUAAAASAAkACAAEAAEAAAASAAoACAAEAAIAAAASAAsACAAEAAMAAAASAAwACAAEAAQAAAASAA0ACAAEAAUAAAAQAAgACAAGAAAAABAPAAgACAAHAAAAABA=")
 tile_set = ExtResource("2_6kj5h")
 
+[node name="StaticBody2D" type="StaticBody2D" parent="TileMapLayers/Walls" index="0"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TileMapLayers/Walls/StaticBody2D" index="0"]
+polygon = PackedVector2Array(304, 219.429, 256, 219.429, 240, 210.286, 240, 86.8571, 224, 77.7143, 162.286, 77.7143, 162.286, 54.8571, 253.714, 54.8571, 253.714, 210.286, 304, 210.286)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="TileMapLayers/Walls/StaticBody2D" index="1"]
+polygon = PackedVector2Array(16, 128, 16, 267.429, 29.7143, 278.857, 304, 278.857, 304, 285.714, 29.7143, 285.714, 9.14286, 269.714, 9.14286, 128)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="TileMapLayers/Walls/StaticBody2D" index="2"]
+position = Vector2(0.285714, 0)
+polygon = PackedVector2Array(38.8571, 134.857, 38.8571, 84.5714, 162.286, 84.5714, 162.286, 54.8571, 13.7143, 54.8571, 13.7143, 134.857)
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="TileMapLayers/Walls/StaticBody2D" index="3"]
+polygon = PackedVector2Array(68.5714, 139.429, 178.286, 139.429, 178.286, 123.429, 68.5714, 123.429)
+
 [node name="Props" type="TileMapLayer" parent="TileMapLayers" index="4"]
 tile_map_data = PackedByteArray("AAAMAAEAAwAAAAAAAAAMAAIAAwAAAAEAAAAMAAMAAwAAAAIAAAAMAAQAAwAAAAMAAAANAAEAAwABAAAAAAANAAIAAwABAAEAAAANAAMAAwABAAIAAAANAAQAAwABAAMAAAA=")
 tile_set = ExtResource("2_6kj5h")
@@ -53,7 +114,7 @@ DestinationName = "ToKitchen"
 position = Vector2(10.8466, 70.6898)
 
 [node name="Transfer" parent="Elements/Transfers" index="1" instance=ExtResource("3_6kj5h")]
-position = Vector2(728, 256)
+position = Vector2(736, 264)
 scale = Vector2(1.58, 1.14)
 RequiresInteraction = true
 
@@ -92,49 +153,131 @@ texture = ExtResource("7_hi2c5")
 offset = Vector2(0, -4.57143)
 metadata/_edit_lock_ = true
 
-[node name="KitchenTable" type="Sprite2D" parent="Elements/Props" index="4"]
+[node name="KitchenTable" parent="Elements/Props" index="4" instance=ExtResource("10_r0b43")]
+position = Vector2(344, 680)
+Data = SubResource("Resource_0c7li")
+
+[node name="Sprite2D" parent="Elements/Props/KitchenTable" index="0"]
+texture = ExtResource("8_w8a38")
+
+[node name="CollisionShape2D" parent="Elements/Props/KitchenTable" index="1"]
+position = Vector2(0, 6.14285)
+shape = SubResource("RectangleShape2D_0c7li")
+
+[node name="KitchenTable_s" type="Sprite2D" parent="Elements/Props" index="5"]
+visible = false
 position = Vector2(344, 680)
 scale = Vector2(3.5, 3.5)
 texture = ExtResource("8_w8a38")
-metadata/_edit_lock_ = true
 
-[node name="KitchenTV" type="Sprite2D" parent="Elements/Props" index="5"]
+[node name="KitchenTV" parent="Elements/Props" index="6" instance=ExtResource("10_r0b43")]
+position = Vector2(424, 1008)
+Data = SubResource("Resource_cwbho")
+
+[node name="Sprite2D" parent="Elements/Props/KitchenTV" index="0"]
+position = Vector2(7.62939e-06, -25.1429)
+texture = ExtResource("8_6sm5m")
+
+[node name="CollisionShape2D" parent="Elements/Props/KitchenTV" index="1"]
+position = Vector2(-9.80923e-06, -11.4286)
+shape = SubResource("RectangleShape2D_r0b43")
+
+[node name="KitchenTV_s" type="Sprite2D" parent="Elements/Props" index="7"]
+visible = false
 position = Vector2(424, 952)
 scale = Vector2(3.5, 3.5)
 texture = ExtResource("8_6sm5m")
 offset = Vector2(0, -9.14285)
 metadata/_edit_lock_ = true
 
-[node name="KitchenChair1" type="Sprite2D" parent="Elements/Props" index="6"]
+[node name="KitchenChair1" parent="Elements/Props" index="8" instance=ExtResource("10_r0b43")]
+position = Vector2(160, 736)
+Data = ExtResource("13_mefai")
+
+[node name="Sprite2D" parent="Elements/Props/KitchenChair1" index="0"]
+position = Vector2(0, -11.4286)
+texture = ExtResource("10_40y8b")
+
+[node name="CollisionShape2D" parent="Elements/Props/KitchenChair1" index="1"]
+position = Vector2(-0.214291, -4.1429)
+shape = SubResource("RectangleShape2D_thnrq")
+
+[node name="KitchenChair1_s" type="Sprite2D" parent="Elements/Props" index="9"]
+visible = false
 position = Vector2(160, 696)
 scale = Vector2(3.5, 3.5)
 texture = ExtResource("10_40y8b")
 metadata/_edit_lock_ = true
 
-[node name="KitchenChair2" type="Sprite2D" parent="Elements/Props" index="7"]
+[node name="KitchenChair2" parent="Elements/Props" index="10" instance=ExtResource("10_r0b43")]
+position = Vector2(528, 736)
+Data = ExtResource("13_mefai")
+
+[node name="Sprite2D" parent="Elements/Props/KitchenChair2" index="0"]
+position = Vector2(0, -11.4286)
+texture = ExtResource("10_40y8b")
+flip_h = true
+
+[node name="CollisionShape2D" parent="Elements/Props/KitchenChair2" index="1"]
+position = Vector2(0, -3.36163)
+shape = SubResource("RectangleShape2D_thnrq")
+
+[node name="KitchenChair2_s" type="Sprite2D" parent="Elements/Props" index="11"]
+visible = false
 position = Vector2(528, 696)
 scale = Vector2(3.5, 3.5)
 texture = ExtResource("10_40y8b")
 flip_h = true
 metadata/_edit_lock_ = true
 
-[node name="KitchenFridge" type="Sprite2D" parent="Elements/Props" index="8"]
+[node name="KitchenFridge" parent="Elements/Props" index="12" instance=ExtResource("10_r0b43")]
+position = Vector2(787, 392)
+Data = SubResource("Resource_r0b43")
+
+[node name="Sprite2D" parent="Elements/Props/KitchenFridge" index="0"]
+texture = ExtResource("11_plt6y")
+
+[node name="CollisionShape2D" parent="Elements/Props/KitchenFridge" index="1"]
+position = Vector2(-1.28572, 12.5714)
+scale = Vector2(0.999999, 0.999999)
+shape = SubResource("RectangleShape2D_mefai")
+
+[node name="KitchenFridge_s" type="Sprite2D" parent="Elements/Props" index="13"]
+visible = false
 position = Vector2(792, 440)
 scale = Vector2(3.5, 3.5)
 texture = ExtResource("11_plt6y")
 offset = Vector2(-1.42857, -13.7143)
 metadata/_edit_lock_ = true
 
-[node name="KitchenShelf" type="Sprite2D" parent="Elements/Props" index="9"]
+[node name="KitchenShelf" parent="Elements/Props" index="14" instance=ExtResource("10_r0b43")]
+position = Vector2(808, 600)
+Data = SubResource("Resource_mefai")
+
+[node name="Sprite2D" parent="Elements/Props/KitchenShelf" index="0"]
+texture = ExtResource("12_be7gj")
+
+[node name="CollisionShape2D" parent="Elements/Props/KitchenShelf" index="1"]
+position = Vector2(0, 4.57143)
+shape = SubResource("RectangleShape2D_cwbho")
+
+[node name="KitchenShelf_s" type="Sprite2D" parent="Elements/Props" index="15"]
+visible = false
 position = Vector2(808, 600)
 scale = Vector2(3.5, 3.5)
 texture = ExtResource("12_be7gj")
 metadata/_edit_lock_ = true
 
-[node name="KitchenTrash" type="Sprite2D" parent="Elements/Props" index="10"]
+[node name="KitchenTrash" type="Sprite2D" parent="Elements/Props" index="16"]
 position = Vector2(600, 272)
 scale = Vector2(3.5, 3.5)
 texture = ExtResource("14_4qfju")
 
 [editable path="Elements/Transfers/ToEntrance"]
 [editable path="Elements/Transfers/ToEntrance/DetectionArea"]
+[editable path="Elements/Props/KitchenTable"]
+[editable path="Elements/Props/KitchenTV"]
+[editable path="Elements/Props/KitchenChair1"]
+[editable path="Elements/Props/KitchenChair2"]
+[editable path="Elements/Props/KitchenFridge"]
+[editable path="Elements/Props/KitchenShelf"]
