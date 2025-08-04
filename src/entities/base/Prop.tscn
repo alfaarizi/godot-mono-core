@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://307rvguddqy8"]
+
+[ext_resource type="Script" uid="uid://di2e24mny140l" path="res://src/entities/base/Prop.cs" id="1_3uoax"]
+
+[node name="Prop" type="StaticBody2D" node_paths=PackedStringArray("Sprite", "CollisionShape")]
+scale = Vector2(3.5, 3.5)
+script = ExtResource("1_3uoax")
+Sprite = NodePath("Sprite2D")
+CollisionShape = NodePath("CollisionShape2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://tubun22eupv2"]
+
+[ext_resource type="Script" uid="uid://b0r6u6le8g3py" path="res://src/components/CameraComponent.cs" id="1_vflby"]
+
+[node name="CameraComponent" type="Node" node_paths=PackedStringArray("Camera")]
+script = ExtResource("1_vflby")
+Camera = NodePath("Camera2D")
+metadata/_custom_type_script = "uid://bvr3yq8d15ypf"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
+limit_smoothed = true

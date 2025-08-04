@@ -114,7 +114,7 @@ csharp_style_prefer_readonly_struct = true
 csharp_style_prefer_readonly_struct_member = true
 
 # Code-block preferences
-csharp_prefer_braces = true
+csharp_prefer_braces = when_multiline
 csharp_prefer_simple_using_statement = true
 csharp_style_namespace_declarations = block_scoped
 csharp_style_prefer_method_group_conversion = true
@@ -254,6 +254,9 @@ dotnet_diagnostic.IDE0005.severity = none # Don't warn about unused usings
 dotnet_diagnostic.IDE0008.severity = none # Don't warn about using var
 dotnet_diagnostic.IDE0051.severity = suggestion # Unused members (Godot reflection)
 
+# Style Preferences
+dotnet_diagnostic.IDE0022.severity = none
+
 # Critical rules
 dotnet_diagnostic.IDE1006.severity = error # Bad naming
 dotnet_diagnostic.IDE0052.severity = error # Unused members
@@ -266,3 +269,6 @@ dotnet_separate_import_directive_groups = false
 dotnet_analyzer_diagnostic.IMPORTS.severity = none
 dotnet_diagnostic.CS8669.severity = none
 generated_code = true
+
+[tests/*.cs]
+dotnet_diagnostic.CA1822.severity = none

@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://b73ng4lo6h50r"]
+
+[ext_resource type="PackedScene" uid="uid://307rvguddqy8" path="res://src/entities/base/Prop.tscn" id="1_ynlg8"]
+[ext_resource type="Script" uid="uid://decs1fhutkcf1" path="res://src/common/Transfer.cs" id="2_cli3g"]
+[ext_resource type="PackedScene" uid="uid://1cdnr2kjy6l8" path="res://src/common/Actionable.tscn" id="3_g4ion"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p106i"]
+size = Vector2(64, 32)
+
+[node name="Transfer" instance=ExtResource("1_ynlg8")]
+script = ExtResource("2_cli3g")
+RoomPath = ""
+DestinationName = ""
+RequiresInteraction = true
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, -8)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, -16)
+metadata/_edit_lock_ = true
+
+[node name="Actionable" parent="." index="2" instance=ExtResource("3_g4ion")]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" parent="Actionable" index="0"]
+position = Vector2(0, 16)
+shape = SubResource("RectangleShape2D_p106i")
+metadata/_edit_lock_ = true
+
+[node name="PromptComponent" parent="Actionable" index="2"]
+Text = "Press Z to Enter"
+
+[node name="Marker2D" type="Marker2D" parent="." index="3"]
+unique_name_in_owner = true
+position = Vector2(0, 16)
+
+[editable path="Actionable"]
