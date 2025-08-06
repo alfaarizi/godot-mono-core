@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2txv1448dtmq"]
+
+[ext_resource type="Script" uid="uid://dnsyh8tofhlfv" path="res://src/components/navigation/PathfindingComponent.cs" id="1_1jaad"]
+
+[node name="PathfindingComponent" type="Node"]
+script = ExtResource("1_1jaad")
+metadata/_custom_type_script = "uid://bvr3yq8d15ypf"

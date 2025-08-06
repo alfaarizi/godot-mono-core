@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxawi3qhfts2k"]
+
+[ext_resource type="PackedScene" uid="uid://cek2r2gb7cb4q" path="res://src/common/BasePortrait.tscn" id="1_4icpd"]
+[ext_resource type="Texture2D" uid="uid://1ilafohwcdn3" path="res://assets/sprites/hart/hart.png" id="2_ji4ub"]
+
+[node name="HartPortrait" instance=ExtResource("1_4icpd")]
+
+[node name="Body" parent="Marker2D" index="0"]
+position = Vector2(0, -270)
+texture = ExtResource("2_ji4ub")

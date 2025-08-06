@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=4 uid="uid://ce6gpduluhlyk"]
+[gd_scene load_steps=9 format=4 uid="uid://ce6gpduluhlyk"]
 
 [ext_resource type="PackedScene" uid="uid://dnsgoxb5hgp8o" path="res://src/rooms/base/Room.tscn" id="1_i7v4r"]
 [ext_resource type="TileSet" uid="uid://bpw0mvwwesfx6" path="res://presets/PrologueForest/PrologueForest08/PrologueForest08.tres" id="2_7w6s4"]
 [ext_resource type="PackedScene" uid="uid://b73ng4lo6h50r" path="res://src/common/Transfer.tscn" id="3_7w6s4"]
 [ext_resource type="PackedScene" uid="uid://da3dgt837tvea" path="res://src/entities/player/Player.tscn" id="4_kxxa4"]
+[ext_resource type="PackedScene" uid="uid://dbrrokolrm0sb" path="res://src/entities/npcs/NPCFollower.tscn" id="5_mxkny"]
+[ext_resource type="Resource" uid="uid://2kul8gwn8fqy" path="res://src/data/characters/Brother.tres" id="6_icv1v"]
+[ext_resource type="PackedScene" uid="uid://bo54kwxb3is75" path="res://src/common/DialogueActionable.tscn" id="7_icv1v"]
+[ext_resource type="Resource" uid="uid://bxivn6rg5nf46" path="res://src/dialogue/resources/testDialogue.dialogue" id="8_o5ur4"]
 
 [node name="PrologueForest08" instance=ExtResource("1_i7v4r")]
 
@@ -46,6 +50,7 @@ rotation = 1.5708
 scale = Vector2(5.5, 0.7)
 RoomPath = "uid://s3rvpuuv2ohq"
 DestinationName = "ToPrologueForest08"
+RequiresInteraction = false
 
 [node name="Marker2D" parent="Elements/Transfers/ToPrologueForest07" index="3"]
 position = Vector2(-0.909091, 84.2858)
@@ -56,6 +61,7 @@ rotation = 1.5708
 scale = Vector2(3.9, 0.54)
 RoomPath = "uid://s4a8q72wcgc7"
 DestinationName = "ToPrologueForest08"
+RequiresInteraction = false
 
 [node name="Marker2D" parent="Elements/Transfers/ToPrologueForest09" index="3"]
 position = Vector2(1.28205, 122.222)
@@ -66,16 +72,25 @@ rotation = -1.5708
 scale = Vector2(4.34, 0.699999)
 RoomPath = "uid://c8gvo6ofxw1wx"
 DestinationName = "ToPrologueForest08"
+RequiresInteraction = false
 
 [node name="Marker2D" parent="Elements/Transfers/ToPrologueForest11" index="3"]
 position = Vector2(-5.99078, 134.286)
 
 [node name="Player" parent="Elements/Characters" index="0" instance=ExtResource("4_kxxa4")]
-position = Vector2(1775, 2369)
+position = Vector2(426, 933)
+
+[node name="NPCFollower" parent="Elements/Characters" index="1" instance=ExtResource("5_mxkny")]
+position = Vector2(1201, 769)
+Data = ExtResource("6_icv1v")
+
+[node name="DialogueActionable" parent="Elements/Actionables" index="0" instance=ExtResource("7_icv1v")]
+position = Vector2(794, 664)
+DialogueResource = ExtResource("8_o5ur4")
 
 [editable path="Elements/Transfers/ToPrologueForest07"]
-[editable path="Elements/Transfers/ToPrologueForest07/DetectionArea"]
+[editable path="Elements/Transfers/ToPrologueForest07/Actionable"]
 [editable path="Elements/Transfers/ToPrologueForest09"]
-[editable path="Elements/Transfers/ToPrologueForest09/DetectionArea"]
+[editable path="Elements/Transfers/ToPrologueForest09/Actionable"]
 [editable path="Elements/Transfers/ToPrologueForest11"]
-[editable path="Elements/Transfers/ToPrologueForest11/DetectionArea"]
+[editable path="Elements/Transfers/ToPrologueForest11/Actionable"]

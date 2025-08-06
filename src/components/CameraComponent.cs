@@ -45,13 +45,13 @@ public partial class CameraComponent : Component
     public void MakeCurrent()
     {
         if (Camera == null || !IsEnabled) return;
-        Global.CurrentCamera = this;
+        EventBus.EmitCameraChanged(this);
         Camera.MakeCurrent();
         RefreshProcess();
         _ = CallDeferred(nameof(SetPosition));
     }
 
-    public bool IsCurrent => Global.CurrentCamera == this;
+    public bool IsCurrent => Global.GetCurrentCamera() == this;
 
     public void SetBoundsFromTileMap(TileMapLayer? tileMapLayer)
     {
@@ -64,6 +64,14 @@ public partial class CameraComponent : Component
             tileMapLayer.ToGlobal(usedRect.Position * quadrantSize),
             tileMapLayer.ToGlobal(usedRect.End * quadrantSize)
         );
+    }
+
+    public bool IsInViewport(Vector2 position)
+    {
+        if (Camera == null) return false;
+        var halfScreen = GetViewport().GetVisibleRect().Size / Camera.Zoom * 0.5f;
+        var delta = (position - Camera.GlobalPosition).Abs();
+        return delta.X <= halfScreen.X && delta.Y <= halfScreen.Y;
     }
 
     public override void _Ready()
@@ -100,10 +108,6 @@ public partial class CameraComponent : Component
     public override void _ExitTree()
     {
         EnabledChanged -= OnEnabledChanged;
-
-        if (Global.CurrentCamera == this)
-            Global.CurrentCamera = null;
-
         base._ExitTree();
     }
 

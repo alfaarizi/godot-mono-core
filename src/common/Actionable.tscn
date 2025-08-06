@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://1cdnr2kjy6l8"]
+
+[ext_resource type="Script" uid="uid://bwpswgsy1r8q2" path="res://src/common/Actionable.cs" id="1_y363o"]
+[ext_resource type="PackedScene" uid="uid://d38i6iuc1di8v" path="res://src/components/InputComponent.tscn" id="2_j3ibl"]
+[ext_resource type="PackedScene" uid="uid://dtfb4gdflqv1c" path="res://src/components/PromptComponent.tscn" id="3_61jj7"]
+
+[node name="Actionable" type="Area2D"]
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_y363o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+debug_color = Color(0.580392, 0.45098, 0.823529, 0.419608)
+
+[node name="InputComponent" parent="." instance=ExtResource("2_j3ibl")]
+unique_name_in_owner = true
+PressActions = [&"ui_interact"]
+
+[node name="PromptComponent" parent="." instance=ExtResource("3_61jj7")]
+unique_name_in_owner = true

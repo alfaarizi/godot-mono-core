@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjxy831xfipp2"]
+
+[ext_resource type="Script" uid="uid://dluiu3jseabf7" path="res://src/common/LOSDebugger.cs" id="1_pibdm"]
+
+[node name="LOSDebugger" type="Node2D"]
+script = ExtResource("1_pibdm")

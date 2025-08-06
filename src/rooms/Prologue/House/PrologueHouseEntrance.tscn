@@ -51,7 +51,6 @@ tile_set = ExtResource("2_e7ohn")
 [node name="ToBasement" parent="Elements/Transfers" index="0" instance=ExtResource("3_v2u6f")]
 position = Vector2(1008, 264)
 scale = Vector2(1.49999, 1.58)
-RequiresInteraction = true
 
 [node name="Marker2D" parent="Elements/Transfers/ToBasement" index="3"]
 position = Vector2(0.666671, 115.254)
@@ -62,6 +61,7 @@ rotation = -1.5708
 scale = Vector2(3.06, 1.42)
 RoomPath = "uid://brqcxxcd45hlq"
 DestinationName = "ToEntrance"
+RequiresInteraction = false
 
 [node name="Marker2D" parent="Elements/Transfers/ToKitchen" index="3"]
 position = Vector2(-6.28271, 81.6901)
@@ -72,7 +72,6 @@ rotation = 3.14159
 scale = Vector2(3.42, 1.46)
 RoomPath = "uid://dnpdqylkufn2k"
 DestinationName = "ToHouseEntrance"
-RequiresInteraction = true
 
 [node name="Marker2D" parent="Elements/Transfers/ToPrologueForest10" index="3"]
 position = Vector2(-1.63731e-05, 55.4798)
@@ -83,6 +82,7 @@ rotation = 1.5708
 scale = Vector2(2.78, 1.53999)
 RoomPath = "uid://d1hwftfk3mnmd"
 DestinationName = "ToEntrance"
+RequiresInteraction = false
 
 [node name="Marker2D" parent="Elements/Transfers/ToLivingRoom" index="3"]
 position = Vector2(11.5108, 72.0785)
@@ -91,10 +91,10 @@ position = Vector2(11.5108, 72.0785)
 position = Vector2(888, 1222)
 
 [editable path="Elements/Transfers/ToBasement"]
-[editable path="Elements/Transfers/ToBasement/DetectionArea"]
+[editable path="Elements/Transfers/ToBasement/Actionable"]
 [editable path="Elements/Transfers/ToKitchen"]
-[editable path="Elements/Transfers/ToKitchen/DetectionArea"]
+[editable path="Elements/Transfers/ToKitchen/Actionable"]
 [editable path="Elements/Transfers/ToPrologueForest10"]
-[editable path="Elements/Transfers/ToPrologueForest10/DetectionArea"]
+[editable path="Elements/Transfers/ToPrologueForest10/Actionable"]
 [editable path="Elements/Transfers/ToLivingRoom"]
-[editable path="Elements/Transfers/ToLivingRoom/DetectionArea"]
+[editable path="Elements/Transfers/ToLivingRoom/Actionable"]

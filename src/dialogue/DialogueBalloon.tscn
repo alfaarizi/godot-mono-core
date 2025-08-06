@@ -1,0 +1,308 @@
+[gd_scene load_steps=20 format=3 uid="uid://c8ohp2aoihlcb"]
+
+[ext_resource type="Script" uid="uid://kjrvw51x18ai" path="res://src/dialogue/DialogueBalloon.cs" id="1_cko0s"]
+[ext_resource type="FontFile" uid="uid://crkv0naeyvgmb" path="res://assets/fonts/Born2bSportyV2.ttf" id="1_qw0e5"]
+[ext_resource type="Texture2D" uid="uid://csc2vm6n12kkh" path="res://assets/hud/dialogue/dialogue_bar.png" id="2_cko0s"]
+[ext_resource type="AudioStream" uid="uid://bbpme0xr32p7k" path="res://assets/audio/Talk.wav" id="2_hct3x"]
+[ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="3_hct3x"]
+[ext_resource type="Texture2D" uid="uid://bwx2p3kuvjmr5" path="res://assets/hud/dialogue/character_bar.png" id="4_tpecj"]
+[ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="5_2vkr6"]
+[ext_resource type="AudioStream" uid="uid://ctmlvvorf2c7j" path="res://assets/audio/talking_beep.ogg" id="6_s2fc7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.329412, 0.329412, 0.329412, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ri4m3"]
+bg_color = Color(0.121569, 0.121569, 0.121569, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e0njw"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.6, 0.6, 0.6, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qkmqt"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="Theme" id="Theme_qq3yp"]
+default_font = ExtResource("1_qw0e5")
+default_font_size = 32
+Button/styles/disabled = SubResource("StyleBoxFlat_spyqn")
+Button/styles/focus = SubResource("StyleBoxFlat_ri4m3")
+Button/styles/hover = SubResource("StyleBoxFlat_e0njw")
+Button/styles/normal = SubResource("StyleBoxFlat_e0njw")
+MarginContainer/constants/margin_bottom = 15
+MarginContainer/constants/margin_left = 30
+MarginContainer/constants/margin_right = 30
+MarginContainer/constants/margin_top = 15
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_qkmqt")
+
+[sub_resource type="Animation" id="Animation_8x6f2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LeftPortraitPosition:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(240, 1080)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RightPortraitPosition:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1680, 1080)]
+}
+
+[sub_resource type="Animation" id="Animation_12yat"]
+resource_name = "hide_left_portrait"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LeftPortraitPosition:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(240, 1080), Vector2(-240, 1080)]
+}
+
+[sub_resource type="Animation" id="Animation_rytn6"]
+resource_name = "hide_right_portrait"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RightPortraitPosition:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1680, 1080), Vector2(2160, 1080)]
+}
+
+[sub_resource type="Animation" id="Animation_hxttf"]
+resource_name = "show_left_portrait"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LeftPortraitPosition:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-240, 1080), Vector2(240, 1080)]
+}
+
+[sub_resource type="Animation" id="Animation_q7yug"]
+resource_name = "show_right_portrait"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RightPortraitPosition:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2160, 1080), Vector2(1680, 1080)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8x6f2"]
+_data = {
+&"RESET": SubResource("Animation_8x6f2"),
+&"hide_left_portrait": SubResource("Animation_12yat"),
+&"hide_right_portrait": SubResource("Animation_rytn6"),
+&"show_left_portrait": SubResource("Animation_hxttf"),
+&"show_right_portrait": SubResource("Animation_q7yug")
+}
+
+[node name="DialogueBalloon" type="CanvasLayer"]
+layer = 100
+script = ExtResource("1_cko0s")
+VoiceAudio = ExtResource("2_hct3x")
+
+[node name="Balloon" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_qq3yp")
+
+[node name="DialogueContainer" type="MarginContainer" parent="Balloon"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -219.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Balloon/DialogueContainer"]
+layout_mode = 2
+
+[node name="LeftPortrait" type="Control" parent="Balloon/DialogueContainer/HBoxContainer"]
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 2
+
+[node name="Dialogue" type="MarginContainer" parent="Balloon/DialogueContainer/HBoxContainer"]
+clip_children = 2
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="Balloon/DialogueContainer/HBoxContainer/Dialogue"]
+layout_mode = 2
+texture = ExtResource("2_cko0s")
+
+[node name="MarginContainer" type="MarginContainer" parent="Balloon/DialogueContainer/HBoxContainer/Dialogue"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 30
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Balloon/DialogueContainer/HBoxContainer/Dialogue/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="DialogueLabel" parent="Balloon/DialogueContainer/HBoxContainer/Dialogue/MarginContainer/ScrollContainer" instance=ExtResource("3_hct3x")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Dialogue..."
+scroll_active = true
+scroll_following = true
+
+[node name="RightPortrait" type="Control" parent="Balloon/DialogueContainer/HBoxContainer"]
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 2
+
+[node name="CharacterContainer" type="MarginContainer" parent="Balloon"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 449.0
+offset_top = -302.0
+offset_right = -1152.0
+offset_bottom = -199.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="Balloon/CharacterContainer"]
+layout_mode = 2
+texture = ExtResource("4_tpecj")
+
+[node name="CharacterLabel" type="RichTextLabel" parent="Balloon/CharacterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 1
+bbcode_enabled = true
+text = "Character"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResponsesMenu" type="VBoxContainer" parent="Balloon" node_paths=PackedStringArray("response_template")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -290.5
+offset_top = -35.0
+offset_right = 290.5
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+alignment = 1
+script = ExtResource("5_2vkr6")
+response_template = NodePath("ResponseExample")
+
+[node name="ResponseExample" type="Button" parent="Balloon/ResponsesMenu"]
+layout_mode = 2
+text = "Response example"
+
+[node name="LeftPortraitPosition" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(240, 1080)
+
+[node name="RightPortraitPosition" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1680, 1080)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_8x6f2")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_s2fc7")
+
+[connection signal="gui_input" from="Balloon" to="." method="_on_balloon_gui_input"]
+[connection signal="response_selected" from="Balloon/ResponsesMenu" to="." method="_on_responses_menu_response_selected"]

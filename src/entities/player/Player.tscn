@@ -1,16 +1,12 @@
-[gd_scene load_steps=34 format=3 uid="uid://da3dgt837tvea"]
+[gd_scene load_steps=32 format=3 uid="uid://da3dgt837tvea"]
 
 [ext_resource type="PackedScene" uid="uid://gr5ue7odva4l" path="res://src/entities/base/Character.tscn" id="1_3py4g"]
 [ext_resource type="Script" uid="uid://cmqgvm31pj3xi" path="res://src/entities/player/Player.cs" id="2_vna0p"]
 [ext_resource type="Resource" uid="uid://doevqnbisq07u" path="res://src/data/characters/Hart.tres" id="3_j0f6w"]
-[ext_resource type="Texture2D" uid="uid://dtbgmwolnpw6l" path="res://assets/sprites/hart/hart_movement.png" id="4_3g2ip"]
 [ext_resource type="PackedScene" uid="uid://dnx5ypkt3ymst" path="res://src/components/AnimationComponent.tscn" id="5_lvau8"]
 [ext_resource type="PackedScene" uid="uid://dwu0av21crh2f" path="res://src/components/MovementComponent.tscn" id="6_gc66i"]
 [ext_resource type="PackedScene" uid="uid://d38i6iuc1di8v" path="res://src/components/InputComponent.tscn" id="7_j0f6w"]
 [ext_resource type="PackedScene" uid="uid://tubun22eupv2" path="res://src/components/CameraComponent.tscn" id="8_3g2ip"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2et12"]
-size = Vector2(11, 10)
 
 [sub_resource type="Animation" id="Animation_3g2ip"]
 length = 0.001
@@ -240,25 +236,23 @@ advance_condition = &"!is_moving"
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_brwq7"]
 states/End/position = Vector2(739, 155.101)
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_dky6r")
-states/Idle/position = Vector2(374.545, 86.7658)
+states/Idle/position = Vector2(374.545, 86.9943)
 states/Move/node = SubResource("AnimationNodeBlendSpace2D_wjetm")
-states/Move/position = Vector2(570.605, 86.6797)
+states/Move/position = Vector2(570.605, 86.7227)
 states/Start/position = Vector2(194.5, 155.268)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_j0f6w"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_3g2ip"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_4niw5")]
-graph_offset = Vector2(-40.998, -1.2)
+graph_offset = Vector2(53.397, 8.565)
 
-[node name="Player" instance=ExtResource("1_3py4g")]
-motion_mode = 1
+[node name="Player" groups=["action_actor", "dialogue_actor"] instance=ExtResource("1_3py4g")]
+collision_layer = 2
 script = ExtResource("2_vna0p")
 Data = ExtResource("3_j0f6w")
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(0, -23)
-texture = ExtResource("4_3g2ip")
 
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2(0, -5.5)
-shape = SubResource("RectangleShape2D_2et12")
 
 [node name="InputComponent" parent="." index="2" instance=ExtResource("7_j0f6w")]
 unique_name_in_owner = true

@@ -5,147 +5,105 @@ public partial class Transfer : Prop
 {
     [Export(PropertyHint.File, "*.tscn")] public string RoomPath { get; set; } = "";
     [Export] public string DestinationName { get; set; } = "";
-    [Export] public bool RequiresInteraction { get; set; }
+    [Export]
+    public bool RequiresInteraction
+    {
+        get => _requiresInteraction;
+        set
+        {
+            _requiresInteraction = value;
+            if (_actionable != null)
+                _actionable.RequiresInteraction = value;
+        }
+    }
 
-    private Area2D? _detectionArea;
+    private Actionable? _actionable;
     private Marker2D? _marker;
-    private InputComponent? _inputComponent;
-    private PromptComponent? _promptComponent;
     private SceneManager? _sceneManager;
-    private Player? _playerEntered;
-    private Vector2 _entryDirection;
-    private bool _isTransported;
+    private bool _requiresInteraction = true;
 
     public override void _Ready()
     {
         base._Ready();
         if (Engine.IsEditorHint()) return;
 
-        _detectionArea = GetNodeOrNull<Area2D>("%DetectionArea");
+        _actionable = GetNodeOrNull<Actionable>("%Actionable");
         _marker = GetNodeOrNull<Marker2D>("%Marker2D");
-        _inputComponent = GetNodeOrNull<InputComponent>("%InputComponent");
-        _promptComponent = GetNodeOrNull<PromptComponent>("%PromptComponent");
         _sceneManager = GetNode<SceneManager>("/root/SceneManager");
 
-        Global.AddDestination(Name, this);
+        EventBus.EmitDestinationAdded(Name, this);
 
-        if (_detectionArea != null)
+        if (_actionable != null)
         {
-            _detectionArea.BodyEntered += OnPlayerEntered;
-            _detectionArea.BodyExited += OnPlayerExited;
-        }
+            _actionable.RequiresInteraction = _requiresInteraction;
+            _actionable.ActionRequested += OnActionRequested;
 
-        if (_marker != null)
-        {
+            if (_marker == null) return;
             Vector2 diff = GlobalPosition - _marker.GlobalPosition;
-            _entryDirection = Mathf.Abs(diff.X) > Mathf.Abs(diff.Y)
+            _actionable.ActionDirection = Mathf.Abs(diff.X) > Mathf.Abs(diff.Y)
                 ? new Vector2(Mathf.Sign(diff.X), 0)
                 : new Vector2(0, Mathf.Sign(diff.Y));
         }
-
-        if (_inputComponent != null)
-            _inputComponent.ActionPressed += OnActionPressed;
     }
 
     public override void _ExitTree()
     {
-        Global.RemoveDestination(Name);
+        if (Engine.IsEditorHint()) return;
 
-        if (_detectionArea != null)
-        {
-            _detectionArea.BodyEntered -= OnPlayerEntered;
-            _detectionArea.BodyExited -= OnPlayerExited;
-        }
+        EventBus.EmitDestinationRemoved(Name);
 
-        if (_inputComponent != null)
-            _inputComponent.ActionPressed -= OnActionPressed;
+        if (_actionable != null)
+            _actionable.ActionRequested -= OnActionRequested;
 
         base._ExitTree();
     }
 
-    private void OnPlayerEntered(Node body)
+    private void OnActionRequested(Node2D actor)
+        => Transport(actor);
+
+    private async void Transport(Node2D actor)
     {
-        if (body is not Player player) return;
+        var inputComponent = actor.GetNodeOrNull<InputComponent>("%InputComponent");
+        var movementComponent = actor.GetNodeOrNull<MovementComponent>("%MovementComponent");
 
-        _isTransported = false;
-        _playerEntered = player;
+        inputComponent?.SetEnabled(false);
+        movementComponent?.SetEnabled(false);
 
-        if (RequiresInteraction)
-        {
-            _promptComponent?.Show("Press Z to Enter");
-            return;
-        }
-
-        if (player.MovementComponent != null)
-            player.MovementComponent.LastDirectionChanged += OnPlayerLastDirectionChanged;
-
-        // Check Initial Direction
-        if (player.MovementComponent?.GetLastDirection().Dot(_entryDirection) > 0.0f)
-        {
-            _isTransported = true;
-            Transport(player);
-        }
-    }
-
-    private void OnPlayerLastDirectionChanged(Vector2 direction)
-    {
-        if (_playerEntered != null && !_isTransported && direction.Dot(_entryDirection) > 0.0f)
-        {
-            _isTransported = true;
-            Transport(_playerEntered);
-        }
-    }
-
-    private void OnPlayerExited(Node body)
-    {
-        if (body != _playerEntered) return;
-
-        if (_playerEntered?.MovementComponent != null)
-            _playerEntered.MovementComponent.LastDirectionChanged -= OnPlayerLastDirectionChanged;
-
-        _isTransported = false;
-        _playerEntered = null;
-
-        if (RequiresInteraction)
-            _promptComponent?.Hide();
-    }
-
-    private void OnActionPressed(StringName action)
-    {
-        if (_playerEntered == null || !RequiresInteraction || action != "ui_interact") return;
-        Transport(_playerEntered);
-    }
-
-    private async void Transport(Player currentPlayer)
-    {
         if (!string.IsNullOrEmpty(RoomPath))
         {
-            _promptComponent?.Hide();
-            currentPlayer.InputComponent?.SetEnabled(false);
-            currentPlayer.MovementComponent?.SetEnabled(false);
-
-            Room? currentRoom = Global.CurrentRoom;
+            // Transport to a destination in a new room
+            Room? currentRoom = Global.GetCurrentRoom();
             if (currentRoom == null || _sceneManager == null)
-            {
-                currentPlayer.InputComponent?.SetEnabled(true);
-                currentPlayer.MovementComponent?.SetEnabled(true);
                 return;
-            }
 
             _sceneManager.ChangeScene(RoomPath, currentRoom.GetParent(), currentRoom);
             _ = await ToSignal(_sceneManager, SceneManager.SignalName.SceneLoadCompleted);
 
-            if (Global.GetCharacter("Player") is Player newPlayer && Global.GetDestination(DestinationName) is Transfer newTransfer)
+            var newActor = Global.GetCharacter(actor.Name);
+            if (newActor == null) return;
+
+            TransportToDestination(newActor);
+
+            if (_actionable != null && _actionable.ActionDirection != Vector2.Zero)
             {
-                newPlayer.GlobalPosition = newTransfer._marker?.GlobalPosition ?? newTransfer.GlobalPosition;
-                if (_entryDirection != Vector2.Zero)
-                    newPlayer.MovementComponent?.SetLastDirection(_entryDirection);
+                var newMovementComponent = newActor.GetNodeOrNull<MovementComponent>("%MovementComponent");
+                newMovementComponent?.SetLastDirection(_actionable.ActionDirection);
             }
         }
-        else if (!string.IsNullOrEmpty(DestinationName) && Global.GetDestination(DestinationName) is Transfer currentTransfer)
+        else if (!string.IsNullOrEmpty(DestinationName))
         {
-            _promptComponent?.Hide();
-            currentPlayer.GlobalPosition = currentTransfer._marker?.GlobalPosition ?? currentTransfer.GlobalPosition;
+            // Transport to a destination in the same room
+            TransportToDestination(actor);
         }
+
+        inputComponent?.SetEnabled(true);
+        movementComponent?.SetEnabled(true);
     }
+
+    private void TransportToDestination(Node2D actor)
+    {
+        if (Global.GetDestination(DestinationName) is Transfer destination)
+            actor.GlobalPosition = destination._marker?.GlobalPosition ?? destination.GlobalPosition;
+    }
+
 }
