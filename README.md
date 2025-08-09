@@ -6,15 +6,16 @@
 
 ## Preview
 
-![Preview 1](preview1.png)
+<div align="center">
+ <img src="preview1.png" alt="Preview 1" height="200"/>
+ <img src="preview2.png" alt="Preview 2" height="200"/>
+ <img src="preview3.png" alt="Preview 3" height="200"/>
+</div>
 
-![Preview 2](preview2.png)
-
-![Preview 3](preview3.png)
-
-![Preview 4](preview4.png)
-
-![Preview 5](preview5.png)
+<div align="center">
+ <img src="preview4.png" alt="Preview 4" height="300"/>
+ <img src="preview5.png" alt="Preview 5" height="300"/>
+</div>
 
 ## Requirements
 
