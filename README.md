@@ -4,6 +4,18 @@
 
 **Inner Anima** is a psychological adventure where a boy becomes trapped in his own mind after a therapy session goes wrong. To escape, he must navigate surreal environments, solve puzzles, and confront his fears, uncovering hidden truths along the way.
 
+## Preview
+
+![Preview 1](preview1.png)
+
+![Preview 2](preview2.png)
+
+![Preview 3](preview3.png)
+
+![Preview 4](preview4.png)
+
+![Preview 5](preview5.png)
+
 ## Requirements
 
 The minimum requirement by this application is that you have OpenGL 3.3 / OpenGL ES 3.0 compatible hardware.
