@@ -7,9 +7,9 @@
 ## Preview
 
 <div align="center">
+ <img src="preview3.png" alt="Preview 3" height="200"/>
  <img src="preview1.png" alt="Preview 1" height="200"/>
  <img src="preview2.png" alt="Preview 2" height="200"/>
- <img src="preview3.png" alt="Preview 3" height="200"/>
 </div>
 
 <div align="center">
