@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jslgvryfruk5"
-path="res://.godot/imported/forest6_bush1.png-acbab733296e139d6038a30c059bb519.ctex"
+uid="uid://dl37k62w7cygp"
+path="res://.godot/imported/forest6_bushL6.png-e940068bb3438570ed1356621fb25a9a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/props/PrologueForest/forest6_bush1.png"
-dest_files=["res://.godot/imported/forest6_bush1.png-acbab733296e139d6038a30c059bb519.ctex"]
+source_file="res://assets/props/PrologueForest09/forest6_bushL6.png"
+dest_files=["res://.godot/imported/forest6_bushL6.png-e940068bb3438570ed1356621fb25a9a.ctex"]
 
 [params]
 

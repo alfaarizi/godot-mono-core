@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b0o43244mbbfs"
-path="res://.godot/imported/forest6_bush2.png-a293268400aecc4e4d7c5841bc99e7f7.ctex"
+path="res://.godot/imported/forest6_bush2.png-deb0e30be98cd67ffb08a84d101d11c5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/props/PrologueForest/forest6_bush2.png"
-dest_files=["res://.godot/imported/forest6_bush2.png-a293268400aecc4e4d7c5841bc99e7f7.ctex"]
+source_file="res://assets/props/PrologueForest06/forest6_bush2.png"
+dest_files=["res://.godot/imported/forest6_bush2.png-deb0e30be98cd67ffb08a84d101d11c5.ctex"]
 
 [params]
 

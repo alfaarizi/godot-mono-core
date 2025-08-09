@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="PropData" load_steps=4 format=3 uid="uid://carp8n7armugt"]
+
+[ext_resource type="Texture2D" uid="uid://btlhageicf21j" path="res://assets/props/PrologueForest09/forest6_bush2.png" id="1_5qil2"]
+[ext_resource type="Script" uid="uid://b1p3e8jgmnx7h" path="res://src/data/base/PropData.cs" id="2_gdm1p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gvk0h"]
+size = Vector2(20, 22.2857)
+
+[resource]
+script = ExtResource("2_gdm1p")
+Name = "Forest09Bush02"
+Sprite = ExtResource("1_5qil2")
+CollisionShape = SubResource("RectangleShape2D_gvk0h")
+metadata/_custom_type_script = "uid://b1p3e8jgmnx7h"

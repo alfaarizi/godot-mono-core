@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="PropData" load_steps=3 format=3 uid="uid://wxnfaqvrhxjr"]
 
-[ext_resource type="Texture2D" uid="uid://b3yry52ptuu3x" path="res://assets/props/PrologueForest/forest6_bush5.png" id="1_e8g52"]
+[ext_resource type="Texture2D" uid="uid://b3yry52ptuu3x" path="res://assets/props/PrologueForest06/forest6_bush5.png" id="1_e8g52"]
 [ext_resource type="Script" uid="uid://b1p3e8jgmnx7h" path="res://src/data/base/PropData.cs" id="2_ijahp"]
 
 [resource]
