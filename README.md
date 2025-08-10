@@ -86,4 +86,4 @@ This project is proprietary software. See [LICENSE.md](LICENSE.md) for details.
 
 ## Contributing
 
-This is a private development project. For inquiries, please contact the development team.
+This is a private development project. For inquiries, please contact the development team at [mkdrdscf23@gmail.com].
