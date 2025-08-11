@@ -82,7 +82,8 @@ public partial class Actionable : Area2D
 
     private void OnActionPressed(StringName action)
     {
-        if (_actor != null && RequiresInteraction && action == "ui_interact")
+        if (_actor == null || _movementComponent == null) return;
+        if (RequiresInteraction && action == "ui_interact" && IsValidDirection(_movementComponent.GetLastDirection()))
             Action();
     }
 
