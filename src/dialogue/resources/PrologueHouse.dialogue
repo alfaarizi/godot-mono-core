@@ -1,0 +1,53 @@
+~ start
+Nathan: [[Hi|Hello|Howdy]], this is some dialogue.
+Nathan: Here are some choices.
+- First one
+	Nathan: You picked the first one.
+- Second one
+	Nathan: You picked the second one.
+- Start again => start
+- End the conversation => END
+Nathan: For more information see the online documentation.
+=> END
+
+~ CoffeeMaker
+: A standard kitchen coffee maker.
+: Unfortunately not in the mood for some caffeine intake right now.
+: Unless I plan on staying up all night until morning.
+=> END
+
+~ Kettle
+: A kettle.
+=> END
+
+~ Salt
+: The three infamous spices. Salt, Pepper and sugar.
+: You took your finger in to scoope some sugar then tasted it.
+: It was as you expected. Sweet.
+=> END
+
+~ Cupboard
+: You took a peek inside the cupboard, expecting something.
+: It was empty.
+=> END
+
+~ Trash
+: An empty trash can bin.
+=> END
+
+~ Sink
+: You felt the urge to wash your hands, but stopped because you knew it was not necessary right now.
+=> END
+
+~ Fridge
+: Inside the fridge, there is a variety of snacks and drinks.
+: And an oddly large amount of vegetables that you do not like.
+=> END
+
+~ TV
+: A TV. You do not know how to turn it on.
+=> END
+
+~ Shelf
+: There's a weird paper on the shelf.
+=> END

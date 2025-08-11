@@ -6,17 +6,17 @@
 [ext_resource type="PackedScene" uid="uid://b73ng4lo6h50r" path="res://src/common/Transfer.tscn" id="3_ocj6w"]
 [ext_resource type="PackedScene" uid="uid://307rvguddqy8" path="res://src/entities/base/Prop.tscn" id="5_rp02f"]
 [ext_resource type="Resource" uid="uid://bshq7d5e2w4sh" path="res://src/data/props/ForestBush00.tres" id="6_g5yfs"]
-[ext_resource type="Texture2D" uid="uid://bsdoi6vgbhgtr" path="res://assets/props/PrologueForest06/forest6_bush0.png" id="7_c77ne"]
+[ext_resource type="Texture2D" uid="uid://bsdoi6vgbhgtr" path="res://assets/props/PrologueForest06/forest6_bush0.png" id="7_3biul"]
 [ext_resource type="Resource" uid="uid://b11pr10n0ius7" path="res://src/data/props/ForestBush01.tres" id="7_oauvh"]
 [ext_resource type="Resource" uid="uid://ccq2htnslv85v" path="res://src/data/props/ForestBush02.tres" id="8_g5yfs"]
+[ext_resource type="Texture2D" uid="uid://jslgvryfruk5" path="res://assets/props/PrologueForest06/forest6_bush1.png" id="9_43ahc"]
 [ext_resource type="Resource" uid="uid://bvbgkdb7t4wve" path="res://src/data/props/ForestBush03.tres" id="9_oauvh"]
-[ext_resource type="Texture2D" uid="uid://jslgvryfruk5" path="res://assets/props/PrologueForest06/forest6_bush1.png" id="9_prhsa"]
 [ext_resource type="Resource" uid="uid://cqfdw0kf367i" path="res://src/data/props/ForestBush04.tres" id="10_c77ne"]
-[ext_resource type="Texture2D" uid="uid://ci66krngys8xw" path="res://assets/props/PrologueForest06/forest6_bush3.png" id="10_g5yfs"]
-[ext_resource type="Texture2D" uid="uid://b0o43244mbbfs" path="res://assets/props/PrologueForest06/forest6_bush2.png" id="10_prhsa"]
+[ext_resource type="Texture2D" uid="uid://b0o43244mbbfs" path="res://assets/props/PrologueForest06/forest6_bush2.png" id="11_q4sin"]
 [ext_resource type="Resource" uid="uid://wxnfaqvrhxjr" path="res://src/data/props/ForestBush05.tres" id="11_vyafm"]
-[ext_resource type="Texture2D" uid="uid://dvxp6oqrf8jks" path="res://assets/props/PrologueForest06/forest6_bush4.png" id="15_nraq4"]
-[ext_resource type="Texture2D" uid="uid://b3yry52ptuu3x" path="res://assets/props/PrologueForest06/forest6_bush5.png" id="16_ljidl"]
+[ext_resource type="Texture2D" uid="uid://ci66krngys8xw" path="res://assets/props/PrologueForest06/forest6_bush3.png" id="13_krxbv"]
+[ext_resource type="Texture2D" uid="uid://dvxp6oqrf8jks" path="res://assets/props/PrologueForest06/forest6_bush4.png" id="15_pgl56"]
+[ext_resource type="Texture2D" uid="uid://b3yry52ptuu3x" path="res://assets/props/PrologueForest06/forest6_bush5.png" id="17_xw2m6"]
 [ext_resource type="PackedScene" uid="uid://pw7ehan7f5p5" path="res://src/entities/Props/DirectionalBush.tscn" id="18_3biul"]
 [ext_resource type="Texture2D" uid="uid://jy5hscatjcy6" path="res://assets/props/forest_gate.png" id="19_43ahc"]
 
@@ -109,7 +109,7 @@ Data = ExtResource("6_g5yfs")
 
 [node name="Sprite2D" parent="Elements/Props/Prop00" index="0"]
 position = Vector2(0, -8)
-texture = ExtResource("7_c77ne")
+texture = ExtResource("7_3biul")
 
 [node name="CollisionShape2D" parent="Elements/Props/Prop00" index="1"]
 rotation = 1.57079
@@ -122,7 +122,7 @@ Data = ExtResource("7_oauvh")
 
 [node name="Sprite2D" parent="Elements/Props/Prop01" index="0"]
 position = Vector2(0, -7.42857)
-texture = ExtResource("9_prhsa")
+texture = ExtResource("9_43ahc")
 
 [node name="CollisionShape2D" parent="Elements/Props/Prop01" index="1"]
 position = Vector2(0, -2.98023e-06)
@@ -135,7 +135,7 @@ Data = ExtResource("8_g5yfs")
 
 [node name="Sprite2D" parent="Elements/Props/Prop02" index="0"]
 position = Vector2(0, -8)
-texture = ExtResource("10_prhsa")
+texture = ExtResource("11_q4sin")
 
 [node name="CollisionShape2D" parent="Elements/Props/Prop02" index="1"]
 position = Vector2(0, -0.285645)
@@ -150,7 +150,7 @@ Data = ExtResource("9_oauvh")
 
 [node name="Sprite2D" parent="Elements/Props/Prop03" index="0"]
 position = Vector2(8, 0)
-texture = ExtResource("10_g5yfs")
+texture = ExtResource("13_krxbv")
 
 [node name="CollisionShape2D" parent="Elements/Props/Prop03" index="1"]
 rotation = 1.5708
@@ -164,7 +164,7 @@ Data = ExtResource("9_oauvh")
 
 [node name="Sprite2D" parent="Elements/Props/Prop07" index="0"]
 position = Vector2(8, 0)
-texture = ExtResource("10_g5yfs")
+texture = ExtResource("13_krxbv")
 
 [node name="CollisionShape2D" parent="Elements/Props/Prop07" index="1"]
 rotation = 1.5708
@@ -177,7 +177,7 @@ Data = ExtResource("10_c77ne")
 
 [node name="Sprite2D" parent="Elements/Props/Prop04" index="0"]
 position = Vector2(0, -24)
-texture = ExtResource("15_nraq4")
+texture = ExtResource("15_pgl56")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Elements/Props/Prop04" index="2"]
 position = Vector2(0, -24)
@@ -189,7 +189,7 @@ Data = ExtResource("11_vyafm")
 
 [node name="Sprite2D" parent="Elements/Props/Prop05" index="0"]
 position = Vector2(-16, -68)
-texture = ExtResource("16_ljidl")
+texture = ExtResource("17_xw2m6")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Elements/Props/Prop05" index="2"]
 position = Vector2(0, -68)
@@ -201,7 +201,7 @@ Data = ExtResource("9_oauvh")
 
 [node name="Sprite2D" parent="Elements/Props/Prop06" index="0"]
 position = Vector2(0, -8)
-texture = ExtResource("10_g5yfs")
+texture = ExtResource("13_krxbv")
 
 [node name="CollisionShape2D" parent="Elements/Props/Prop06" index="1"]
 rotation = 1.5708
@@ -215,7 +215,7 @@ Data = ExtResource("8_g5yfs")
 
 [node name="Sprite2D" parent="Elements/Props/Prop08" index="0"]
 position = Vector2(8, 0)
-texture = ExtResource("10_prhsa")
+texture = ExtResource("11_q4sin")
 
 [node name="CollisionShape2D" parent="Elements/Props/Prop08" index="1"]
 position = Vector2(-7.42857, -2.89351e-05)
