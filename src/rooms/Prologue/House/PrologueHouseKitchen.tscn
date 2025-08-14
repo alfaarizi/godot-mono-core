@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://brqcxxcd45hlq"]
+[gd_scene load_steps=29 format=4 uid="uid://brqcxxcd45hlq"]
 
 [ext_resource type="PackedScene" uid="uid://dnsgoxb5hgp8o" path="res://src/rooms/base/Room.tscn" id="1_uhjil"]
 [ext_resource type="TileSet" uid="uid://4wy66er8xqpd" path="res://presets/PrologueHouse/PrologueHouse.tres" id="2_6kj5h"]
@@ -39,6 +39,8 @@ Name = "PHouseTV"
 Sprite = ExtResource("8_6sm5m")
 CollisionShape = SubResource("RectangleShape2D_r0b43")
 metadata/_custom_type_script = "uid://b1p3e8jgmnx7h"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_thnrq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mefai"]
 size = Vector2(32.2857, 36)
@@ -129,6 +131,7 @@ position = Vector2(104, 376)
 scale = Vector2(3.5, 2.62)
 DialogueResource = ExtResource("6_0c7li")
 DialogueStart = "Sink"
+ActionDirection = 1
 
 [node name="Kettle" parent="Elements/Actionables" index="1" instance=ExtResource("5_cwbho")]
 z_index = 5
@@ -154,6 +157,7 @@ position = Vector2(184, 264)
 scale = Vector2(1.5, 1.67437)
 DialogueResource = ExtResource("6_0c7li")
 DialogueStart = "Salt"
+ActionDirection = 2
 
 [node name="Trash" parent="Elements/Actionables" index="4" instance=ExtResource("5_cwbho")]
 z_index = 5
@@ -161,12 +165,14 @@ position = Vector2(616, 288)
 scale = Vector2(1.29999, 2.06)
 DialogueResource = ExtResource("6_0c7li")
 DialogueStart = "Trash"
+ActionDirection = 2
 
 [node name="Fridge" parent="Elements/Actionables" index="5" instance=ExtResource("5_cwbho")]
 position = Vector2(744, 464)
 scale = Vector2(1.22, 1.78)
 DialogueResource = ExtResource("6_0c7li")
 DialogueStart = "Fridge"
+ActionDirection = 3
 
 [node name="TV" parent="Elements/Actionables" index="6" instance=ExtResource("5_cwbho")]
 z_index = 5
@@ -180,6 +186,7 @@ position = Vector2(792, 600)
 scale = Vector2(3.5, 3.66)
 DialogueResource = ExtResource("6_0c7li")
 DialogueStart = "Shelf"
+ActionDirection = 3
 
 [node name="KitchenFloor" type="Sprite2D" parent="Elements/Props" index="0"]
 y_sort_enabled = true
@@ -214,8 +221,12 @@ metadata/_edit_lock_ = true
 position = Vector2(344, 680)
 Data = SubResource("Resource_0c7li")
 
+[node name="Sprite2D" parent="Elements/Props/KitchenTable" index="0"]
+texture = ExtResource("8_w8a38")
+
 [node name="CollisionShape2D" parent="Elements/Props/KitchenTable" index="1"]
 position = Vector2(0, 6.14285)
+shape = SubResource("RectangleShape2D_0c7li")
 
 [node name="KitchenTable_s" type="Sprite2D" parent="Elements/Props" index="5"]
 visible = false
@@ -229,9 +240,11 @@ Data = SubResource("Resource_cwbho")
 
 [node name="Sprite2D" parent="Elements/Props/KitchenTV" index="0"]
 position = Vector2(7.62939e-06, -25.1429)
+texture = ExtResource("8_6sm5m")
 
 [node name="CollisionShape2D" parent="Elements/Props/KitchenTV" index="1"]
 position = Vector2(-9.80923e-06, -11.4286)
+shape = SubResource("RectangleShape2D_r0b43")
 
 [node name="KitchenTV_s" type="Sprite2D" parent="Elements/Props" index="7"]
 visible = false
@@ -247,9 +260,11 @@ Data = ExtResource("13_mefai")
 
 [node name="Sprite2D" parent="Elements/Props/KitchenChair1" index="0"]
 position = Vector2(0, -11.4286)
+texture = ExtResource("10_40y8b")
 
 [node name="CollisionShape2D" parent="Elements/Props/KitchenChair1" index="1"]
 position = Vector2(-0.214291, -4.1429)
+shape = SubResource("RectangleShape2D_thnrq")
 
 [node name="KitchenChair1_s" type="Sprite2D" parent="Elements/Props" index="9"]
 visible = false
@@ -264,10 +279,12 @@ Data = ExtResource("13_mefai")
 
 [node name="Sprite2D" parent="Elements/Props/KitchenChair2" index="0"]
 position = Vector2(0, -11.4286)
+texture = ExtResource("10_40y8b")
 flip_h = true
 
 [node name="CollisionShape2D" parent="Elements/Props/KitchenChair2" index="1"]
 position = Vector2(0, -3.36163)
+shape = SubResource("RectangleShape2D_thnrq")
 
 [node name="KitchenChair2_s" type="Sprite2D" parent="Elements/Props" index="11"]
 visible = false
@@ -281,9 +298,13 @@ metadata/_edit_lock_ = true
 position = Vector2(787, 392)
 Data = SubResource("Resource_r0b43")
 
+[node name="Sprite2D" parent="Elements/Props/KitchenFridge" index="0"]
+texture = ExtResource("11_plt6y")
+
 [node name="CollisionShape2D" parent="Elements/Props/KitchenFridge" index="1"]
 position = Vector2(-1.28572, 12.5714)
 scale = Vector2(0.999999, 0.999999)
+shape = SubResource("RectangleShape2D_mefai")
 
 [node name="KitchenFridge_s" type="Sprite2D" parent="Elements/Props" index="13"]
 visible = false
@@ -297,8 +318,12 @@ metadata/_edit_lock_ = true
 position = Vector2(808, 600)
 Data = SubResource("Resource_mefai")
 
+[node name="Sprite2D" parent="Elements/Props/KitchenShelf" index="0"]
+texture = ExtResource("12_be7gj")
+
 [node name="CollisionShape2D" parent="Elements/Props/KitchenShelf" index="1"]
 position = Vector2(0, 4.57143)
+shape = SubResource("RectangleShape2D_cwbho")
 
 [node name="KitchenShelf_s" type="Sprite2D" parent="Elements/Props" index="15"]
 visible = false
