@@ -60,7 +60,7 @@ public partial class Player : Character
             var actionables = _actionableFinder.GetOverlappingAreas();
             for (int i = 0; i < actionables.Count; i++)
             {
-                if (actionables[i] is Actionable actionable && actionable.IsEnabled)
+                if (actionables[i] is Actionable actionable && actionable == Actionable.ActiveActionable)
                 {
                     actionable.Action();
                     return;

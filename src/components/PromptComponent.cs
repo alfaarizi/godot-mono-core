@@ -6,6 +6,7 @@ public partial class PromptComponent : Component
     [Export] public float SlideDuration { get; set; } = 0.3f;
     [Export] public float SlideDistance { get; set; } = 30.0f;
 
+    private static PromptComponent? _activePrompt;
     private Tween? _tween;
     private Control? _control;
     private MarginContainer? _marginContainer;
@@ -17,12 +18,24 @@ public partial class PromptComponent : Component
     public void ShowAndHide(float displayDuration, string promptText = "")
     {
         if (!IsEnabled) return;
+
+        if (_activePrompt != null && _activePrompt != this)
+            _activePrompt.HideImmediate();
+
+        _activePrompt = this;
+
         SetText(promptText);
         _tween?.Kill();
         _tween = CreateTween();
         TweenShow(_tween);
         _ = _tween.TweenInterval(displayDuration);
         TweenHide(_tween);
+
+        _ = _tween.TweenCallback(Callable.From(() =>
+        {
+            if (_activePrompt == this)
+                _activePrompt = null;
+        }));
     }
     #endregion
 
@@ -30,6 +43,12 @@ public partial class PromptComponent : Component
     public void Show(string promptText = "")
     {
         if (!IsEnabled) return;
+
+        if (_activePrompt != null && _activePrompt != this)
+            _activePrompt.HideImmediate();
+
+        _activePrompt = this;
+
         SetText(promptText);
         _tween?.Kill();
         _tween = CreateTween();
@@ -39,6 +58,10 @@ public partial class PromptComponent : Component
     public void Hide()
     {
         if (!IsEnabled || !(_control?.Modulate.A > 0.1f)) return;
+
+        if (_activePrompt == this)
+            _activePrompt = null;
+
         _tween?.Kill();
         _tween = CreateTween();
         TweenHide(_tween);
@@ -84,6 +107,17 @@ public partial class PromptComponent : Component
                 .SetEase(Tween.EaseType.Out);
         }
     }
+
+    private void HideImmediate()
+    {
+        if (!IsEnabled) return;
+        if (_activePrompt == this)
+            _activePrompt = null;
+        _tween?.Kill();
+        _control?.SetModulate(new Color(1, 1, 1, 0));
+        if (_marginContainer != null)
+            _marginContainer.Position = _hiddenPosition;
+    }
     #endregion
 
     public override void _Ready()
@@ -106,6 +140,8 @@ public partial class PromptComponent : Component
 
     public override void _ExitTree()
     {
+        if (_activePrompt == this)
+            _activePrompt = null;
         _tween?.Kill();
         base._ExitTree();
     }

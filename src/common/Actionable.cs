@@ -26,6 +26,7 @@ public partial class Actionable : Area2D
         }
     }
 
+    public static Actionable? ActiveActionable { get; private set; }
     public bool IsEnabled { get; private set; }
 
     private PromptComponent? _promptComponent;
@@ -59,6 +60,8 @@ public partial class Actionable : Area2D
 
     public override void _ExitTree()
     {
+        if (ActiveActionable == this)
+            ActiveActionable = null;
         EventBus.EmitActionableRemoved(Name);
         base._ExitTree();
     }
@@ -80,6 +83,7 @@ public partial class Actionable : Area2D
         }
         else if (isValidDirection)
         {
+            ActiveActionable = this;
             _promptComponent?.Show();
             _isPromptVisible = true;
         }
@@ -102,6 +106,9 @@ public partial class Actionable : Area2D
         if (_movementComponent != null)
             _movementComponent.LastDirectionChanged -= OnLastDirectionChanged;
 
+        if (ActiveActionable == this)
+            ActiveActionable = null;
+
         _promptComponent?.Hide();
         _isPromptVisible = false;
         _actor = null;
@@ -116,6 +123,8 @@ public partial class Actionable : Area2D
 
         if (!isValidDirection)
         {
+            if (ActiveActionable == this)
+                ActiveActionable = null;
             _promptComponent?.Hide();
             _isPromptVisible = false;
             return;
@@ -129,6 +138,7 @@ public partial class Actionable : Area2D
 
         if (!_isPromptVisible)
         {
+            ActiveActionable = this;
             _promptComponent?.Show();
             _isPromptVisible = true;
         }
