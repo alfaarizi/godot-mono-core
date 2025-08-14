@@ -56,7 +56,7 @@ rotation = 3.14159
 scale = Vector2(4.12282, 1.15725)
 RoomPath = "uid://c7jq83l1yke0e"
 DestinationName = "ToPrologueForest02"
-RequiresInteraction = false
+ForceInteraction = false
 
 [node name="Marker2D" parent="Elements/Transfers/ToPrologueForest01" index="3"]
 position = Vector2(-0.72768, 47.5265)
@@ -67,7 +67,7 @@ rotation = 4.71239
 scale = Vector2(2.9, 0.9)
 RoomPath = "uid://ctturifr7tg34"
 DestinationName = "ToPrologueForest02"
-RequiresInteraction = false
+ForceInteraction = false
 
 [node name="Marker2D" parent="Elements/Transfers/ToPrologueForest03" index="3"]
 position = Vector2(-0.68962, 62.2222)
@@ -78,7 +78,7 @@ rotation = 1.5708
 scale = Vector2(5.06, 0.82)
 RoomPath = "uid://c3ybehawmiq16"
 DestinationName = "ToPrologueForest02"
-RequiresInteraction = false
+ForceInteraction = false
 
 [node name="Marker2D" parent="Elements/Transfers/ToPrologueForest04" index="3"]
 position = Vector2(0.395245, 80.4877)
@@ -88,7 +88,7 @@ position = Vector2(1014, 3)
 scale = Vector2(4.17999, 0.78)
 RoomPath = "uid://c8gvo6ofxw1wx"
 DestinationName = "ToPrologueForest02"
-RequiresInteraction = false
+ForceInteraction = false
 
 [node name="Marker2D" parent="Elements/Transfers/ToPrologueForest11" index="3"]
 position = Vector2(0, 132.051)

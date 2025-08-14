@@ -2,8 +2,9 @@ using Godot;
 
 public partial class Actionable : Area2D
 {
-    [Export] public bool RequiresInteraction { get; set; } = true;
-    [Export] public Vector2 ActionDirection { get; set; }
+    [Export] public bool ForceInteraction { get; set; } = true;
+    [Export] public bool ForceDirection { get; set; } = true;
+    [Export] public Direction ActionDirection { get; set; }
 
     [Signal] public delegate void ActionRequestedEventHandler(Node2D actor);
 
@@ -12,6 +13,7 @@ public partial class Actionable : Area2D
     private MovementComponent? _movementComponent;
     private Node2D? _actor;
     private bool _triggered;
+    private bool _promptShown;
 
     public void Action()
     {
@@ -52,13 +54,24 @@ public partial class Actionable : Area2D
         _movementComponent = actor.GetNodeOrNull<MovementComponent>("%MovementComponent");
         _triggered = false;
 
-        if (RequiresInteraction)
-            _promptComponent?.Show();
-        else if (ActionDirection == Vector2.Zero)
-            _ = EmitSignal(SignalName.ActionRequested, actor);
-        else if (_movementComponent != null && IsValidDirection(_movementComponent.GetLastDirection()))
+        bool validDirection = !ForceDirection || (_movementComponent?.GetLastDirection() is Direction dir && dir.Matches(ActionDirection));
+
+        if (validDirection && !ForceInteraction)
+        {
             Action();
-        else if (_movementComponent != null)
+        }
+        else if (validDirection)
+        {
+            _promptComponent?.Show();
+            _promptShown = true;
+        }
+        else
+        {
+            _promptComponent?.Hide();
+            _promptShown = false;
+        }
+
+        if (_movementComponent != null && (ForceInteraction || !validDirection))
             _movementComponent.LastDirectionChanged += OnLastDirectionChanged;
     }
 
@@ -74,19 +87,36 @@ public partial class Actionable : Area2D
         _movementComponent = null;
     }
 
-    private void OnLastDirectionChanged(Vector2 dir)
+    private void OnLastDirectionChanged(int direction)
     {
-        if (!_triggered && IsValidDirection(dir))
+        if (_triggered) return;
+
+        bool validDirection = ((Direction)direction).Matches(ActionDirection);
+
+        if (!validDirection)
+        {
+            _promptComponent?.Hide();
+            _promptShown = false;
+            return;
+        }
+
+        if (!ForceInteraction)
+        {
             Action();
+            return;
+        }
+
+        if (!_promptShown)
+        {
+            _promptComponent?.Show();
+            _promptShown = true;
+        }
     }
 
     private void OnActionPressed(StringName action)
     {
         if (_actor == null || _movementComponent == null) return;
-        if (RequiresInteraction && action == "ui_interact" && IsValidDirection(_movementComponent.GetLastDirection()))
+        if (ForceInteraction && action == "ui_interact" && (!ForceDirection || _movementComponent.GetLastDirection().Matches(ActionDirection)))
             Action();
     }
-
-    private bool IsValidDirection(Vector2 dir)
-        => dir.Dot(ActionDirection) > 0;
 }

@@ -1,4 +1,6 @@
 using Godot;
+using System;
+using System.Collections.Generic;
 public static class DirectionExtensions
 {
     private static readonly Vector2 DownLeft = new(-0.7071f, 0.7071f);
@@ -46,6 +48,20 @@ public static class DirectionExtensions
         Direction.UpLeft
     };
 
+    // Direction match bit masks (index = target Direction)
+    // Each bit indicates a Direction that counts as a valid match for the target
+    // Bit positions (LSB -> MSB) follow the Direction enum order
+    private static readonly byte[] DirectionBitMasks = {
+        0b10010001, // Down matches     : Down, DownLeft, DownRight
+        0b00110010, // Left matches     : Left, UpLeft, DownLeft
+        0b01100100, // Up matches       : Up, UpLeft, UpRight
+        0b11001000, // Right matches    : Right, UpRight, DownRight
+        0b00010011, // DownLeft matches : Down, Left, DownLeft
+        0b00100110, // UpLeft matches   : Left, Up, UpLeft
+        0b01001100, // UpRight matches  : Up, Right, UpRight
+        0b10001001  // DownRight matches: Down, Right, DownRight
+    };
+
     public static Vector2 ToVector(this Direction direction)
         => Vectors[(int)direction];
 
@@ -64,4 +80,7 @@ public static class DirectionExtensions
 
         return DirectionGrid[x + (y * 3)];
     }
+
+    public static bool Matches(this Direction direction, Direction otherDirection)
+        => (DirectionBitMasks[(int)otherDirection] & (1 << (int)direction)) != 0;
 }

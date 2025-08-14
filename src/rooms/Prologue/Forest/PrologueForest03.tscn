@@ -39,7 +39,7 @@ rotation = 1.5708
 scale = Vector2(3.82115, 1.22)
 RoomPath = "uid://btpnpd7i4hpdv"
 DestinationName = "ToPrologueForest03"
-RequiresInteraction = false
+ForceInteraction = false
 
 [node name="Marker2D" parent="Elements/Transfers/ToPrologueForest02" index="3"]
 position = Vector2(0.261773, 63.9344)

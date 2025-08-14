@@ -11,7 +11,7 @@ public enum MovementMode
 
 public partial class MovementComponent : Component
 {
-    [Signal] public delegate void LastDirectionChangedEventHandler(Vector2 direction);
+    [Signal] public delegate void LastDirectionChangedEventHandler(int direction);
     [Signal] public delegate void MovementCompletedEventHandler();
     [Export] public PhysicsBody2D? Body { get; set; }
     [Export] public float MaxSpeed { get; set; } = 100.0f;
@@ -21,7 +21,7 @@ public partial class MovementComponent : Component
     private MovementMode _currentMovementMode = MovementMode.None;
     private Vector2 _velocity;
     private Vector2 _direction;
-    private Vector2 _lastDirection = Vector2.Down;
+    private Direction _lastDirection = Direction.Down;
     private Vector2 _targetPosition;
     private float _stoppingDistance = 1.0f;
     private bool _isMovingToTarget;
@@ -31,10 +31,10 @@ public partial class MovementComponent : Component
     {
         _isMovingToTarget = false;
         _direction = direction.Normalized();
-        if (_direction != Vector2.Zero && _direction != _lastDirection)
+        if (_direction != Vector2.Zero && _direction.ToDirection() is var lastDirection && lastDirection != _lastDirection)
         {
-            _lastDirection = _direction;
-            _ = EmitSignal(SignalName.LastDirectionChanged, _lastDirection);
+            _lastDirection = lastDirection;
+            _ = EmitSignal(SignalName.LastDirectionChanged, (int)_lastDirection);
         }
         _currentMovementMode = direction.LengthSquared() > 0 ? MovementMode.Input : MovementMode.None;
     }
@@ -102,13 +102,13 @@ public partial class MovementComponent : Component
     public Vector2 GetDirection()
         => _direction;
 
-    public Vector2 GetLastDirection()
+    public Direction GetLastDirection()
         => _lastDirection;
 
-    public void SetLastDirection(Vector2 lastDirection)
+    public void SetLastDirection(Direction lastDirection)
     {
         _lastDirection = lastDirection;
-        _ = EmitSignal(SignalName.LastDirectionChanged, _lastDirection);
+        _ = EmitSignal(SignalName.LastDirectionChanged, (int)_lastDirection);
     }
     #endregion
 
@@ -146,10 +146,10 @@ public partial class MovementComponent : Component
             else
             {
                 _direction = directionToTarget.Normalized();
-                if (_direction != Vector2.Zero && _direction != _lastDirection)
+                if (_direction != Vector2.Zero && _direction.ToDirection() is var lastDirection && lastDirection != _lastDirection)
                 {
-                    _lastDirection = _direction;
-                    _ = EmitSignal(SignalName.LastDirectionChanged, _lastDirection);
+                    _lastDirection = lastDirection;
+                    _ = EmitSignal(SignalName.LastDirectionChanged, (int)_lastDirection);
                 }
             }
         }

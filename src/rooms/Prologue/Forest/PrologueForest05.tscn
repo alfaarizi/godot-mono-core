@@ -47,7 +47,7 @@ position = Vector2(609, 6)
 scale = Vector2(4.50001, 0.539999)
 RoomPath = "uid://c3ybehawmiq16"
 DestinationName = "ToPrologueForest05"
-RequiresInteraction = false
+ForceInteraction = false
 
 [node name="Marker2D" parent="Elements/Transfers/ToPrologueForest04" index="3"]
 position = Vector2(0.44443, 140.741)
@@ -57,7 +57,7 @@ position = Vector2(3200, 4)
 scale = Vector2(5.7, 0.62)
 RoomPath = "uid://dsy1k1jb1shwx"
 DestinationName = "ToPrologueForest05"
-RequiresInteraction = false
+ForceInteraction = false
 
 [node name="Marker2D" parent="Elements/Transfers/ToPrologueForest06" index="3"]
 position = Vector2(0.526359, 112.903)

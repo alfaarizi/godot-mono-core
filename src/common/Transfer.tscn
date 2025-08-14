@@ -11,7 +11,7 @@ size = Vector2(64, 32)
 script = ExtResource("2_cli3g")
 RoomPath = ""
 DestinationName = ""
-RequiresInteraction = true
+ForceInteraction = true
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(0, -8)

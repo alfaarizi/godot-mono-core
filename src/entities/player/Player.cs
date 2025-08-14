@@ -7,6 +7,7 @@ public partial class Player : Character
     public MovementComponent? MovementComponent { get; private set; }
     public AnimationComponent? AnimationComponent { get; private set; }
     public CameraComponent? CameraComponent { get; private set; }
+    private DirectionMarker? _directionMarker;
 
     public override void _Ready()
     {
@@ -30,6 +31,8 @@ public partial class Player : Character
         CameraComponent = GetNodeOrNull<CameraComponent>("%CameraComponent");
 
         CameraComponent?.MakeCurrent();
+
+        _directionMarker = GetNodeOrNull<DirectionMarker>("%DirectionMarker");
     }
 
     public override void _Process(double delta)
@@ -37,7 +40,7 @@ public partial class Player : Character
         if (AnimationComponent != null && MovementComponent != null)
         {
             bool isMoving = MovementComponent.IsMoving();
-            Vector2 lastDirection = MovementComponent.GetLastDirection();
+            Vector2 lastDirection = MovementComponent.GetLastDirection().ToVector();
             AnimationComponent.SetTreeParameter("conditions/is_moving", isMoving);
             AnimationComponent.SetTreeParameter("conditions/!is_moving", !isMoving);
             AnimationComponent.SetTreeParameter("Move/blend_position", lastDirection);
@@ -53,5 +56,9 @@ public partial class Player : Character
     }
 
     private void OnDirectionalInput(Vector2 inputVector)
-        => MovementComponent?.SetDirection(inputVector);
+    {
+        MovementComponent?.SetDirection(inputVector);
+        if (_directionMarker != null && inputVector != Vector2.Zero)
+            _directionMarker.Direction = inputVector.ToDirection();
+    }
 }

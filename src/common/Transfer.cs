@@ -6,21 +6,21 @@ public partial class Transfer : Prop
     [Export(PropertyHint.File, "*.tscn")] public string RoomPath { get; set; } = "";
     [Export] public string DestinationName { get; set; } = "";
     [Export]
-    public bool RequiresInteraction
+    public bool ForceInteraction
     {
-        get => _requiresInteraction;
+        get => _forceInteraction;
         set
         {
-            _requiresInteraction = value;
+            _forceInteraction = value;
             if (_actionable != null)
-                _actionable.RequiresInteraction = value;
+                _actionable.ForceInteraction = value;
         }
     }
 
     private Actionable? _actionable;
     private Marker2D? _marker;
     private SceneManager? _sceneManager;
-    private bool _requiresInteraction = true;
+    private bool _forceInteraction = true;
 
     public override void _Ready()
     {
@@ -35,14 +35,14 @@ public partial class Transfer : Prop
 
         if (_actionable != null)
         {
-            _actionable.RequiresInteraction = _requiresInteraction;
+            _actionable.ForceInteraction = _forceInteraction;
             _actionable.ActionRequested += OnActionRequested;
 
             if (_marker == null) return;
             Vector2 diff = GlobalPosition - _marker.GlobalPosition;
             _actionable.ActionDirection = Mathf.Abs(diff.X) > Mathf.Abs(diff.Y)
-                ? new Vector2(Mathf.Sign(diff.X), 0)
-                : new Vector2(0, Mathf.Sign(diff.Y));
+                ? (diff.X > 0 ? Direction.Right : Direction.Left)
+                : (diff.Y > 0 ? Direction.Down : Direction.Up);
         }
     }
 
@@ -84,10 +84,13 @@ public partial class Transfer : Prop
 
             TransportToDestination(newActor);
 
-            if (_actionable != null && _actionable.ActionDirection != Vector2.Zero)
+            if (_actionable != null)
             {
                 var newMovementComponent = newActor.GetNodeOrNull<MovementComponent>("%MovementComponent");
                 newMovementComponent?.SetLastDirection(_actionable.ActionDirection);
+                var directionMarker = newActor.GetNodeOrNull<DirectionMarker>("%DirectionMarker");
+                if (directionMarker != null)
+                    directionMarker.Direction = _actionable.ActionDirection;
             }
         }
         else if (!string.IsNullOrEmpty(DestinationName))
