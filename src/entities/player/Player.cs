@@ -8,6 +8,7 @@ public partial class Player : Character
     public AnimationComponent? AnimationComponent { get; private set; }
     public CameraComponent? CameraComponent { get; private set; }
     private DirectionMarker? _directionMarker;
+    private Area2D? _actionableFinder;
 
     public override void _Ready()
     {
@@ -33,6 +34,8 @@ public partial class Player : Character
         CameraComponent?.MakeCurrent();
 
         _directionMarker = GetNodeOrNull<DirectionMarker>("%DirectionMarker");
+
+        _actionableFinder = GetNodeOrNull<Area2D>("%ActionableFinder");
     }
 
     public override void _Process(double delta)
@@ -45,6 +48,24 @@ public partial class Player : Character
             AnimationComponent.SetTreeParameter("conditions/!is_moving", !isMoving);
             AnimationComponent.SetTreeParameter("Move/blend_position", lastDirection);
             AnimationComponent.SetTreeParameter("Idle/blend_position", lastDirection);
+        }
+    }
+
+    public override void _UnhandledInput(InputEvent @event)
+    {
+        if (Engine.IsEditorHint()) return;
+
+        if (_actionableFinder != null && @event.IsActionPressed("ui_interact"))
+        {
+            var actionables = _actionableFinder.GetOverlappingAreas();
+            for (int i = 0; i < actionables.Count; i++)
+            {
+                if (actionables[i] is Actionable actionable && actionable.IsEnabled)
+                {
+                    actionable.Action();
+                    return;
+                }
+            }
         }
     }
 

@@ -14,6 +14,3 @@ DialogueStart = "start"
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource("RectangleShape2D_j3l4g")
-
-[node name="PromptComponent" parent="." index="2"]
-Text = "Press Z to Interact"

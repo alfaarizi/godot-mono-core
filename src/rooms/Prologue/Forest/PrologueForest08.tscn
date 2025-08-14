@@ -86,6 +86,7 @@ Data = ExtResource("6_icv1v")
 
 [node name="DialogueActionable" parent="Elements/Actionables" index="0" instance=ExtResource("7_icv1v")]
 position = Vector2(794, 664)
+monitorable = false
 DialogueResource = ExtResource("8_o5ur4")
 
 [editable path="Elements/Transfers/ToPrologueForest07"]

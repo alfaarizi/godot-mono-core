@@ -130,42 +130,36 @@ scale = Vector2(3.5, 2.62)
 DialogueResource = ExtResource("6_0c7li")
 DialogueStart = "Sink"
 
-[node name="CollisionShape2D" parent="Elements/Actionables/Sink" index="0"]
-scale = Vector2(0.428571, 1.30857)
-
 [node name="Kettle" parent="Elements/Actionables" index="1" instance=ExtResource("5_cwbho")]
 z_index = 5
 position = Vector2(392, 288)
+scale = Vector2(1.66, 2.34)
 DialogueResource = ExtResource("6_0c7li")
 DialogueStart = "Kettle"
-
-[node name="CollisionShape2D" parent="Elements/Actionables/Kettle" index="0"]
-scale = Vector2(0.497143, 0.828571)
+ActionDirection = 2
 
 [node name="Cupboard" parent="Elements/Actionables" index="2" instance=ExtResource("5_cwbho")]
 z_index = 5
-position = Vector2(512, 280)
-scale = Vector2(1.7, 3.5)
+position = Vector2(512, 291)
+scale = Vector2(1.7, 2.06)
 DialogueResource = ExtResource("6_0c7li")
 DialogueStart = "Cupboard"
+OneShot = true
+ActionDirection = 2
 
 [node name="Salt" parent="Elements/Actionables" index="3" instance=ExtResource("5_cwbho")]
 z_index = 5
 position = Vector2(184, 264)
+scale = Vector2(1.5, 1.67437)
 DialogueResource = ExtResource("6_0c7li")
 DialogueStart = "Salt"
-
-[node name="CollisionShape2D" parent="Elements/Actionables/Salt" index="0"]
-scale = Vector2(0.451429, 1)
 
 [node name="Trash" parent="Elements/Actionables" index="4" instance=ExtResource("5_cwbho")]
 z_index = 5
 position = Vector2(616, 288)
+scale = Vector2(1.29999, 2.06)
 DialogueResource = ExtResource("6_0c7li")
 DialogueStart = "Trash"
-
-[node name="CollisionShape2D" parent="Elements/Actionables/Trash" index="0"]
-scale = Vector2(0.394286, 0.725715)
 
 [node name="Fridge" parent="Elements/Actionables" index="5" instance=ExtResource("5_cwbho")]
 position = Vector2(744, 464)
@@ -185,9 +179,6 @@ position = Vector2(792, 600)
 scale = Vector2(3.5, 3.66)
 DialogueResource = ExtResource("6_0c7li")
 DialogueStart = "Shelf"
-
-[node name="CollisionShape2D" parent="Elements/Actionables/Shelf" index="0"]
-scale = Vector2(0.36, 1.35155)
 
 [node name="KitchenFloor" type="Sprite2D" parent="Elements/Props" index="0"]
 y_sort_enabled = true
@@ -322,14 +313,6 @@ texture = ExtResource("14_4qfju")
 
 [editable path="Elements/Transfers/ToEntrance"]
 [editable path="Elements/Transfers/ToEntrance/Actionable"]
-[editable path="Elements/Actionables/Sink"]
-[editable path="Elements/Actionables/Kettle"]
-[editable path="Elements/Actionables/Cupboard"]
-[editable path="Elements/Actionables/Salt"]
-[editable path="Elements/Actionables/Trash"]
-[editable path="Elements/Actionables/Fridge"]
-[editable path="Elements/Actionables/TV"]
-[editable path="Elements/Actionables/Shelf"]
 [editable path="Elements/Props/KitchenTable"]
 [editable path="Elements/Props/KitchenTV"]
 [editable path="Elements/Props/KitchenChair1"]
