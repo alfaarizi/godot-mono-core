@@ -27,7 +27,6 @@ public partial class Actionable : Area2D
     }
 
     public static Actionable? ActiveActionable { get; private set; }
-    public bool IsEnabled { get; private set; }
 
     private PromptComponent? _promptComponent;
     private MovementComponent? _movementComponent;
@@ -75,8 +74,6 @@ public partial class Actionable : Area2D
 
         bool isValidDirection = !ForceDirection || (_movementComponent?.GetLastDirection() is Direction dir && dir.Matches(ActionDirection));
 
-        IsEnabled = isValidDirection;
-
         if (isValidDirection && !ForceInteraction)
         {
             Action();
@@ -101,8 +98,6 @@ public partial class Actionable : Area2D
     {
         if (body != _actor) return;
 
-        IsEnabled = false;
-
         if (_movementComponent != null)
             _movementComponent.LastDirectionChanged -= OnLastDirectionChanged;
 
@@ -118,8 +113,6 @@ public partial class Actionable : Area2D
     private void OnLastDirectionChanged(int direction)
     {
         bool isValidDirection = !ForceDirection || ((Direction)direction).Matches(ActionDirection);
-
-        IsEnabled = isValidDirection;
 
         if (!isValidDirection)
         {

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://dsy1k1jb1shwx"]
+[gd_scene load_steps=25 format=4 uid="uid://dsy1k1jb1shwx"]
 
 [ext_resource type="PackedScene" uid="uid://dnsgoxb5hgp8o" path="res://src/rooms/base/Room.tscn" id="1_wb5wf"]
 [ext_resource type="TileSet" uid="uid://c0ljo4jw63lvb" path="res://presets/PrologueForest/PrologueForest06/PrologueForest06.tres" id="2_14eyr"]
@@ -6,13 +6,32 @@
 [ext_resource type="PackedScene" uid="uid://b73ng4lo6h50r" path="res://src/common/Transfer.tscn" id="3_ocj6w"]
 [ext_resource type="PackedScene" uid="uid://307rvguddqy8" path="res://src/entities/base/Prop.tscn" id="5_rp02f"]
 [ext_resource type="Resource" uid="uid://bshq7d5e2w4sh" path="res://src/data/props/ForestBush00.tres" id="6_g5yfs"]
+[ext_resource type="Texture2D" uid="uid://bsdoi6vgbhgtr" path="res://assets/props/PrologueForest06/forest6_bush0.png" id="7_3biul"]
 [ext_resource type="Resource" uid="uid://b11pr10n0ius7" path="res://src/data/props/ForestBush01.tres" id="7_oauvh"]
 [ext_resource type="Resource" uid="uid://ccq2htnslv85v" path="res://src/data/props/ForestBush02.tres" id="8_g5yfs"]
+[ext_resource type="Texture2D" uid="uid://jslgvryfruk5" path="res://assets/props/PrologueForest06/forest6_bush1.png" id="9_43ahc"]
 [ext_resource type="Resource" uid="uid://bvbgkdb7t4wve" path="res://src/data/props/ForestBush03.tres" id="9_oauvh"]
 [ext_resource type="Resource" uid="uid://cqfdw0kf367i" path="res://src/data/props/ForestBush04.tres" id="10_c77ne"]
+[ext_resource type="Texture2D" uid="uid://b0o43244mbbfs" path="res://assets/props/PrologueForest06/forest6_bush2.png" id="11_q4sin"]
 [ext_resource type="Resource" uid="uid://wxnfaqvrhxjr" path="res://src/data/props/ForestBush05.tres" id="11_vyafm"]
+[ext_resource type="Texture2D" uid="uid://ci66krngys8xw" path="res://assets/props/PrologueForest06/forest6_bush3.png" id="13_krxbv"]
+[ext_resource type="Texture2D" uid="uid://dvxp6oqrf8jks" path="res://assets/props/PrologueForest06/forest6_bush4.png" id="15_pgl56"]
+[ext_resource type="Texture2D" uid="uid://b3yry52ptuu3x" path="res://assets/props/PrologueForest06/forest6_bush5.png" id="17_xw2m6"]
 [ext_resource type="PackedScene" uid="uid://pw7ehan7f5p5" path="res://src/entities/Props/DirectionalBush.tscn" id="18_3biul"]
 [ext_resource type="Texture2D" uid="uid://jy5hscatjcy6" path="res://assets/props/forest_gate.png" id="19_43ahc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o0jvr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2d1cv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_67dtr"]
+size = Vector2(31.9999, 64.4694)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qegfe"]
+size = Vector2(32.4656, 86.6294)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sh3d8"]
+size = Vector2(80, 32)
 
 [node name="PrologueForest06" instance=ExtResource("1_wb5wf")]
 
@@ -90,10 +109,12 @@ Data = ExtResource("6_g5yfs")
 
 [node name="Sprite2D" parent="Elements/Props/Prop00" index="0"]
 position = Vector2(0, -8)
+texture = ExtResource("7_3biul")
 
 [node name="CollisionShape2D" parent="Elements/Props/Prop00" index="1"]
 rotation = 1.57079
 scale = Vector2(0.805715, 30.4057)
+shape = SubResource("RectangleShape2D_o0jvr")
 
 [node name="Prop01" parent="Elements/Props" index="1" instance=ExtResource("5_rp02f")]
 position = Vector2(1344, 637)
@@ -101,10 +122,12 @@ Data = ExtResource("7_oauvh")
 
 [node name="Sprite2D" parent="Elements/Props/Prop01" index="0"]
 position = Vector2(0, -7.42857)
+texture = ExtResource("9_43ahc")
 
 [node name="CollisionShape2D" parent="Elements/Props/Prop01" index="1"]
 position = Vector2(0, -2.98023e-06)
 scale = Vector2(1.60549, 0.794274)
+shape = SubResource("RectangleShape2D_2d1cv")
 
 [node name="Prop02" parent="Elements/Props" index="2" instance=ExtResource("5_rp02f")]
 position = Vector2(2184, 640)
@@ -112,11 +135,13 @@ Data = ExtResource("8_g5yfs")
 
 [node name="Sprite2D" parent="Elements/Props/Prop02" index="0"]
 position = Vector2(0, -8)
+texture = ExtResource("11_q4sin")
 
 [node name="CollisionShape2D" parent="Elements/Props/Prop02" index="1"]
 position = Vector2(0, -0.285645)
 rotation = 1.5708
 scale = Vector2(0.518338, 0.993479)
+shape = SubResource("RectangleShape2D_67dtr")
 
 [node name="Prop03" parent="Elements/Props" index="3" instance=ExtResource("5_rp02f")]
 position = Vector2(1008, 533)
@@ -125,10 +150,12 @@ Data = ExtResource("9_oauvh")
 
 [node name="Sprite2D" parent="Elements/Props/Prop03" index="0"]
 position = Vector2(8, 0)
+texture = ExtResource("13_krxbv")
 
 [node name="CollisionShape2D" parent="Elements/Props/Prop03" index="1"]
 rotation = 1.5708
 scale = Vector2(0.988574, 0.908574)
+shape = SubResource("RectangleShape2D_qegfe")
 
 [node name="Prop07" parent="Elements/Props" index="4" instance=ExtResource("5_rp02f")]
 position = Vector2(2904, 536)
@@ -137,10 +164,12 @@ Data = ExtResource("9_oauvh")
 
 [node name="Sprite2D" parent="Elements/Props/Prop07" index="0"]
 position = Vector2(8, 0)
+texture = ExtResource("13_krxbv")
 
 [node name="CollisionShape2D" parent="Elements/Props/Prop07" index="1"]
 rotation = 1.5708
 scale = Vector2(0.988574, 0.908574)
+shape = SubResource("RectangleShape2D_qegfe")
 
 [node name="Prop04" parent="Elements/Props" index="5" instance=ExtResource("5_rp02f")]
 position = Vector2(1680, 984)
@@ -148,6 +177,7 @@ Data = ExtResource("10_c77ne")
 
 [node name="Sprite2D" parent="Elements/Props/Prop04" index="0"]
 position = Vector2(0, -24)
+texture = ExtResource("15_pgl56")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Elements/Props/Prop04" index="2"]
 position = Vector2(0, -24)
@@ -159,6 +189,7 @@ Data = ExtResource("11_vyafm")
 
 [node name="Sprite2D" parent="Elements/Props/Prop05" index="0"]
 position = Vector2(-16, -68)
+texture = ExtResource("17_xw2m6")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Elements/Props/Prop05" index="2"]
 position = Vector2(0, -68)
@@ -170,10 +201,12 @@ Data = ExtResource("9_oauvh")
 
 [node name="Sprite2D" parent="Elements/Props/Prop06" index="0"]
 position = Vector2(0, -8)
+texture = ExtResource("13_krxbv")
 
 [node name="CollisionShape2D" parent="Elements/Props/Prop06" index="1"]
 rotation = 1.5708
 scale = Vector2(0.482327, 1.10286)
+shape = SubResource("RectangleShape2D_qegfe")
 
 [node name="Prop08" parent="Elements/Props" index="8" instance=ExtResource("5_rp02f")]
 position = Vector2(2912, 1144)
@@ -182,137 +215,106 @@ Data = ExtResource("8_g5yfs")
 
 [node name="Sprite2D" parent="Elements/Props/Prop08" index="0"]
 position = Vector2(8, 0)
+texture = ExtResource("11_q4sin")
 
 [node name="CollisionShape2D" parent="Elements/Props/Prop08" index="1"]
 position = Vector2(-7.42857, -2.89351e-05)
 rotation = 1.5708
 scale = Vector2(1, 1.11428)
+shape = SubResource("RectangleShape2D_67dtr")
 
 [node name="DirectionalBush" parent="Elements/Props" index="9" instance=ExtResource("18_3biul")]
 position = Vector2(1037, 1112)
 rotation = -1.5708
 
-[node name="Sprite2D" parent="Elements/Props/DirectionalBush" index="0"]
-texture = null
-
 [node name="CollisionShape2D" parent="Elements/Props/DirectionalBush" index="1"]
 position = Vector2(-7.71425, -8.28574)
 scale = Vector2(1.13714, 1)
-shape = null
+shape = SubResource("RectangleShape2D_sh3d8")
 
 [node name="DirectionalBush1" parent="Elements/Props" index="10" instance=ExtResource("18_3biul")]
 position = Vector2(982, 784)
 rotation = 1.5708
 
-[node name="Sprite2D" parent="Elements/Props/DirectionalBush1" index="0"]
-texture = null
-
 [node name="CollisionShape2D" parent="Elements/Props/DirectionalBush1" index="1"]
 position = Vector2(7.71427, -7.71428)
 scale = Vector2(1.13714, 1)
-shape = null
+shape = SubResource("RectangleShape2D_sh3d8")
 
 [node name="DirectionalBush2" parent="Elements/Props" index="11" instance=ExtResource("18_3biul")]
 position = Vector2(1176, 582)
 rotation = 3.14159
 
-[node name="Sprite2D" parent="Elements/Props/DirectionalBush2" index="0"]
-texture = null
-
 [node name="CollisionShape2D" parent="Elements/Props/DirectionalBush2" index="1"]
 position = Vector2(5.44343e-05, -15.7143)
 scale = Vector2(1, 0.519997)
-shape = null
+shape = SubResource("RectangleShape2D_sh3d8")
 
 [node name="DirectionalBush3" parent="Elements/Props" index="12" instance=ExtResource("18_3biul")]
 position = Vector2(1400, 922)
 rotation = 3.14159
 
-[node name="Sprite2D" parent="Elements/Props/DirectionalBush3" index="0"]
-texture = null
-
 [node name="CollisionShape2D" parent="Elements/Props/DirectionalBush3" index="1"]
 position = Vector2(5.371e-05, -15.4286)
 scale = Vector2(1, 0.497134)
-shape = null
+shape = SubResource("RectangleShape2D_sh3d8")
 
 [node name="DirectionalBush4" parent="Elements/Props" index="13" instance=ExtResource("18_3biul")]
 position = Vector2(1520, 640)
 
-[node name="Sprite2D" parent="Elements/Props/DirectionalBush4" index="0"]
-texture = null
-
 [node name="CollisionShape2D" parent="Elements/Props/DirectionalBush4" index="1"]
 position = Vector2(0, -0.857143)
 scale = Vector2(1, 0.508573)
-shape = null
+shape = SubResource("RectangleShape2D_sh3d8")
 
 [node name="DirectionalBush5" parent="Elements/Props" index="14" instance=ExtResource("18_3biul")]
 position = Vector2(2100, 440)
 rotation = 1.5708
 
-[node name="Sprite2D" parent="Elements/Props/DirectionalBush5" index="0"]
-texture = null
-
 [node name="CollisionShape2D" parent="Elements/Props/DirectionalBush5" index="1"]
 position = Vector2(3.99997, -8.00001)
 scale = Vector2(1.25143, 1)
-shape = null
+shape = SubResource("RectangleShape2D_sh3d8")
 
 [node name="DirectionalBush6" parent="Elements/Props" index="15" instance=ExtResource("18_3biul")]
 position = Vector2(2154, 776)
 rotation = -1.5708
 
-[node name="Sprite2D" parent="Elements/Props/DirectionalBush6" index="0"]
-texture = null
-
 [node name="CollisionShape2D" parent="Elements/Props/DirectionalBush6" index="1"]
 scale = Vector2(1, 0.965709)
-shape = null
+shape = SubResource("RectangleShape2D_sh3d8")
 
 [node name="DirectionalBush7" parent="Elements/Props" index="16" instance=ExtResource("18_3biul")]
 position = Vector2(1960, 1032)
 rotation = 3.14159
 
-[node name="Sprite2D" parent="Elements/Props/DirectionalBush7" index="0"]
-texture = null
-
 [node name="CollisionShape2D" parent="Elements/Props/DirectionalBush7" index="1"]
-shape = null
+shape = SubResource("RectangleShape2D_sh3d8")
 
 [node name="DirectionalBush8" parent="Elements/Props" index="17" instance=ExtResource("18_3biul")]
 position = Vector2(2744, 1086)
 
-[node name="Sprite2D" parent="Elements/Props/DirectionalBush8" index="0"]
-texture = null
-
 [node name="CollisionShape2D" parent="Elements/Props/DirectionalBush8" index="1"]
 position = Vector2(0, -1.99998)
 scale = Vector2(1, 0.622871)
-shape = null
+shape = SubResource("RectangleShape2D_sh3d8")
 
 [node name="DirectionalBush9" parent="Elements/Props" index="18" instance=ExtResource("18_3biul")]
 position = Vector2(2736, 640)
 
-[node name="Sprite2D" parent="Elements/Props/DirectionalBush9" index="0"]
-texture = null
-
 [node name="CollisionShape2D" parent="Elements/Props/DirectionalBush9" index="1"]
 position = Vector2(1.81084e-05, -0.571426)
 scale = Vector2(1, 0.565714)
-shape = null
+shape = SubResource("RectangleShape2D_sh3d8")
 
 [node name="DirectionalBush10" parent="Elements/Props" index="19" instance=ExtResource("18_3biul")]
 position = Vector2(2408, 587)
 rotation = 3.14159
 
-[node name="Sprite2D" parent="Elements/Props/DirectionalBush10" index="0"]
-texture = null
-
 [node name="CollisionShape2D" parent="Elements/Props/DirectionalBush10" index="1"]
 position = Vector2(1.88327e-05, -14.8571)
 scale = Vector2(1, 0.531423)
-shape = null
+shape = SubResource("RectangleShape2D_sh3d8")
 
 [node name="Sprite2D" type="Sprite2D" parent="Elements/Props" index="20"]
 position = Vector2(3072, 1304)
