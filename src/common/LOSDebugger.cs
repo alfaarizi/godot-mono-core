@@ -12,7 +12,7 @@ public partial class LOSDebugger : Node2D
             QueueRedraw();
         }
     }
-    [Export] public LOSManager? LOSManager { get; set; }
+    [Export] public LOSManager? LOSManager { get; private set; }
 
     private bool _isEnabled;
     private float _tileSize;
@@ -31,16 +31,15 @@ public partial class LOSDebugger : Node2D
             return;
         }
 
-        if (LOSManager?.TileMapLayer?.TileSet != null)
-        {
-            _tileSize = LOSManager.TileMapLayer.TileSet.TileSize.X;
-            _circleSize = _tileSize;
-            _radius = LOSManager.TileRadius * _tileSize;
+        EventBus.Instance.RoomChanged += OnRoomChanged;
 
-            var updateDistance = LOSManager.TileUpdateDistance;
-            _updateDistanceSq = updateDistance * updateDistance;
-        }
+        var currentRoom = Global.GetCurrentRoom();
+        if (currentRoom != null)
+            OnRoomChanged(currentRoom);
     }
+
+    public override void _ExitTree()
+        => EventBus.Instance.RoomChanged -= OnRoomChanged;
 
     public override void _Process(double delta)
     {
@@ -69,5 +68,17 @@ public partial class LOSDebugger : Node2D
         foreach (var tile in tiles.Values)
             DrawCircle(ToLocal(tile.WorldPos), _circleSize, tile.HasLOS ? Colors.Gold : Colors.Purple);
         DrawArc(targetPos, _radius, 0, Mathf.Tau, 32, Colors.Cyan, 1f);
+    }
+
+    private void OnRoomChanged(Room room)
+    {
+        LOSManager = room.GetNodeOrNull<LOSManager>("%LOSManager");
+        if (LOSManager?.TileMapLayer?.TileSet != null)
+        {
+            _tileSize = LOSManager.TileMapLayer.TileSet.TileSize.X;
+            _circleSize = _tileSize;
+            _radius = LOSManager.TileRadius * _tileSize;
+            _updateDistanceSq = LOSManager.TileUpdateDistance * LOSManager.TileUpdateDistance;
+        }
     }
 }

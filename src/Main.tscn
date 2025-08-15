@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bh6yhe6qsb6pf"]
+[gd_scene load_steps=4 format=3 uid="uid://bh6yhe6qsb6pf"]
 
 [ext_resource type="Script" uid="uid://bievrd1e3ixao" path="res://src/Main.cs" id="1_hk4rc"]
 [ext_resource type="PackedScene" uid="uid://c7jq83l1yke0e" path="res://src/rooms/Prologue/Forest/PrologueForest01.tscn" id="2_chrbn"]
+[ext_resource type="PackedScene" uid="uid://c6yn746lke330" path="res://src/huds/DebuggerHUD.tscn" id="3_chrbn"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_hk4rc")
@@ -9,3 +10,13 @@ script = ExtResource("1_hk4rc")
 [node name="World2D" type="Node2D" parent="."]
 
 [node name="PrologueForest01" parent="World2D" instance=ExtResource("2_chrbn")]
+
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DebuggerHUD" parent="GUI" instance=ExtResource("3_chrbn")]

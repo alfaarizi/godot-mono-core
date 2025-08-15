@@ -96,7 +96,7 @@ public partial class LOSManager : Node2D
             _tileRadiusInPixels = TileRadius * _tileSize;
             _tileRadiusInPixelsSq = _tileRadiusInPixels * _tileRadiusInPixels;
         }
-        Target ??= Global.GetCharacter("Player");
+        Target ??= GetTree().GetFirstNodeInGroup("los_target") as Node2D;
         if (Target == null) SetProcess(false);
     }
 

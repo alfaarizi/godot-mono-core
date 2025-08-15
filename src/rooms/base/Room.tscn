@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dnsgoxb5hgp8o"]
+[gd_scene load_steps=3 format=3 uid="uid://dnsgoxb5hgp8o"]
 
 [ext_resource type="Script" uid="uid://d0qhie0t33anj" path="res://src/rooms/base/Room.cs" id="1_l6bsb"]
 [ext_resource type="PackedScene" uid="uid://oo71pjbqscq7" path="res://src/common/LOSManager.tscn" id="2_241hj"]
-[ext_resource type="PackedScene" uid="uid://cjxy831xfipp2" path="res://src/common/LOSDebugger.tscn" id="3_p0i1h"]
-[ext_resource type="FontFile" uid="uid://crkv0naeyvgmb" path="res://assets/fonts/Born2bSportyV2.ttf" id="4_3xvu2"]
 
 [node name="Room" type="Node2D" node_paths=PackedStringArray("TileMapRect")]
 script = ExtResource("1_l6bsb")
@@ -34,73 +32,3 @@ y_sort_enabled = true
 [node name="LOSManager" parent="Managers" node_paths=PackedStringArray("TileMapLayer") instance=ExtResource("2_241hj")]
 unique_name_in_owner = true
 TileMapLayer = NodePath("../../TileMapLayers/Background")
-
-[node name="Debuggers" type="Node2D" parent="."]
-metadata/_edit_lock_ = true
-
-[node name="LOSDebugger" parent="Debuggers" node_paths=PackedStringArray("LOSManager") instance=ExtResource("3_p0i1h")]
-unique_name_in_owner = true
-LOSManager = NodePath("../../Managers/LOSManager")
-metadata/_edit_lock_ = true
-
-[node name="StateDebugger" type="CanvasLayer" parent="Debuggers"]
-
-[node name="RoomLabel" type="Label" parent="Debuggers/StateDebugger"]
-unique_name_in_owner = true
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("4_3xvu2")
-theme_override_font_sizes/font_size = 36
-text = "currentRoom:"
-vertical_alignment = 2
-metadata/_edit_lock_ = true
-
-[node name="FPSLabel" type="Label" parent="Debuggers/StateDebugger"]
-unique_name_in_owner = true
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("4_3xvu2")
-theme_override_font_sizes/font_size = 36
-text = "FPS:"
-horizontal_alignment = 2
-metadata/_edit_lock_ = true
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Debuggers/StateDebugger"]
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 285.0
-grow_vertical = 2
-theme_override_constants/separation = 10
-metadata/_edit_lock_ = true
-
-[node name="DebugLabel" type="Label" parent="Debuggers/StateDebugger/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_3xvu2")
-theme_override_font_sizes/font_size = 36
-text = "debugTools"
-horizontal_alignment = 1
-metadata/_edit_lock_ = true
-
-[node name="LocaleButton" type="Button" parent="Debuggers/StateDebugger/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_3xvu2")
-theme_override_font_sizes/font_size = 36
-text = "Locale:"
-alignment = 0
-metadata/_edit_lock_ = true
-
-[node name="LOSButton" type="Button" parent="Debuggers/StateDebugger/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_3xvu2")
-theme_override_font_sizes/font_size = 36
-text = "LOS:"
-alignment = 0
-metadata/_edit_lock_ = true

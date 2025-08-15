@@ -73,8 +73,9 @@ folder_colors={
 
 [global_group]
 
-action_actor="Entities that can interact with actionable objects"
-dialogue_actor="Entities that can trigger dialogue conversations"
+los_target="Nodes that serve as the focal point for line-of-sight calculations and rendering"
+action_actor="Nodes that can interact with actionable objects"
+dialogue_actor="Nodes that can trigger dialogue conversations"
 
 [input]
 
