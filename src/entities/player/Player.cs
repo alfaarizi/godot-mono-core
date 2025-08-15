@@ -43,7 +43,7 @@ public partial class Player : Character
         if (AnimationComponent != null && MovementComponent != null)
         {
             bool isMoving = MovementComponent.IsMoving();
-            Vector2 lastDirection = MovementComponent.GetLastDirection().ToVector();
+            Vector2 lastDirection = MovementComponent.GetLastDirection();
             AnimationComponent.SetTreeParameter("conditions/is_moving", isMoving);
             AnimationComponent.SetTreeParameter("conditions/!is_moving", !isMoving);
             AnimationComponent.SetTreeParameter("Move/blend_position", lastDirection);

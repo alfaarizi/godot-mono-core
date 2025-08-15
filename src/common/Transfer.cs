@@ -87,7 +87,7 @@ public partial class Transfer : Prop
             if (_actionable != null)
             {
                 var newMovementComponent = newActor.GetNodeOrNull<MovementComponent>("%MovementComponent");
-                newMovementComponent?.SetLastDirection(_actionable.ActionDirection);
+                newMovementComponent?.SetLastDirection(_actionable.ActionDirection.ToVector());
                 var directionMarker = newActor.GetNodeOrNull<DirectionMarker>("%DirectionMarker");
                 if (directionMarker != null)
                     directionMarker.Direction = _actionable.ActionDirection;

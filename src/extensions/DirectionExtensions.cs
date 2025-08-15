@@ -3,10 +3,10 @@ using System;
 using System.Collections.Generic;
 public static class DirectionExtensions
 {
-    private static readonly Vector2 DownLeft = new(-0.7071f, 0.7071f);
-    private static readonly Vector2 UpLeft = new(-0.7071f, -0.7071f);
-    private static readonly Vector2 UpRight = new(0.7071f, -0.7071f);
-    private static readonly Vector2 DownRight = new(0.7071f, 0.7071f);
+    private static readonly Vector2 DownLeft = new(-0.7071068f, 0.7071068f);
+    private static readonly Vector2 UpLeft = new(-0.7071068f, -0.7071068f);
+    private static readonly Vector2 UpRight = new(0.7071068f, -0.7071068f);
+    private static readonly Vector2 DownRight = new(0.7071068f, 0.7071068f);
 
     private static readonly Vector2[] Vectors = {
         Vector2.Down,
@@ -62,25 +62,43 @@ public static class DirectionExtensions
         0b10001001  // DownRight matches: Down, Right, DownRight
     };
 
+    /// <summary>
+    /// Converts a Direction to its Vector2.
+    /// </summary>
     public static Vector2 ToVector(this Direction direction)
         => Vectors[(int)direction];
 
+    /// <summary>
+    /// Converts a Direction to its radian value.
+    /// </summary>
     public static float ToRadians(this Direction direction)
         => Radians[(int)direction];
 
+    /// <summary>
+    /// Converts a Vector2 to the nearest Direction. Looses precision.
+    /// </summary>
     public static Direction ToDirection(this Vector2 vector)
     {
-        if (vector == Vector2.Zero)
-            return Direction.Down;
-
-        // Map X: 0=none, 1=right, 2=left
-        // Map Y: 0=none, 1=down, 2=up
-        int x = vector.X > 0 ? 1 : (vector.X < 0 ? 2 : 0);
-        int y = vector.Y > 0 ? 1 : (vector.Y < 0 ? 2 : 0);
-
+        int x = vector.X > 0 ? 1 : (vector.X < 0 ? 2 : 0); // Map X: 0=none, 1=right, 2=left
+        int y = vector.Y > 0 ? 1 : (vector.Y < 0 ? 2 : 0); // Map Y: 0=none, 1=down, 2=up
         return DirectionGrid[x + (y * 3)];
     }
 
+    /// <summary>
+    /// Checks if this direction matches the given direction, including adjacent directions.
+    /// </summary>
     public static bool Matches(this Direction direction, Direction otherDirection)
         => (DirectionBitMasks[(int)otherDirection] & (1 << (int)direction)) != 0;
+
+    /// <summary>
+    /// Checks if this direction matches the given vector direction. Looses precision.
+    /// </summary>
+    public static bool Matches(this Direction direction, Vector2 otherDirection)
+        => direction.Matches(otherDirection.ToDirection());
+
+    /// <summary>
+    /// Checks if this vector direction matches the given direction. Looses precision.
+    /// </summary>
+    public static bool Matches(this Vector2 direction, Direction otherDirection)
+        => direction.ToDirection().Matches(otherDirection);
 }

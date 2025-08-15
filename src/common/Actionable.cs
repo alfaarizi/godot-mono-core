@@ -72,7 +72,7 @@ public partial class Actionable : Area2D
         _actor = actor;
         _movementComponent = actor.GetNodeOrNull<MovementComponent>("%MovementComponent");
 
-        bool isValidDirection = !ForceDirection || (_movementComponent?.GetLastDirection() is Direction dir && dir.Matches(ActionDirection));
+        bool isValidDirection = !ForceDirection || (_movementComponent != null && _movementComponent.GetLastDirection().Matches(ActionDirection));
 
         if (isValidDirection && !ForceInteraction)
         {
@@ -110,9 +110,9 @@ public partial class Actionable : Area2D
         _movementComponent = null;
     }
 
-    private void OnLastDirectionChanged(int direction)
+    private void OnLastDirectionChanged(Vector2 direction)
     {
-        bool isValidDirection = !ForceDirection || ((Direction)direction).Matches(ActionDirection);
+        bool isValidDirection = !ForceDirection || direction.Matches(ActionDirection);
 
         if (!isValidDirection)
         {
