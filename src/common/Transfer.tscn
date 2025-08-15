@@ -11,7 +11,7 @@ size = Vector2(64, 32)
 script = ExtResource("2_cli3g")
 RoomPath = ""
 DestinationName = ""
-RequiresInteraction = true
+ForceInteraction = true
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(0, -8)
@@ -30,7 +30,7 @@ position = Vector2(0, 16)
 shape = SubResource("RectangleShape2D_p106i")
 metadata/_edit_lock_ = true
 
-[node name="PromptComponent" parent="Actionable" index="2"]
+[node name="PromptComponent" parent="Actionable" index="1"]
 Text = "Press Z to Enter"
 
 [node name="Marker2D" type="Marker2D" parent="." index="3"]

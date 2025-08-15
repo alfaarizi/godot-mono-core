@@ -7,8 +7,8 @@
 ## Preview
 
 <div align="center">
-    <img src="assets/preview1.png" alt="Preview 1" height="200"/>
-    <img src="assets/preview2.png" alt="Preview 2" height="200"/>
+	<img src="assets/preview1.png" alt="Preview 1" height="200"/>
+	<img src="assets/preview2.png" alt="Preview 2" height="200"/>
 </div>
 
 <div align="center">
@@ -86,4 +86,4 @@ This project is proprietary software. See [LICENSE.md](LICENSE.md) for details.
 
 ## Contributing
 
-This is a private development project. For inquiries, please contact the development team.
+This is a private development project. For inquiries, please contact the development team at [mkdrdscf23@gmail.com].

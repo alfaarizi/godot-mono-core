@@ -2,20 +2,40 @@ using Godot;
 
 public partial class Actionable : Area2D
 {
-    [Export] public bool RequiresInteraction { get; set; } = true;
-    [Export] public Vector2 ActionDirection { get; set; }
-
     [Signal] public delegate void ActionRequestedEventHandler(Node2D actor);
+    [Signal] public delegate void ActionCompletedEventHandler();
 
-    private InputComponent? _inputComponent;
+    /// <summary>Destroys this object after first use</summary>
+    [Export] public bool OneShot { get; set; } = false;
+    /// <summary>Requires manual input to trigger (false = auto-trigger)</summary>
+    [Export] public bool ForceInteraction { get; set; } = true;
+    /// <summary>Actor must face specific direction to interact</summary>
+    [Export] public bool ForceDirection { get; set; } = true;
+    /// <summary>Required facing direction for interaction</summary>
+    [Export] public Direction ActionDirection { get; set; }
+    /// <summary>Text displayed when interaction is available</summary>
+    [Export]
+    public string ActionPrompt
+    {
+        get => _promptText;
+        set
+        {
+            _promptText = value;
+            if (_promptComponent != null)
+                _promptComponent.Text = value;
+        }
+    }
+
+    public static Actionable? ActiveActionable { get; private set; }
+
     private PromptComponent? _promptComponent;
     private MovementComponent? _movementComponent;
     private Node2D? _actor;
-    private bool _triggered;
+    private bool _isPromptVisible;
+    private string _promptText = string.Empty;
 
     public void Action()
     {
-        _triggered = true;
         _promptComponent?.Hide();
         if (_actor != null)
             _ = EmitSignal(SignalName.ActionRequested, _actor);
@@ -23,24 +43,25 @@ public partial class Actionable : Area2D
 
     public override void _Ready()
     {
-        _inputComponent = GetNodeOrNull<InputComponent>("%InputComponent");
         _promptComponent = GetNodeOrNull<PromptComponent>("%PromptComponent");
 
+        if (_promptComponent != null && !string.IsNullOrEmpty(_promptText))
+            _promptComponent.Text = _promptText;
+
         BodyEntered += OnBodyEntered;
+
         BodyExited += OnBodyExited;
-        if (_inputComponent != null)
-            _inputComponent.ActionPressed += OnActionPressed;
+
+        ActionCompleted += OnActionCompleted;
 
         EventBus.EmitActionableAdded(Name, this);
     }
 
     public override void _ExitTree()
     {
-        if (_inputComponent != null)
-            _inputComponent.ActionPressed -= OnActionPressed;
-
+        if (ActiveActionable == this)
+            ActiveActionable = null;
         EventBus.EmitActionableRemoved(Name);
-
         base._ExitTree();
     }
 
@@ -50,15 +71,26 @@ public partial class Actionable : Area2D
 
         _actor = actor;
         _movementComponent = actor.GetNodeOrNull<MovementComponent>("%MovementComponent");
-        _triggered = false;
 
-        if (RequiresInteraction)
-            _promptComponent?.Show();
-        else if (ActionDirection == Vector2.Zero)
-            _ = EmitSignal(SignalName.ActionRequested, actor);
-        else if (_movementComponent != null && IsValidDirection(_movementComponent.GetLastDirection()))
+        bool isValidDirection = !ForceDirection || (_movementComponent?.GetLastDirection() is Direction dir && dir.Matches(ActionDirection));
+
+        if (isValidDirection && !ForceInteraction)
+        {
             Action();
-        else if (_movementComponent != null)
+        }
+        else if (isValidDirection)
+        {
+            ActiveActionable = this;
+            _promptComponent?.Show();
+            _isPromptVisible = true;
+        }
+        else
+        {
+            _promptComponent?.Hide();
+            _isPromptVisible = false;
+        }
+
+        if (_movementComponent != null && (ForceInteraction || !isValidDirection))
             _movementComponent.LastDirectionChanged += OnLastDirectionChanged;
     }
 
@@ -69,24 +101,45 @@ public partial class Actionable : Area2D
         if (_movementComponent != null)
             _movementComponent.LastDirectionChanged -= OnLastDirectionChanged;
 
+        if (ActiveActionable == this)
+            ActiveActionable = null;
+
         _promptComponent?.Hide();
+        _isPromptVisible = false;
         _actor = null;
         _movementComponent = null;
     }
 
-    private void OnLastDirectionChanged(Vector2 dir)
+    private void OnLastDirectionChanged(int direction)
     {
-        if (!_triggered && IsValidDirection(dir))
+        bool isValidDirection = !ForceDirection || ((Direction)direction).Matches(ActionDirection);
+
+        if (!isValidDirection)
+        {
+            if (ActiveActionable == this)
+                ActiveActionable = null;
+            _promptComponent?.Hide();
+            _isPromptVisible = false;
+            return;
+        }
+
+        if (!ForceInteraction)
+        {
             Action();
+            return;
+        }
+
+        if (!_isPromptVisible)
+        {
+            ActiveActionable = this;
+            _promptComponent?.Show();
+            _isPromptVisible = true;
+        }
     }
 
-    private void OnActionPressed(StringName action)
+    private void OnActionCompleted()
     {
-        if (_actor == null || _movementComponent == null) return;
-        if (RequiresInteraction && action == "ui_interact" && IsValidDirection(_movementComponent.GetLastDirection()))
-            Action();
+        if (OneShot)
+            QueueFree();
     }
-
-    private bool IsValidDirection(Vector2 dir)
-        => dir.Dot(ActionDirection) > 0;
 }

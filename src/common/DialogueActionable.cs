@@ -43,5 +43,8 @@ public partial class DialogueActionable : Actionable
         _components.movement?.SetEnabled(true);
 
         _components = (null, null);
+
+        if (IsInstanceValid(this))
+            _ = EmitSignal(Actionable.SignalName.ActionCompleted);
     }
 }

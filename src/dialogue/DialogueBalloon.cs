@@ -17,6 +17,7 @@ namespace DialogueManagerRuntime
         private RichTextLabel dialogueLabel;
         private VBoxContainer responsesMenu;
         private ScrollContainer scrollContainer;
+        private MarginContainer characterLabelContainer;
         private AnimationPlayer animationPlayer;
         private AudioStreamPlayer audioStreamPlayer;
 
@@ -59,6 +60,7 @@ namespace DialogueManagerRuntime
             dialogueLabel = GetNode<RichTextLabel>("%DialogueLabel");
             responsesMenu = GetNode<VBoxContainer>("%ResponsesMenu");
             scrollContainer = GetNode<ScrollContainer>("%ScrollContainer");
+            characterLabelContainer = GetNode<MarginContainer>("%CharacterLabelContainer");
             animationPlayer = GetNode<AnimationPlayer>("%AnimationPlayer");
             audioStreamPlayer = GetNode<AudioStreamPlayer>("%AudioStreamPlayer");
 
@@ -195,6 +197,7 @@ namespace DialogueManagerRuntime
             balloon.GrabFocus();
 
             // Set up the character name
+            characterLabelContainer.Visible = !string.IsNullOrEmpty(dialogueLine.Character);
             characterLabel.Visible = !string.IsNullOrEmpty(dialogueLine.Character);
             characterLabel.Text = Tr(dialogueLine.Character, "dialogue");
 

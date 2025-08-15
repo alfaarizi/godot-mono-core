@@ -61,7 +61,7 @@ rotation = -1.5708
 scale = Vector2(3.06, 1.42)
 RoomPath = "uid://brqcxxcd45hlq"
 DestinationName = "ToEntrance"
-RequiresInteraction = false
+ForceInteraction = false
 
 [node name="Marker2D" parent="Elements/Transfers/ToKitchen" index="3"]
 position = Vector2(-6.28271, 81.6901)
@@ -82,7 +82,7 @@ rotation = 1.5708
 scale = Vector2(2.78, 1.53999)
 RoomPath = "uid://d1hwftfk3mnmd"
 DestinationName = "ToEntrance"
-RequiresInteraction = false
+ForceInteraction = false
 
 [node name="Marker2D" parent="Elements/Transfers/ToLivingRoom" index="3"]
 position = Vector2(11.5108, 72.0785)

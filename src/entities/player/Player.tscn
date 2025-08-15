@@ -1,12 +1,17 @@
-[gd_scene load_steps=32 format=3 uid="uid://da3dgt837tvea"]
+[gd_scene load_steps=36 format=3 uid="uid://da3dgt837tvea"]
 
 [ext_resource type="PackedScene" uid="uid://gr5ue7odva4l" path="res://src/entities/base/Character.tscn" id="1_3py4g"]
 [ext_resource type="Script" uid="uid://cmqgvm31pj3xi" path="res://src/entities/player/Player.cs" id="2_vna0p"]
 [ext_resource type="Resource" uid="uid://doevqnbisq07u" path="res://src/data/characters/Hart.tres" id="3_j0f6w"]
+[ext_resource type="Texture2D" uid="uid://dtbgmwolnpw6l" path="res://assets/sprites/hart/hart_movement.png" id="4_4niw5"]
 [ext_resource type="PackedScene" uid="uid://dnx5ypkt3ymst" path="res://src/components/AnimationComponent.tscn" id="5_lvau8"]
 [ext_resource type="PackedScene" uid="uid://dwu0av21crh2f" path="res://src/components/MovementComponent.tscn" id="6_gc66i"]
 [ext_resource type="PackedScene" uid="uid://d38i6iuc1di8v" path="res://src/components/InputComponent.tscn" id="7_j0f6w"]
 [ext_resource type="PackedScene" uid="uid://tubun22eupv2" path="res://src/components/CameraComponent.tscn" id="8_3g2ip"]
+[ext_resource type="PackedScene" uid="uid://dbo7rwy01drry" path="res://src/common/DirectionMarker.tscn" id="9_4niw5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2et12"]
+size = Vector2(11, 10)
 
 [sub_resource type="Animation" id="Animation_3g2ip"]
 length = 0.001
@@ -243,6 +248,9 @@ states/Start/position = Vector2(194.5, 155.268)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_j0f6w"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_3g2ip"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_4niw5")]
 graph_offset = Vector2(53.397, 8.565)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_4niw5"]
+radius = 4.0
+
 [node name="Player" groups=["action_actor", "dialogue_actor"] instance=ExtResource("1_3py4g")]
 collision_layer = 2
 script = ExtResource("2_vna0p")
@@ -250,9 +258,11 @@ Data = ExtResource("3_j0f6w")
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(0, -23)
+texture = ExtResource("4_4niw5")
 
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2(0, -5.5)
+shape = SubResource("RectangleShape2D_2et12")
 
 [node name="InputComponent" parent="." index="2" instance=ExtResource("7_j0f6w")]
 unique_name_in_owner = true
@@ -284,5 +294,20 @@ parameters/Move/blend_position = Vector2(-0.043554, 0.0846155)
 
 [node name="CameraComponent" parent="." index="5" instance=ExtResource("8_3g2ip")]
 unique_name_in_owner = true
+
+[node name="DirectionMarker" parent="." index="6" instance=ExtResource("9_4niw5")]
+unique_name_in_owner = true
+position = Vector2(0, -5.5)
+
+[node name="ActionableFinder" type="Area2D" parent="DirectionMarker" index="0"]
+unique_name_in_owner = true
+position = Vector2(0, 1.57)
+collision_layer = 8
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DirectionMarker/ActionableFinder" index="0"]
+position = Vector2(0, 1.57)
+shape = SubResource("CircleShape2D_4niw5")
 
 [editable path="AnimationComponent"]

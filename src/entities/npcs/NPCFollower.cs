@@ -70,7 +70,7 @@ public partial class NPCFollower : Character
         if (AnimationComponent != null)
         {
             bool isMoving = MovementComponent.IsMoving();
-            Vector2 lastDirection = MovementComponent.GetLastDirection();
+            Vector2 lastDirection = MovementComponent.GetLastDirection().ToVector();
             AnimationComponent.SetTreeParameter("conditions/is_moving", isMoving);
             AnimationComponent.SetTreeParameter("conditions/!is_moving", !isMoving);
             AnimationComponent.SetTreeParameter("Move/blend_position", lastDirection);
