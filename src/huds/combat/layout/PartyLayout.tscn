@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1c2mpxyeai8s"]
+
+[ext_resource type="PackedScene" uid="uid://dcxu3vy4tkmsu" path="res://src/huds/combat/panel/PartyMemberPanel.tscn" id="1_mp5rl"]
+
+[node name="PartyLayout" type="HBoxContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -948.0
+offset_top = -252.5
+offset_right = 948.0
+offset_bottom = 252.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 32
+
+[node name="PartyMemberPanel" parent="." instance=ExtResource("1_mp5rl")]
+layout_mode = 2
+
+[node name="PartyMemberPanel2" parent="." instance=ExtResource("1_mp5rl")]
+layout_mode = 2
+
+[node name="PartyMemberPanel3" parent="." instance=ExtResource("1_mp5rl")]
+layout_mode = 2
+
+[node name="PartyMemberPanel4" parent="." instance=ExtResource("1_mp5rl")]
+layout_mode = 2

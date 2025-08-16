@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbkw7uwk52vh4"]
+
+[ext_resource type="PackedScene" uid="uid://dwertcg48ngub" path="res://src/huds/combat/panel/EnemyPanel.tscn" id="1_5sa1v"]
+
+[node name="EnemyLayoutZigZag" type="HBoxContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -464.0
+offset_top = -189.5
+offset_right = 464.0
+offset_bottom = 189.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="EnemyPanel" parent="." instance=ExtResource("1_5sa1v")]
+layout_mode = 2
+theme_override_constants/margin_top = 100
+
+[node name="EnemyPanel2" parent="." instance=ExtResource("1_5sa1v")]
+layout_mode = 2
+theme_override_constants/margin_bottom = 100
+
+[node name="EnemyPanel3" parent="." instance=ExtResource("1_5sa1v")]
+layout_mode = 2
+theme_override_constants/margin_top = 100
+IsSelected = true
+
+[node name="EnemyPanel4" parent="." instance=ExtResource("1_5sa1v")]
+layout_mode = 2
+theme_override_constants/margin_bottom = 100
+
+[node name="EnemyPanel5" parent="." instance=ExtResource("1_5sa1v")]
+layout_mode = 2
+theme_override_constants/margin_top = 100

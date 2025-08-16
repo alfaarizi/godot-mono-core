@@ -4,8 +4,8 @@
 [ext_resource type="TileSet" uid="uid://bpw0mvwwesfx6" path="res://presets/PrologueForest/PrologueForest08/PrologueForest08.tres" id="2_7w6s4"]
 [ext_resource type="PackedScene" uid="uid://b73ng4lo6h50r" path="res://src/common/Transfer.tscn" id="3_7w6s4"]
 [ext_resource type="PackedScene" uid="uid://da3dgt837tvea" path="res://src/entities/player/Player.tscn" id="4_kxxa4"]
-[ext_resource type="PackedScene" uid="uid://dbrrokolrm0sb" path="res://src/entities/npcs/NPCFollower.tscn" id="5_mxkny"]
-[ext_resource type="Resource" uid="uid://2kul8gwn8fqy" path="res://src/data/characters/Brother.tres" id="6_icv1v"]
+[ext_resource type="PackedScene" uid="uid://bqt0peescrpht" path="res://src/entities/npcs/NPCFollower.tscn" id="5_mxkny"]
+[ext_resource type="Resource" uid="uid://kbsj6k5gq8wp" path="res://src/data/characters/Wisp.tres" id="6_mxkny"]
 
 [node name="PrologueForest08" instance=ExtResource("1_i7v4r")]
 
@@ -80,7 +80,7 @@ position = Vector2(426, 933)
 
 [node name="NPCFollower" parent="Elements/Characters" index="1" instance=ExtResource("5_mxkny")]
 position = Vector2(1201, 769)
-Data = ExtResource("6_icv1v")
+Data = ExtResource("6_mxkny")
 
 [editable path="Elements/Transfers/ToPrologueForest07"]
 [editable path="Elements/Transfers/ToPrologueForest07/Actionable"]

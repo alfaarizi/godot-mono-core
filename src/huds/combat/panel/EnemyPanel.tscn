@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwertcg48ngub"]
+
+[ext_resource type="Script" uid="uid://bljghyh8lnmtt" path="res://src/huds/combat/panel/EnemyPanel.cs" id="1_13qqm"]
+[ext_resource type="Texture2D" uid="uid://cpshf7nrt6ywh" path="res://assets/hud/combat/status_icon.png" id="1_wwewn"]
+[ext_resource type="Texture2D" uid="uid://caos8y612s41f" path="res://assets/hud/combat/enemy.png" id="3_7lrj8"]
+[ext_resource type="PackedScene" uid="uid://bi03jarp2crql" path="res://src/huds/combat/utils/HealthSmallProgressBar.tscn" id="3_a8pvs"]
+[ext_resource type="Texture2D" uid="uid://b70f6mw3rg2nj" path="res://assets/hud/combat/select_enemy.png" id="4_qu77h"]
+
+[node name="EnemyPanel" type="MarginContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -139.5
+offset_right = 80.0
+offset_bottom = 139.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_13qqm")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_wwewn")
+
+[node name="HealthSmallProgressBar" parent="VBoxContainer" instance=ExtResource("3_a8pvs")]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_7lrj8")
+
+[node name="SelectionRect" type="TextureRect" parent="VBoxContainer/TextureRect"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -63.5
+offset_top = -58.0
+offset_right = 63.5
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_qu77h")
