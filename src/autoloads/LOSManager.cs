@@ -1,8 +1,7 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 
-public partial class LOSManager : Node2D
+public partial class LOSManager : Node
 {
     [Export] public bool IsEnabled { get; set; } = true;
     [Export] public TileMapLayer? TileMapLayer { get; set; }
@@ -11,6 +10,8 @@ public partial class LOSManager : Node2D
     [Export] public float TileUpdateDistance { get; set; } = 96.0f;
     [Export] public int TileProcessedPerFrame { get; set; } = 60;
     [Export] public int NearestLOSUpdateFrames { get; set; } = 6;
+
+    public static LOSManager Instance { get; private set; } = null!;
 
     private readonly Dictionary<Vector2I, LOSTile> _tiles = new();
     private readonly Queue<Vector2I> _tilesUpdateQueue = new();
@@ -87,17 +88,25 @@ public partial class LOSManager : Node2D
             SetProcess(false);
             return;
         }
-        _space = GetWorld2D().DirectSpaceState;
+
+        Instance = this;
+
+        _space = GetTree().Root.GetWorld2D().DirectSpaceState;
         _rayQuery.CollisionMask = 1;
-        if (TileMapLayer?.TileSet != null)
-        {
-            _tileSize = TileMapLayer.TileSet.TileSize.X;
-            _tileRadiusSq = TileRadius * TileRadius;
-            _tileRadiusInPixels = TileRadius * _tileSize;
-            _tileRadiusInPixelsSq = _tileRadiusInPixels * _tileRadiusInPixels;
-        }
-        Target ??= GetTree().GetFirstNodeInGroup("los_target") as Node2D;
-        if (Target == null) SetProcess(false);
+
+        EventBus.Instance.RoomChanged += OnRoomChanged;
+
+        var currentRoom = Global.GetCurrentRoom();
+        if (currentRoom != null)
+            OnRoomChanged(currentRoom);
+    }
+
+    public override void _ExitTree()
+    {
+        EventBus.Instance.RoomChanged -= OnRoomChanged;
+        if (Instance == this)
+            Instance = null!;
+        base._ExitTree();
     }
 
     public override void _Process(double delta)
@@ -110,6 +119,33 @@ public partial class LOSManager : Node2D
             _lastTargetPos = pos;
         }
         ProcessQueue();
+    }
+
+    private void OnRoomChanged(Room room)
+    {
+        TileMapLayer = room.TileMapRect;
+        foreach (var losCandidate in GetTree().GetNodesInGroup("los_target"))
+        {
+            if (losCandidate is Node2D node && room.IsAncestorOf(node))
+            {
+                Target = node;
+                break;
+            }
+        }
+
+        _tiles.Clear();
+        _tilesUpdateQueue.Clear();
+
+        if (TileMapLayer?.TileSet != null)
+        {
+            _tileSize = TileMapLayer.TileSet.TileSize.X;
+            _tileRadiusSq = TileRadius * TileRadius;
+            _tileRadiusInPixels = TileRadius * _tileSize;
+            _tileRadiusInPixelsSq = _tileRadiusInPixels * _tileRadiusInPixels;
+        }
+
+        if (Target != null)
+            _lastTargetPos = Vector2.Inf;
     }
 
     private void UpdateQueue(Vector2 targetPos)

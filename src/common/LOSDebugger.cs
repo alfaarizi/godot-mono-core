@@ -39,7 +39,10 @@ public partial class LOSDebugger : Node2D
     }
 
     public override void _ExitTree()
-        => EventBus.Instance.RoomChanged -= OnRoomChanged;
+    {
+        EventBus.Instance.RoomChanged -= OnRoomChanged;
+        base._ExitTree();
+    }
 
     public override void _Process(double delta)
     {
@@ -72,7 +75,7 @@ public partial class LOSDebugger : Node2D
 
     private void OnRoomChanged(Room room)
     {
-        LOSManager = room.GetNodeOrNull<LOSManager>("%LOSManager");
+        LOSManager = LOSManager.Instance;
         if (LOSManager?.TileMapLayer?.TileSet != null)
         {
             _tileSize = LOSManager.TileMapLayer.TileSet.TileSize.X;

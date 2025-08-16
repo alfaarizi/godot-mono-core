@@ -28,7 +28,7 @@ public partial class NPCFollower : Character
         MovementComponent ??= GetNodeOrNull<MovementComponent>("%MovementComponent");
         AnimationComponent ??= GetNodeOrNull<AnimationComponent>("%AnimationComponent");
         PathfindingComponent ??= GetNodeOrNull<PathfindingComponent>("%PathfindingComponent");
-        _losManager = GetNodeOrNull<LOSManager>("%LOSManager");
+        _losManager = LOSManager.Instance;
 
         _ = CallDeferred(nameof(Setup));
     }

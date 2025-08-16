@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://ce6gpduluhlyk"]
+[gd_scene load_steps=7 format=4 uid="uid://ce6gpduluhlyk"]
 
 [ext_resource type="PackedScene" uid="uid://dnsgoxb5hgp8o" path="res://src/rooms/base/Room.tscn" id="1_i7v4r"]
 [ext_resource type="TileSet" uid="uid://bpw0mvwwesfx6" path="res://presets/PrologueForest/PrologueForest08/PrologueForest08.tres" id="2_7w6s4"]
@@ -6,8 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://da3dgt837tvea" path="res://src/entities/player/Player.tscn" id="4_kxxa4"]
 [ext_resource type="PackedScene" uid="uid://dbrrokolrm0sb" path="res://src/entities/npcs/NPCFollower.tscn" id="5_mxkny"]
 [ext_resource type="Resource" uid="uid://2kul8gwn8fqy" path="res://src/data/characters/Brother.tres" id="6_icv1v"]
-[ext_resource type="PackedScene" uid="uid://bo54kwxb3is75" path="res://src/common/DialogueActionable.tscn" id="7_icv1v"]
-[ext_resource type="Resource" uid="uid://bxivn6rg5nf46" path="res://src/dialogue/resources/testDialogue.dialogue" id="8_o5ur4"]
 
 [node name="PrologueForest08" instance=ExtResource("1_i7v4r")]
 
@@ -83,11 +81,6 @@ position = Vector2(426, 933)
 [node name="NPCFollower" parent="Elements/Characters" index="1" instance=ExtResource("5_mxkny")]
 position = Vector2(1201, 769)
 Data = ExtResource("6_icv1v")
-
-[node name="DialogueActionable" parent="Elements/Actionables" index="0" instance=ExtResource("7_icv1v")]
-position = Vector2(794, 664)
-monitorable = false
-DialogueResource = ExtResource("8_o5ur4")
 
 [editable path="Elements/Transfers/ToPrologueForest07"]
 [editable path="Elements/Transfers/ToPrologueForest07/Actionable"]

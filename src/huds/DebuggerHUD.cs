@@ -38,7 +38,10 @@ public partial class DebuggerHUD : CanvasLayer
     }
 
     public override void _ExitTree()
-        => EventBus.Instance.RoomChanged -= OnRoomChanged;
+    {
+        EventBus.Instance.RoomChanged -= OnRoomChanged;
+        base._ExitTree();
+    }
 
     public override void _Process(double delta)
     {

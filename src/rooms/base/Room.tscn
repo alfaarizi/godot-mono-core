@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dnsgoxb5hgp8o"]
+[gd_scene load_steps=2 format=3 uid="uid://dnsgoxb5hgp8o"]
 
 [ext_resource type="Script" uid="uid://d0qhie0t33anj" path="res://src/rooms/base/Room.cs" id="1_l6bsb"]
-[ext_resource type="PackedScene" uid="uid://oo71pjbqscq7" path="res://src/common/LOSManager.tscn" id="2_241hj"]
 
 [node name="Room" type="Node2D" node_paths=PackedStringArray("TileMapRect")]
 script = ExtResource("1_l6bsb")
@@ -26,9 +25,3 @@ y_sort_enabled = true
 
 [node name="Props" type="Node2D" parent="Elements"]
 y_sort_enabled = true
-
-[node name="Managers" type="Node2D" parent="."]
-
-[node name="LOSManager" parent="Managers" node_paths=PackedStringArray("TileMapLayer") instance=ExtResource("2_241hj")]
-unique_name_in_owner = true
-TileMapLayer = NodePath("../../TileMapLayers/Background")

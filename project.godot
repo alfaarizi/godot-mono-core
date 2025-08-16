@@ -21,6 +21,7 @@ GameSettings="*res://src/autoloads/GameSettings.cs"
 EventBus="*res://src/autoloads/EventBus.cs"
 Global="*res://src/autoloads/Global.cs"
 SceneManager="*res://src/autoloads/SceneManager.cs"
+LOSManager="*res://src/autoloads/LOSManager.cs"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
 [dialogue_manager]
