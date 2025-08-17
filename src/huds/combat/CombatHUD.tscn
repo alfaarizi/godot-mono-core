@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cq2f2miobtreb" path="res://src/huds/combat/panel/ActionPanel.tscn" id="4_vrkjm"]
 [ext_resource type="PackedScene" uid="uid://dcxu3vy4tkmsu" path="res://src/huds/combat/panel/PartyMemberPanel.tscn" id="4_vxprt"]
 [ext_resource type="PackedScene" uid="uid://c64i5nbd7pale" path="res://src/huds/combat/panel/DescriptionPanel.tscn" id="5_csnwy"]
-[ext_resource type="Script" uid="uid://4sqe5pn5dvog" path="res://src/huds/combat/ButtonNavigator.cs" id="9_a00t3"]
+[ext_resource type="PackedScene" uid="uid://oadii2equviy" path="res://src/huds/combat/utils/ButtonNavigator.tscn" id="9_a00t3"]
 
 [node name="CombatHUD" type="CanvasLayer"]
 script = ExtResource("1_bg7xp")
@@ -120,5 +120,4 @@ offset_bottom = 412.0
 grow_horizontal = 0
 grow_vertical = 1
 
-[node name="ButtonNavigator" type="Node" parent="."]
-script = ExtResource("9_a00t3")
+[node name="ButtonNavigator" parent="." instance=ExtResource("9_a00t3")]
