@@ -1,12 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://b2ar40176raud"]
+[gd_scene load_steps=10 format=3 uid="uid://b2ar40176raud"]
 
+[ext_resource type="Script" uid="uid://b4mvgwlvvdpk6" path="res://src/huds/combat/CombatHUD.cs" id="1_bg7xp"]
 [ext_resource type="Texture2D" uid="uid://cqe1pgdvoay0c" path="res://assets/hud/combat/combat_1_bg.png" id="1_vrkjm"]
-[ext_resource type="PackedScene" uid="uid://cbkw7uwk52vh4" path="res://src/huds/combat/layout/EnemyLayoutZigZag.tscn" id="2_csnwy"]
+[ext_resource type="PackedScene" uid="uid://mkvtaeyshc4b" path="res://src/huds/combat/layout/EnemyLayoutZigZag.tscn" id="2_csnwy"]
+[ext_resource type="PackedScene" uid="uid://dwertcg48ngub" path="res://src/huds/combat/panel/EnemyPanel.tscn" id="3_5xnh4"]
 [ext_resource type="PackedScene" uid="uid://c1c2mpxyeai8s" path="res://src/huds/combat/layout/PartyLayout.tscn" id="3_csnwy"]
 [ext_resource type="PackedScene" uid="uid://cq2f2miobtreb" path="res://src/huds/combat/panel/ActionPanel.tscn" id="4_vrkjm"]
+[ext_resource type="PackedScene" uid="uid://dcxu3vy4tkmsu" path="res://src/huds/combat/panel/PartyMemberPanel.tscn" id="4_vxprt"]
 [ext_resource type="PackedScene" uid="uid://c64i5nbd7pale" path="res://src/huds/combat/panel/DescriptionPanel.tscn" id="5_csnwy"]
+[ext_resource type="Script" uid="uid://4sqe5pn5dvog" path="res://src/huds/combat/ButtonNavigator.cs" id="9_a00t3"]
 
 [node name="CombatHUD" type="CanvasLayer"]
+script = ExtResource("1_bg7xp")
 
 [node name="Background" type="TextureRect" parent="."]
 anchors_preset = 15
@@ -16,28 +21,59 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_vrkjm")
 
-[node name="EnemyGroup" type="Control" parent="."]
+[node name="HostilesGroup" type="Control" parent="."]
+unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
-[node name="EnemyLayoutZigZag" parent="EnemyGroup" instance=ExtResource("2_csnwy")]
+[node name="EnemyLayoutZigZag" parent="HostilesGroup" instance=ExtResource("2_csnwy")]
 layout_mode = 1
-offset_top = -440.0
-offset_bottom = -61.0
+offset_left = -609.0
+offset_top = -548.0
+offset_right = 609.0
+offset_bottom = 47.0
 
-[node name="PartyGroup" type="Control" parent="."]
+[node name="EnemyPanel" parent="HostilesGroup/EnemyLayoutZigZag" instance=ExtResource("3_5xnh4")]
+layout_mode = 2
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_bottom = 0
+
+[node name="EnemyPanel2" parent="HostilesGroup/EnemyLayoutZigZag" instance=ExtResource("3_5xnh4")]
+layout_mode = 2
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_bottom = 100
+
+[node name="EnemyPanel3" parent="HostilesGroup/EnemyLayoutZigZag" instance=ExtResource("3_5xnh4")]
+layout_mode = 2
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_bottom = 0
+
+[node name="EnemyPanel4" parent="HostilesGroup/EnemyLayoutZigZag" instance=ExtResource("3_5xnh4")]
+layout_mode = 2
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_bottom = 100
+
+[node name="EnemyPanel5" parent="HostilesGroup/EnemyLayoutZigZag" instance=ExtResource("3_5xnh4")]
+layout_mode = 2
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_bottom = 0
+
+[node name="AlliesGroup" type="Control" parent="."]
+unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
-[node name="PartyLayout" parent="PartyGroup" instance=ExtResource("3_csnwy")]
+[node name="PartyLayout" parent="AlliesGroup" instance=ExtResource("3_csnwy")]
 layout_mode = 1
 anchors_preset = 7
 anchor_top = 1.0
@@ -45,6 +81,18 @@ anchor_bottom = 1.0
 offset_top = -505.0
 offset_bottom = 0.0
 grow_vertical = 0
+
+[node name="PartyMemberPanel" parent="AlliesGroup/PartyLayout" instance=ExtResource("4_vxprt")]
+layout_mode = 2
+
+[node name="PartyMemberPanel2" parent="AlliesGroup/PartyLayout" instance=ExtResource("4_vxprt")]
+layout_mode = 2
+
+[node name="PartyMemberPanel3" parent="AlliesGroup/PartyLayout" instance=ExtResource("4_vxprt")]
+layout_mode = 2
+
+[node name="PartyMemberPanel4" parent="AlliesGroup/PartyLayout" instance=ExtResource("4_vxprt")]
+layout_mode = 2
 
 [node name="ActionPanel" parent="." instance=ExtResource("4_vrkjm")]
 anchors_preset = 0
@@ -71,3 +119,6 @@ offset_right = 0.0
 offset_bottom = 412.0
 grow_horizontal = 0
 grow_vertical = 1
+
+[node name="ButtonNavigator" type="Node" parent="."]
+script = ExtResource("9_a00t3")

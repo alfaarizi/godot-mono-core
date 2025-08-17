@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://cbkw7uwk52vh4"]
+[gd_scene load_steps=2 format=3 uid="uid://mkvtaeyshc4b"]
 
-[ext_resource type="PackedScene" uid="uid://dwertcg48ngub" path="res://src/huds/combat/panel/EnemyPanel.tscn" id="1_5sa1v"]
+[ext_resource type="Script" uid="uid://uqrqo843wugb" path="res://src/huds/combat/layout/EnemyLayoutZigZag.cs" id="1_6oiah"]
 
 [node name="EnemyLayoutZigZag" type="HBoxContainer"]
 anchors_preset = 8
@@ -16,24 +16,4 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 32
 alignment = 1
-
-[node name="EnemyPanel" parent="." instance=ExtResource("1_5sa1v")]
-layout_mode = 2
-theme_override_constants/margin_top = 100
-
-[node name="EnemyPanel2" parent="." instance=ExtResource("1_5sa1v")]
-layout_mode = 2
-theme_override_constants/margin_bottom = 100
-
-[node name="EnemyPanel3" parent="." instance=ExtResource("1_5sa1v")]
-layout_mode = 2
-theme_override_constants/margin_top = 100
-IsSelected = true
-
-[node name="EnemyPanel4" parent="." instance=ExtResource("1_5sa1v")]
-layout_mode = 2
-theme_override_constants/margin_bottom = 100
-
-[node name="EnemyPanel5" parent="." instance=ExtResource("1_5sa1v")]
-layout_mode = 2
-theme_override_constants/margin_top = 100
+script = ExtResource("1_6oiah")

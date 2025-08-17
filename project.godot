@@ -77,6 +77,9 @@ folder_colors={
 los_target="Nodes that serve as the focal point for line-of-sight calculations and rendering"
 action_actor="Nodes that can interact with actionable objects"
 dialogue_actor="Nodes that can trigger dialogue conversations"
+hostiles="combat opponents that oppose you"
+allies="controllable characters that fight for your cause"
+nav_buttons="buttons navigatable with key press"
 
 [input]
 
