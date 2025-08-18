@@ -85,7 +85,6 @@ rotation = 3.14159
 scale = Vector2(5.74, 0.54)
 RoomPath = "uid://dapu3u0idjvcp"
 DestinationName = "ToPrologueForest06"
-ForceInteraction = false
 
 [node name="Marker2D" parent="Elements/Transfers/ToPrologueForest05" index="3"]
 position = Vector2(-0.174216, 66.6667)
@@ -95,7 +94,6 @@ position = Vector2(3076, 3.00001)
 scale = Vector2(3.5, 0.539999)
 RoomPath = "uid://s3rvpuuv2ohq"
 DestinationName = "ToPrologueForest06"
-ForceInteraction = false
 
 [node name="Marker2D" parent="Elements/Transfers/ToPrologueForest07" index="3"]
 position = Vector2(0.857143, 120.371)
