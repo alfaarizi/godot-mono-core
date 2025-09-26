@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=3 format=3 uid="uid://kbsj6k5gq8wp"]
+
+[ext_resource type="Texture2D" uid="uid://c25af5cl1gqa2" path="res://assets/sprites/wisp/wisp_movement.png" id="1_iqqo4"]
+[ext_resource type="Script" uid="uid://bcauf63r01jxq" path="res://src/data/base/CharacterData.cs" id="1_rr6l2"]
+
+[resource]
+script = ExtResource("1_rr6l2")
+Name = "Wisp"
+Sprite = ExtResource("1_iqqo4")
+metadata/_custom_type_script = "uid://bcauf63r01jxq"

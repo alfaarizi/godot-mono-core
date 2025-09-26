@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bi03jarp2crql"]
+
+[ext_resource type="Texture2D" uid="uid://b4x76r5pyuvrf" path="res://assets/hud/combat/enemy_hp_small_under.png" id="1_7tr1k"]
+[ext_resource type="Texture2D" uid="uid://dbbymrrju6or7" path="res://assets/hud/combat/enemy_hp_small_progress.png" id="2_gbnay"]
+
+[node name="HealthSmallProgressBar" type="TextureProgressBar"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -0.5
+offset_right = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+texture_under = ExtResource("1_7tr1k")
+texture_progress = ExtResource("2_gbnay")

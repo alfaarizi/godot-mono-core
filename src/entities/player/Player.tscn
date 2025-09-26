@@ -251,7 +251,7 @@ graph_offset = Vector2(53.397, 8.565)
 [sub_resource type="CircleShape2D" id="CircleShape2D_4niw5"]
 radius = 4.0
 
-[node name="Player" groups=["action_actor", "dialogue_actor"] instance=ExtResource("1_3py4g")]
+[node name="Player" groups=["action_actor", "dialogue_actor", "los_target"] instance=ExtResource("1_3py4g")]
 collision_layer = 2
 script = ExtResource("2_vna0p")
 Data = ExtResource("3_j0f6w")
