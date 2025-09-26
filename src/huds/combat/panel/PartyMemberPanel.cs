@@ -3,22 +3,8 @@ using Godot;
 [Tool]
 public partial class PartyMemberPanel : MarginContainer
 {
-
-    private bool isDisabled;
-    [Export]
-    public bool IsDisabled
-    {
-        get => isDisabled;
-        set
-        {
-            if (isDisabled == value) return;
-            isDisabled = value;
-            if (_textureButton != null)
-                _textureButton.Disabled = isDisabled;
-            if (isDisabled && _marginContainer != null)
-                _marginContainer.Modulate = _disabledColor;
-        }
-    }
+    [Export] public bool IsSelected { get; set; }
+    [Export] public bool IsDisabled { get; set; }
 
     private TextureButton? _textureButton;
     private MarginContainer? _marginContainer;
@@ -29,22 +15,30 @@ public partial class PartyMemberPanel : MarginContainer
     {
         _textureButton = GetNodeOrNull<TextureButton>("%TextureButton");
         _marginContainer = GetNodeOrNull<MarginContainer>("%MarginContainer");
+
         if (_textureButton != null)
         {
-            _textureButton.MouseEntered += OnButtonHovered;
-            _textureButton.MouseExited += OnButtonUnhovered;
+            _textureButton.FocusEntered += OnButtonStateChanged;
+            _textureButton.FocusExited += OnButtonStateChanged;
+            _textureButton.MouseEntered += () => _textureButton.GrabFocus();
+            _textureButton.Pressed += () =>
+            {
+                GD.Print();
+                IsSelected = !IsSelected;
+                OnButtonStateChanged();
+            };
         }
-        OnButtonUnhovered();
+        OnButtonStateChanged();
     }
 
-    private void OnButtonHovered()
+    private void OnButtonStateChanged()
     {
-        if (!IsDisabled && _marginContainer != null)
-            _marginContainer.Modulate = _normalColor;
-    }
-    private void OnButtonUnhovered()
-    {
-        if (!IsDisabled && _marginContainer != null)
-            _marginContainer.Modulate = _disabledColor;
+        if (_textureButton != null)
+            _textureButton.Disabled = IsDisabled;
+        if (_marginContainer != null)
+        {
+            bool isHighlighted = !IsDisabled && (IsSelected || _textureButton?.HasFocus() == true);
+            _marginContainer.Modulate = isHighlighted ? _normalColor : _disabledColor;
+        }
     }
 }
