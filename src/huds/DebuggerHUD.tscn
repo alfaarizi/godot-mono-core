@@ -1,0 +1,75 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6yn746lke330"]
+
+[ext_resource type="Script" uid="uid://dgg2j4s76m34q" path="res://src/huds/DebuggerHUD.cs" id="1_4eiri"]
+[ext_resource type="FontFile" uid="uid://crkv0naeyvgmb" path="res://assets/fonts/Born2bSportyV2.ttf" id="1_h7yuv"]
+[ext_resource type="PackedScene" uid="uid://cjxy831xfipp2" path="res://src/common/LOSDebugger.tscn" id="2_5jmiu"]
+
+[node name="DebuggerHUD" type="CanvasLayer"]
+script = ExtResource("1_4eiri")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+follow_viewport_enabled = true
+
+[node name="LOSDebugger" parent="CanvasLayer" instance=ExtResource("2_5jmiu")]
+unique_name_in_owner = true
+
+[node name="RoomLabel" type="Label" parent="."]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_h7yuv")
+theme_override_font_sizes/font_size = 36
+text = "currentRoom:"
+vertical_alignment = 2
+metadata/_edit_lock_ = true
+
+[node name="FPSLabel" type="Label" parent="."]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_h7yuv")
+theme_override_font_sizes/font_size = 36
+text = "FPS:"
+horizontal_alignment = 2
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 285.0
+grow_vertical = 2
+theme_override_constants/separation = 10
+metadata/_edit_lock_ = true
+
+[node name="DebugLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_h7yuv")
+theme_override_font_sizes/font_size = 36
+text = "debugTools"
+horizontal_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="LocaleButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_h7yuv")
+theme_override_font_sizes/font_size = 36
+text = "Locale:"
+alignment = 0
+metadata/_edit_lock_ = true
+
+[node name="LOSButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_h7yuv")
+theme_override_font_sizes/font_size = 36
+text = "LOS:"
+alignment = 0
+metadata/_edit_lock_ = true
